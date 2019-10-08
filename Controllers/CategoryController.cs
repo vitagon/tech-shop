@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using TechShop.Data;
 using TechShop.Models;
 
 namespace TechShop.Controllers
 {
+    [Route("/api/categories")]
     public class CategoryController
     {
 
@@ -38,6 +40,7 @@ namespace TechShop.Controllers
             return categories;
         }
 
+        [HttpGet]
         public IQueryable<Category> GetCategories()
         {
             var result = from i in _context.Category

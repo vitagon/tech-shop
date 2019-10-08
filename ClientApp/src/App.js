@@ -1,14 +1,24 @@
-﻿import React from 'react';
-import { Route } from 'react-router';
-import Layout from './components/Layout';
+﻿import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
-import Counter from './components/Counter';
-import FetchData from './components/FetchData';
+import Navigation from './components/Navigation';
+import Categories from './components/categories/Categories';
 
-export default () => (
-  <Layout>
-    <Route exact path='/' component={Home} />
-    <Route path='/counter' component={Counter} />
-    <Route path='/fetchdata/:startDateIndex?' component={FetchData} />
-  </Layout>
-);
+
+class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Navigation />
+          <Switch>
+            <Route path='/' exact component={Home} />
+            <Route path='/categories' component={Categories} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    )
+  }
+}
+
+export default App;
