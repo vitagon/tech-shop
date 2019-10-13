@@ -1,79 +1,74 @@
 ﻿import React, { Component } from "react";
 import { Table, Button } from 'react-bootstrap';
-import axios from 'axios';
 import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {fetchCategoriesAction} from '../../actions/categoriesActions';
 
 class CategoriesList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      categories: []
-    }
     //this.getCategories();
   }
 
-  async getCategories() {
-    let response;
-    try {
-      response = await axios.get('https://localhost:5001/api/categories')
-    } catch (error) {
-      console.error(error.response);
-    }
-    
-    this.setState({
-      categories: response.data
-    });
-  }
+  // async getCategories() {
+  //   this.setState({
+  //     categories: response.data
+  //   });
+  // }
 
-  changeCategory() {
-    this.setState({
-      categories: [
-        ...this.state.categories,
-        {name: 'Schemas'}
-      ]
-    })
+  handleClick = () => {
+    this.props.fetchCategories();
   }
 
   render() {
     let categoriesEl = [];
+    console.log(this.props);
 
-    //for (const [index, value] of this.state.categories.entries()) {
-    for (const [index, value] of this.props.categories.entries()) {
-      categoriesEl.push(
-        <tr key={index}>
-          <td>{value.id}</td>
-          <td>{value.name}</td>
-          <td>{value.parentId}</td>
-          <td>
-            <Button variant="primary" size="sm" className="mr-2">Edit</Button>
-            <Button variant="danger" size="sm">Delete</Button>
-          </td>
-        </tr>
-      )
+    if (this.props.categories !== undefined) {
+      for (const [index, value] of this.props.categories.entries()) {
+        categoriesEl.push(
+          <tr key={index}>
+            <td>{value.id}</td>
+            <td>{value.name}</td>
+            <td>{value.parentId}</td>
+            <td>
+              <Button variant="primary" size="sm" className="mr-2">Edit</Button>
+              <Button variant="danger" size="sm">Delete</Button>
+            </td>
+          </tr>
+        )
+      }
     }
 
     return (
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Parent</th>
-            <th style={{width: '117px'}}>Controls</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categoriesEl}
-        </tbody>
-      </Table>
+      <div>
+        <button onClick={this.handleClick}>Get categories</button>
+        <Table striped bordered hover size="sm">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Parent</th>
+              <th style={{width: '117px'}}>Controls</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categoriesEl}
+          </tbody>
+        </Table>
+      </div>
     );
   }
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    categories: state.categories
+    categories: state.categoriesReducer.categories
   }
 }
 
-export default connect(mapStateToProps)(CategoriesList);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  fetchCategories: fetchCategoriesAction
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesList);

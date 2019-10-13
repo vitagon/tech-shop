@@ -29,7 +29,7 @@ namespace TechShop
               options.AddPolicy(MyAllowSpecificOrigins,
               builder =>
               {
-                builder.WithOrigins("http://localhost:3000");
+                builder.WithOrigins("http://localhost:3000", "https://localhost:5001");
               });
             });
 
@@ -59,7 +59,7 @@ namespace TechShop
             }
 
             app.UseCors(MyAllowSpecificOrigins);
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
