@@ -4,12 +4,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
-import rootReducer from './reducers/rootReducer';
+import rootReducer from './reducers';
 import thunk from 'redux-thunk';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+require('dotenv').config();
+const middlewares = [thunk];
+const store = createStore(rootReducer, composeWithDevTools(
+  applyMiddleware(...middlewares)
+));
 
 ReactDOM.render(
   <Provider store={store}>

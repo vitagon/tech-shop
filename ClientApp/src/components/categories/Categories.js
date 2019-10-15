@@ -1,6 +1,7 @@
 ﻿import React, { Component } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
 import CategoriesList from './CategoriesList';
+import AddCatogory from './AddCategory';
 
 class Categories extends Component {
   render() {
@@ -9,6 +10,7 @@ class Categories extends Component {
         <Row>
           <Col md={12} className="mt-5">
             <CategoriesList></CategoriesList>
+            <AddCatogory></AddCatogory>
           </Col>
         </Row>
       </Container>
