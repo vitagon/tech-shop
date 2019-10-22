@@ -9,12 +9,15 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		TechShop Light|Any CPU = TechShop Light|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{84CE79AE-A064-4727-9B97-9DE85AD837EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{84CE79AE-A064-4727-9B97-9DE85AD837EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84CE79AE-A064-4727-9B97-9DE85AD837EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84CE79AE-A064-4727-9B97-9DE85AD837EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84CE79AE-A064-4727-9B97-9DE85AD837EA}.TechShop Light|Any CPU.ActiveCfg = TechShop Light|Any CPU
+		{84CE79AE-A064-4727-9B97-9DE85AD837EA}.TechShop Light|Any CPU.Build.0 = TechShop Light|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

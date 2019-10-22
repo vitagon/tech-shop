@@ -10,6 +10,7 @@ using TechShop.Models;
 
 namespace TechShop.Controllers
 {
+    [ApiController]
     [Route("/api/categories")]
     public class CategoryController
     {
@@ -46,6 +47,45 @@ namespace TechShop.Controllers
             var result = from i in _context.Category
                          select i;
             return result;
+        }
+
+        [HttpGet("name/{name}")]
+        public IActionResult GetCategoryByName(string name)
+        {
+            var result = from i in _context.Category
+                         where i.Name == name
+                         select i;
+            
+            Category category = result.SingleOrDefault();
+            if (category == null) {
+              return new NotFoundResult();
+            }
+            return new OkResult();
+        }
+
+        [HttpPost]
+        public Category SaveCategory([FromBody] Category category)
+        {
+            _context.Category.Add(category);
+            _context.SaveChanges();
+            return category;
+        }
+
+        [HttpPut]
+        public void UpdateCategory([FromBody] Category category)
+        {
+            if (category.Id == 0) {
+                throw new Exception("Id property is required!");
+            }
+            _context.Category.Update(category);
+            _context.SaveChanges();
+        }
+
+        [HttpDelete("{id}")]
+        public void DeleteCategory(int id)
+        {
+            _context.Category.Remove(new Category { Id = id });
+            _context.SaveChanges();
         }
     }
 }

@@ -3,7 +3,15 @@ import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchCategoriesAction} from '../../actions/categoriesActions';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import Axios from "axios";
+import Axios from 'axios';
+import * as Yup from 'yup';
+
+const form = Yup.object().shape({
+  name: Yup.string()
+    .min(2, '*Name should have 2-50 symbols!')
+    .max(50, '*Name should have 2-50 symbols!')
+    .required('*Required')
+});
 
 class AddCategory extends Component {
 
@@ -11,6 +19,14 @@ class AddCategory extends Component {
     super(props);
     this.state = {
     }
+  }
+
+  getCategoryByName(name) {
+    return Axios.get(`http://localhost:5000/api/categories/name/${name}`)
+      .then(result => {
+        
+        return result.data;
+      });
   }
 
   editCategory = () => {
@@ -34,32 +50,27 @@ class AddCategory extends Component {
       )
     }
 
-    let {form} = this.state;
-
     return (
       <div>
         <h5>Add category</h5>
         <hr/>
 
         <Formik
-          onSubmit={(values, actions) => {
-            alert("Form is validated!");
-            setTimeout( () => {
-              actions.setSubmitting(false);
-            }, 1000);
+          onSubmit={async (values, actions) => {
+            try {
+              await this.getCategoryByName(values.name);
+              actions.setErrors({
+                name: '*Name already exists!'
+              })
+            } catch (e) {
+            }
+            actions.setSubmitting(false);
           }}
           initialValues={{
             name: '',
             parent: 23
           }}
-          validate={values => {
-            let errors = {};
-            if (values.name === '') {
-              errors.name = "*Name is required!";
-            }
-            
-            return errors;
-          }}
+          validationSchema={form}
         >
           { ({touched, errors, isSubmitting }) => (
               <Form>
