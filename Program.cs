@@ -14,7 +14,8 @@ namespace TechShop
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            var app = CreateWebHostBuilder(args).Build();
+            app.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

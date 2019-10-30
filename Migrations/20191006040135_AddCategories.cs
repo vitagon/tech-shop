@@ -7,7 +7,7 @@ namespace TechShop.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql(
-                "insert into categories values " +
+                "insert into Category values " +
                 "   ('cellphones', 0)," +
                 "   ('laptops', 0)"
             );
@@ -16,7 +16,7 @@ namespace TechShop.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql(
-                "delete from categories where name in ('cellphones','laptops')"
+                "delete from Category where Name in ('cellphones','laptops')"
             );
         }
     }

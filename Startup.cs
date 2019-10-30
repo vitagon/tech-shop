@@ -1,12 +1,20 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using TechShop.Data;
+using TechShop.Filters;
+using TechShop.Models;
+using TechShop.Utilities;
 
 namespace TechShop
 {
@@ -32,9 +40,21 @@ namespace TechShop
                 builder.WithOrigins("http://localhost:3000", "https://localhost:5001");
               });
             });
+            //services.AddTransient<IValidator<Category>, CategoryValidator>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
 
+            services
+                .AddMvc(options =>
+                {
+                    options.Filters.Add(new ValidationFilter());
+                })
+                .AddFluentValidation(mvcConfiguration => mvcConfiguration.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

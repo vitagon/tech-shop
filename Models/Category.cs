@@ -8,19 +8,16 @@ using TechShop.Utilities.Attributes;
 
 namespace TechShop.Models
 {
-    [Table("categories")]
+    [Table("Category")]
     public class Category
     {
         [Required, Key]
-        [Range(1, Int32.MaxValue)]
         public int Id { get; set; }
 
         [Required]
-        [StringLength(255, MinimumLength = 2, ErrorMessage = "{0} length must be between {2} and {1}")]
         public string Name { get; set; }
 
-        [Required, Column("parent_id")]
-        [Min(0, ErrorMessage = "{0} must be more or equal to 0")]
+        [Required]
         public int ParentId { get; set; }
 
         public override string ToString()

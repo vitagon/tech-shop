@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using TechShop.Contracts.V1.Responses;
 using TechShop.Data;
 using TechShop.Models;
+using TechShop.Utilities.Attributes;
 
 namespace TechShop.Controllers
 {
@@ -14,7 +18,6 @@ namespace TechShop.Controllers
     [Route("/api/categories")]
     public class CategoryController
     {
-
         private readonly IConfiguration configuration;
         private TechDbContext _context;
 
@@ -55,10 +58,10 @@ namespace TechShop.Controllers
             var result = from i in _context.Category
                          where i.Name == name
                          select i;
-            
+
             Category category = result.SingleOrDefault();
             if (category == null) {
-              return new NotFoundResult();
+                return new NotFoundResult();
             }
             return new OkResult();
         }
@@ -70,15 +73,40 @@ namespace TechShop.Controllers
             _context.SaveChanges();
             return category;
         }
-
-        [HttpPut]
-        public void UpdateCategory([FromBody] Category category)
+        
+        [HttpPut("{id}")]
+        public ActionResult UpdateCategory([Min(0)] int id, [FromBody] Category categoryDto)
         {
-            if (category.Id == 0) {
-                throw new Exception("Id property is required!");
+            
+            var result = from i in _context.Category
+                         where i.Id == id
+                         select i;
+
+            Category category = result.SingleOrDefault();
+
+            if (category == null)
+            {
+                return new BadRequestObjectResult(new ErrorResponse()
+                {
+                    Type = "Entity not found",
+                    Errors = new List<ErrorModel>()
+                    {
+                        new ErrorModel()
+                        {
+                            FieldName = "id",
+                            Messages = new List<string>() {"Entity with such id was not found!"}
+                        }
+                    },
+                    Status = 400
+                });
             }
-            _context.Category.Update(category);
+
+            
+            categoryDto.Id = id;
+            _context.Entry(category).State = EntityState.Detached;
+            _context.Category.Update(categoryDto);
             _context.SaveChanges();
+            return new OkResult();
         }
 
         [HttpDelete("{id}")]

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TechShop.Utilities.Attributes
 {
+    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property)]
     public class MinAttribute : ValidationAttribute
     {
         private int _minVal;
@@ -25,6 +26,11 @@ namespace TechShop.Utilities.Attributes
             {
                 return false;
             }
+        }
+
+        public override string FormatErrorMessage(string name)
+        {
+            return $"{name} must be greater or equal to {_minVal}";
         }
     }
 }
