@@ -11,8 +11,10 @@ namespace TechShop.Migrations
                 name: "Category",
                 columns: table => new
                 {
+                    //Id = table.Column<int>(nullable: false)
+                    //    .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: false, maxLength: 450),
                     ParentId = table.Column<int>(nullable: false)
                 },

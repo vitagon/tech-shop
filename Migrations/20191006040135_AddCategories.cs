@@ -7,7 +7,7 @@ namespace TechShop.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql(
-                "insert into Category values " +
+                "insert into Category (Name, ParentId) values " +
                 "   ('cellphones', 0)," +
                 "   ('laptops', 0)"
             );

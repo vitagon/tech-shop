@@ -11,7 +11,7 @@ namespace TechShop.Models
     [Table("Category")]
     public class Category
     {
-        [Required, Key]
+        [Key]
         public int Id { get; set; }
 
         [Required]

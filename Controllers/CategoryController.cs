@@ -10,39 +10,42 @@ using Newtonsoft.Json;
 using TechShop.Contracts.V1.Responses;
 using TechShop.Data;
 using TechShop.Models;
+using TechShop.Services;
 using TechShop.Utilities.Attributes;
 
 namespace TechShop.Controllers
 {
     [ApiController]
     [Route("/api/categories")]
-    public class CategoryController
+    public class CategoryController : Controller
     {
         private readonly IConfiguration configuration;
         private TechDbContext _context;
+        private ICategoryService categoryService;
 
-        public CategoryController(IConfiguration configuration, TechDbContext context)
+        public CategoryController(IConfiguration configuration, TechDbContext context, ICategoryService categoryService)
         {
             this.configuration = configuration;
             this._context = context;
+            this.categoryService = categoryService;
         }
 
-        public List<string> Index()
-        {
-            List<string> categories = new List<string>();
-            string connectionString = configuration.GetConnectionString("TechShopContext");
+        //public List<string> Index()
+        //{
+        //    List<string> categories = new List<string>();
+        //    string connectionString = configuration.GetConnectionString("TechShopContext");
 
-            SqlConnection connection = new SqlConnection(connectionString);
-            connection.Open();
-            SqlCommand command = new SqlCommand("select * from categories", connection);
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                categories.Add(reader["name"].ToString());
-            }
-            connection.Close();
-            return categories;
-        }
+        //    SqlConnection connection = new SqlConnection(connectionString);
+        //    connection.Open();
+        //    SqlCommand command = new SqlCommand("select * from categories", connection);
+        //    SqlDataReader reader = command.ExecuteReader();
+        //    while (reader.Read())
+        //    {
+        //        categories.Add(reader["name"].ToString());
+        //    }
+        //    connection.Close();
+        //    return categories;
+        //}
 
         [HttpGet]
         public IQueryable<Category> GetCategories()
@@ -69,6 +72,7 @@ namespace TechShop.Controllers
         [HttpPost]
         public Category SaveCategory([FromBody] Category category)
         {
+            category.Id = 0;
             _context.Category.Add(category);
             _context.SaveChanges();
             return category;
@@ -110,7 +114,7 @@ namespace TechShop.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void DeleteCategory(int id)
+        public void DeleteCategory([Min(0)] int id)
         {
             _context.Category.Remove(new Category { Id = id });
             _context.SaveChanges();

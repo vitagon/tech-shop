@@ -1,27 +1,15 @@
-using FluentValidation;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using TechShop.Data;
-using TechShop.Filters;
-using TechShop.Models;
-using TechShop.Utilities;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
+using TechShop.Installers;
 
 namespace TechShop
 {
     public class Startup
     {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,37 +20,8 @@ namespace TechShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-              options.AddPolicy(MyAllowSpecificOrigins,
-              builder =>
-              {
-                builder.WithOrigins("http://localhost:3000", "https://localhost:5001");
-              });
-            });
+            services.InstallServicesInAssembly(Configuration);
             //services.AddTransient<IValidator<Category>, CategoryValidator>();
-
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = true;
-            });
-
-            services
-                .AddMvc(options =>
-                {
-                    options.Filters.Add(new ValidationFilter());
-                })
-                .AddFluentValidation(mvcConfiguration => mvcConfiguration.RegisterValidatorsFromAssemblyContaining<Startup>())
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            
-            // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/build";
-            });
-
-            services.AddDbContext<TechDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("TechShopContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,7 +37,15 @@ namespace TechShop
                 app.UseHsts();
             }
 
-            app.UseCors(MyAllowSpecificOrigins);
+            var swaggerOptions = new TechShop.Options.SwaggerOptions();
+            Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
+            app.UseSwagger(options => options.RouteTemplate = swaggerOptions.JsonRoute);
+            app.UseSwaggerUI(option =>
+            {
+                option.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description);
+            });
+
+            app.UseCors(CorsInstaller._myAllowSpecificOrigins);
             // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
