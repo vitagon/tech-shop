@@ -51,7 +51,7 @@ class AddCategory extends Component {
     }
 
     return (
-      <div>
+      <div className="mb-3">
         <h5>Add category</h5>
         <hr/>
 
@@ -113,7 +113,7 @@ class AddCategory extends Component {
                   className="btn btn-primary btn-block"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Please wait..." : "Submit"}
+                  {isSubmitting ? "Please wait..." : "Save"}
                 </button>
               </Form>
             )}
@@ -130,7 +130,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  fetchCategories: fetchCategoriesAction
+    fetchCategories: fetchCategoriesAction
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCategory);

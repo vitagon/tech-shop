@@ -1,8 +1,9 @@
-﻿import React, { Component } from "react";
+﻿import React, { Component } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {fetchCategoriesAction} from '../../actions/categoriesActions';
+import { fetchCategoriesAction } from '../../actions/categoriesActions';
+import { TOGGLE_EDIT_CATEGORY_COMP } from '../../reducers/categoriesReducer';
 
 class CategoriesList extends Component {
 
@@ -11,8 +12,8 @@ class CategoriesList extends Component {
     console.log(process.env.REACT_APP_API_URL);
   }
 
-  handleClick = () => {
-    this.props.fetchCategories();
+  showEditCategory = (category) => {
+    this.props.showEditCategoryComp(category);
   }
 
   render() {
@@ -25,7 +26,7 @@ class CategoriesList extends Component {
           <td>{value.name}</td>
           <td>{value.parentId}</td>
           <td>
-            <Button variant="primary" size="sm" className="mr-2">Edit</Button>
+            <Button variant="primary" size="sm" className="mr-2" onClick={this.showEditCategory.bind(this, value)}>Edit</Button>
             <Button variant="danger" size="sm">Delete</Button>
           </td>
         </tr>
@@ -34,7 +35,7 @@ class CategoriesList extends Component {
 
     return (
       <div>
-        <Button variant="primary" onClick={this.handleClick} block className="mb-3">Get categories</Button>
+        <Button variant="primary" onClick={this.props.fetchCategories} block className="mb-3">Get categories</Button>
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
@@ -60,7 +61,14 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  fetchCategories: fetchCategoriesAction
+  fetchCategories: fetchCategoriesAction,
+  showEditCategoryComp: (category) => {
+    return (dispatch) => dispatch({
+      type: TOGGLE_EDIT_CATEGORY_COMP,
+      data: category,
+      payload: false
+    })
+  }
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoriesList);

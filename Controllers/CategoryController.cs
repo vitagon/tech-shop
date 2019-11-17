@@ -66,7 +66,7 @@ namespace TechShop.Controllers
             if (category == null) {
                 return new NotFoundResult();
             }
-            return new OkResult();
+            return new OkObjectResult(category);
         }
 
         [HttpPost]

@@ -1,7 +1,12 @@
 ﻿import React, { Component } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
 import CategoriesList from './CategoriesList';
-import AddCatogory from './AddCategory';
+import AddCategory from './AddCategory';
+import EditCategory from './EditCategory';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { TOGGLE_ADD_CATEGORY_COMP } from '../../reducers/categoriesReducer';
+import { Button } from 'react-bootstrap';
 
 class Categories extends Component {
   render() {
@@ -10,7 +15,9 @@ class Categories extends Component {
         <Row>
           <Col md={12} className="mt-5">
             <CategoriesList></CategoriesList>
-            <AddCatogory></AddCatogory>
+            <Button block className="btn btn-success mb-3" onClick={this.props.toggleAddCategoryComp}>Add category</Button>
+            {this.props.showAddCategoryComp ? (<AddCategory></AddCategory>) : null}
+            {this.props.showEditCategoryComp ? (<EditCategory></EditCategory>) : null}
           </Col>
         </Row>
       </Container>
@@ -18,4 +25,13 @@ class Categories extends Component {
   }
 };
 
-export default Categories;
+const mapStateToProps = (state) => ({
+  showAddCategoryComp: state.categoriesReducer.showAddCategoryComp,
+  showEditCategoryComp: state.categoriesReducer.showEditCategoryComp,
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  toggleAddCategoryComp: () => (dispatch) => dispatch({ type: TOGGLE_ADD_CATEGORY_COMP, payload: false })
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);

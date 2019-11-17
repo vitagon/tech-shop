@@ -6,7 +6,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
 using TechShop.Filters;
 
 namespace TechShop.Installers
@@ -30,7 +30,7 @@ namespace TechShop.Installers
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TechShopAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "TechShopAPI", Version = "v1" });
             });
         }
     }
