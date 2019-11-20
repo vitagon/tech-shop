@@ -1,8 +1,11 @@
-import { RECEIVE_CATEGORIES } from '../actions/categoriesActions';
 import { toggleComponent } from './util/ToggleComponent';
 
+export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 export const TOGGLE_ADD_CATEGORY_COMP = 'TOGGLE_ADD_CATEGORY_COMP';
 export const TOGGLE_EDIT_CATEGORY_COMP = 'TOGGLE_EDIT_CATEGORY_COMP';
+export const ADD_CATEGORY = 'ADD_CATEGORY';
+export const SHOW_DELETE_CATEGORY_MODAL = 'SHOW_DELETE_CATEGORY_MODAL';
+export const HIDE_DELETE_CATEGORY_MODAL = 'HIDE_DELETE_CATEGORY_MODAL';
 
 const initialState = {
   categories: [
@@ -12,7 +15,9 @@ const initialState = {
   ],
   showAddCategoryComp: false,
   showEditCategoryComp: false,
-  currentCategory: {}
+  editCategoryCurrentItem: {},
+  showDeleteCategoryModal: false,
+  deleteCategoryCurrentItem: {}
 }
 
 function categoriesReducer(state = initialState, action) {
@@ -20,6 +25,15 @@ function categoriesReducer(state = initialState, action) {
     case RECEIVE_CATEGORIES: {
       return Object.assign({}, state, {
         categories: action.data
+      });
+    }
+    // this case is unused
+    case ADD_CATEGORY: {
+      return Object.assign({}, state, {
+        categories: [
+          ...state.categories,
+          action.data
+        ]
       });
     }
     case TOGGLE_ADD_CATEGORY_COMP: {
@@ -32,7 +46,18 @@ function categoriesReducer(state = initialState, action) {
     }
     case TOGGLE_EDIT_CATEGORY_COMP: {
       let category = action.data;
-      return toggleComponent(state, state.currentCategory, category, 'showEditCategoryComp', 'currentCategory', closeAllComponents);
+      return toggleComponent(state, state.editCategoryCurrentItem, category, 'showEditCategoryComp', 'editCategoryCurrentItem', closeAllComponents);
+    }
+    case SHOW_DELETE_CATEGORY_MODAL: {
+      return Object.assign({}, state, {
+        showDeleteCategoryModal: true,
+        deleteCategoryCurrentItem: action.data
+      });
+    }
+    case HIDE_DELETE_CATEGORY_MODAL: {
+      return Object.assign({}, state, {
+        showDeleteCategoryModal: false
+      });
     }
     default: {
       return state;

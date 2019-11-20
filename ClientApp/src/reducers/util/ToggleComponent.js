@@ -3,6 +3,8 @@
 export function toggleComponent(state, curObj, obj, componentVisibilityControlName, curObjControlName, closeAllComponents) {
   // show component when curObj is not set (curObj: {})
   if (_.isEmpty(curObj)) {
+    // in case if other components are opened
+    closeAllComponents(state);
     return Object.assign({}, state, {
       [curObjControlName]: obj,
       [componentVisibilityControlName]: !state[componentVisibilityControlName]

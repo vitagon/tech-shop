@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import CategoriesList from './CategoriesList';
 import AddCategory from './AddCategory';
 import EditCategory from './EditCategory';
+import DeleteCategory from './DeleteCategory';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { TOGGLE_ADD_CATEGORY_COMP } from '../../reducers/categoriesReducer';
@@ -18,6 +19,7 @@ class Categories extends Component {
             <Button block className="btn btn-success mb-3" onClick={this.props.toggleAddCategoryComp}>Add category</Button>
             {this.props.showAddCategoryComp ? (<AddCategory></AddCategory>) : null}
             {this.props.showEditCategoryComp ? (<EditCategory></EditCategory>) : null}
+            <DeleteCategory></DeleteCategory>
           </Col>
         </Row>
       </Container>

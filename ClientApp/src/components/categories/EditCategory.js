@@ -1,7 +1,7 @@
 ﻿import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchCategoriesAction } from '../../actions/categoriesActions';
+import { fetchCategoriesAction, updateCategoryAction } from '../../actions/categoriesActions';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Axios from 'axios';
 import * as Yup from 'yup';
@@ -29,27 +29,7 @@ class EditCategory extends Component {
       });
   }
 
-  editCategory = () => {
-    this.props.editCategory();
-  }
-
   render() {
-    let categoriesEl = [];
-
-    for (const [index, value] of this.props.categories.entries()) {
-      categoriesEl.push(
-        <tr key={index}>
-          <td>{value.id}</td>
-          <td>{value.name}</td>
-          <td>{value.parentId}</td>
-          <td>
-            <button type="button" className="btn btn-primary btn-sm mr-2">Edit</button>
-            <button type="button" className="btn btn-danger btn-sm">Delete</button>
-          </td>
-        </tr>
-      )
-    }
-
     return (
       <div className="mb-3">
         <h5>Edit category</h5>
@@ -57,16 +37,21 @@ class EditCategory extends Component {
 
         <Formik
           onSubmit={async (values, actions) => {
-            try {
-              await this.getCategoryByName(values.name);
-              actions.setErrors({
-                name: '*Name already exists!'
-              })
-            } catch (e) {
+            if (this.props.currentCategory.name !== values.name) {
+              try {
+                await this.getCategoryByName(values.name);
+                actions.setErrors({
+                  name: '*Name already exists!'
+                })
+              } catch (e) {
+              }
             }
+            
             actions.setSubmitting(false);
+            this.props.editCategory(values);
           }}
           initialValues={{
+            id: this.props.currentCategory.id,
             name: this.props.currentCategory.name,
             parent: this.props.currentCategory.parentId
           }}
@@ -126,11 +111,12 @@ class EditCategory extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   categories: state.categoriesReducer.categories,
-  currentCategory: state.categoriesReducer.currentCategory
+  currentCategory: state.categoriesReducer.editCategoryCurrentItem
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  fetchCategories: fetchCategoriesAction
+  fetchCategories: fetchCategoriesAction,
+  editCategory: updateCategoryAction
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditCategory);

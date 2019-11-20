@@ -18,7 +18,11 @@ namespace TechShop.Installers
                 options.AddPolicy(_myAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:3000", "https://localhost:5001");
+                  builder
+                    .WithOrigins("http://localhost:3000", "https://localhost:5001");
+                      //.AllowAnyHeader()
+                      //.AllowAnyMethod()
+                      //.AllowCredentials();
                 });
             });
         }

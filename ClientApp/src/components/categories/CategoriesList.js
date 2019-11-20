@@ -2,7 +2,7 @@
 import { Table, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import { fetchCategoriesAction } from '../../actions/categoriesActions';
+import { fetchCategoriesAction, showDeleteCategoryModal } from '../../actions/categoriesActions';
 import { TOGGLE_EDIT_CATEGORY_COMP } from '../../reducers/categoriesReducer';
 
 class CategoriesList extends Component {
@@ -10,10 +10,15 @@ class CategoriesList extends Component {
   constructor(props) {
     super(props);
     console.log(process.env.REACT_APP_API_URL);
+    this.showEditCategory = this.showEditCategory.bind(this);
   }
 
-  showEditCategory = (category) => {
-    this.props.showEditCategoryComp(category);
+  // this is just an example that we can do so,
+  // but I would prefer arrow function on onClick = {() => method()}
+  showEditCategory(category) {
+    return function () {
+      this.props.showEditCategoryComp(category);
+    }.bind(this);
   }
 
   render() {
@@ -26,8 +31,8 @@ class CategoriesList extends Component {
           <td>{value.name}</td>
           <td>{value.parentId}</td>
           <td>
-            <Button variant="primary" size="sm" className="mr-2" onClick={this.showEditCategory.bind(this, value)}>Edit</Button>
-            <Button variant="danger" size="sm">Delete</Button>
+            <Button variant="primary" size="sm" className="mr-2" onClick={this.showEditCategory(value)}>Edit</Button>
+            <Button variant="danger" size="sm" onClick={() => this.props.showDeleteCategoryModal(value)}>Delete</Button>
           </td>
         </tr>
       )
@@ -68,7 +73,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
       data: category,
       payload: false
     })
-  }
+  },
+  showDeleteCategoryModal: showDeleteCategoryModal
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoriesList);

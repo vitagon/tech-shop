@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {fetchCategoriesAction} from '../../actions/categoriesActions';
+import { createCategoryAction } from '../../actions/categoriesActions';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Axios from 'axios';
 import * as Yup from 'yup';
@@ -28,28 +28,8 @@ class AddCategory extends Component {
         return result.data;
       });
   }
-
-  editCategory = () => {
-    this.props.editCategory();
-  }
   
   render() {
-    let categoriesEl = [];
-
-    for (const [index, value] of this.props.categories.entries()) {
-      categoriesEl.push(
-        <tr key={index}>
-          <td>{value.id}</td>
-          <td>{value.name}</td>
-          <td>{value.parentId}</td>
-          <td>
-            <button type="button" className="btn btn-primary btn-sm mr-2">Edit</button>
-            <button type="button" className="btn btn-danger btn-sm">Delete</button>
-          </td>
-        </tr>
-      )
-    }
-
     return (
       <div className="mb-3">
         <h5>Add category</h5>
@@ -65,10 +45,11 @@ class AddCategory extends Component {
             } catch (e) {
             }
             actions.setSubmitting(false);
+            this.props.createCategory(values);
           }}
           initialValues={{
             name: '',
-            parent: 23
+            parent: 0
           }}
           validationSchema={form}
         >
@@ -130,7 +111,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    fetchCategories: fetchCategoriesAction
+  createCategory: createCategoryAction
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCategory);
