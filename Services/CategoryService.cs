@@ -10,43 +10,67 @@ namespace TechShop.Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly TechDbContext techDbContext;
+        private readonly TechDbContext _techDbContext;
 
         public CategoryService(TechDbContext techDbContext)
         {
-            this.techDbContext = techDbContext;
+            this._techDbContext = techDbContext;
         }
 
         public async Task<List<Category>> GetCategoriesAsync()
         {
-            return await techDbContext.Category.ToListAsync();
+            var result = from i in _techDbContext.Category
+                         select i;
+            return await result.ToListAsync();
         }
 
         public async Task<Category> GetCategoryByIdAsync(int id)
         {
-            return await techDbContext.Category.SingleOrDefaultAsync(x => x.Id == id);
+            //return await techDbContext.Category.SingleOrDefaultAsync(x => x.Id == id);
+            var result = from i in _techDbContext.Category
+                         where i.Id == id
+                         select i;
+            Category category = await result.SingleOrDefaultAsync();
+            detach(category);
+            return category;
+        }
+
+        public async Task<Category> GetCategoryByNameAsync(string name)
+        {
+            var result = from i in _techDbContext.Category
+                         where i.Name == name
+                         select i;
+            Category category = await result.SingleOrDefaultAsync();
+            detach(category);
+            return category;
         }
 
         public async Task<bool> CreateCategoryAsync(Category category)
         {
-            await techDbContext.Category.AddAsync(category);
-            var created = await techDbContext.SaveChangesAsync();
+            category.Id = 0;
+            await _techDbContext.Category.AddAsync(category);
+            var created = await _techDbContext.SaveChangesAsync();
             return created > 0;
         }
 
         public async Task<bool> UpdateCategoryAsync(Category category)
         {
-            techDbContext.Category.Update(category);
-            var updated = await techDbContext.SaveChangesAsync();
+            _techDbContext.Category.Update(category);
+            var updated = await _techDbContext.SaveChangesAsync();
             return updated > 0;
         }
 
         public async Task<bool> DeleteCategoryAsync(int id)
         {
             var category = await GetCategoryByIdAsync(id);
-            techDbContext.Category.Remove(category);
-            var deleted = await techDbContext.SaveChangesAsync();
-            return deleted > 0; 
+            _techDbContext.Category.Remove(category);
+            var deleted = await _techDbContext.SaveChangesAsync();
+            return deleted > 0;
+        }
+
+        private void detach(Category category)
+        {
+            _techDbContext.Entry(category).State = EntityState.Detached;
         }
     }
 }

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data.SqlClient;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using TechShop.Contracts.V1.Responses;
-using TechShop.Data;
 using TechShop.Models;
 using TechShop.Services;
 using TechShop.Utilities.Attributes;
@@ -19,78 +13,42 @@ namespace TechShop.Controllers
     [Route("/api/categories")]
     public class CategoryController : Controller
     {
-        private readonly IConfiguration configuration;
-        private TechDbContext _context;
-        private ICategoryService categoryService;
+        private readonly ICategoryService _categoryService;
 
-        public CategoryController(IConfiguration configuration, TechDbContext context, ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService)
         {
-            this.configuration = configuration;
-            this._context = context;
-            this.categoryService = categoryService;
+            this._categoryService = categoryService;
         }
 
-        //public List<string> Index()
-        //{
-        //    List<string> categories = new List<string>();
-        //    string connectionString = configuration.GetConnectionString("TechShopContext");
-
-        //    SqlConnection connection = new SqlConnection(connectionString);
-        //    connection.Open();
-        //    SqlCommand command = new SqlCommand("select * from categories", connection);
-        //    SqlDataReader reader = command.ExecuteReader();
-        //    while (reader.Read())
-        //    {
-        //        categories.Add(reader["name"].ToString());
-        //    }
-        //    connection.Close();
-        //    return categories;
-        //}
-
         [HttpGet]
-        public IQueryable<Category> GetCategories()
+        public IActionResult GetCategories()
         {
-            var result = from i in _context.Category
-                         select i;
-            return result;
+            return Ok(_categoryService.GetCategoriesAsync());
         }
 
         [HttpGet("name/{name}")]
-        public IActionResult GetCategoryByName(string name)
+        public async Task<IActionResult> GetCategoryByName(string name)
         {
-            var result = from i in _context.Category
-                         where i.Name == name
-                         select i;
-
-            Category category = result.SingleOrDefault();
+            Category category = await _categoryService.GetCategoryByNameAsync(name);
             if (category == null) {
-                return new NotFoundResult();
+                return NotFound();
             }
-            return new OkObjectResult(category);
+            return Ok(category);
         }
 
         [HttpPost]
-        public Category SaveCategory([FromBody] Category category)
+        public IActionResult SaveCategory([FromBody] Category category)
         {
-            category.Id = 0;
-            _context.Category.Add(category);
-            _context.SaveChanges();
-            return category;
+            return Created("/api/categories", _categoryService.CreateCategoryAsync(category));
         }
         
         [HttpPut("{id}")]
-        public ActionResult UpdateCategory([Min(0)] int id, [FromBody] Category categoryDto)
+        public async Task<IActionResult> UpdateCategory([Min(0)] int id, [FromBody] Category categoryDto)
         {
-            
-            var result = from i in _context.Category
-                         where i.Id == id
-                         select i;
-
-            Category category = result.SingleOrDefault();
-
+            Category category = await _categoryService.GetCategoryByIdAsync(id);
             if (category == null)
             {
-                return new BadRequestObjectResult(new ErrorResponse()
+                return BadRequest(new ErrorResponse()
                 {
                     Type = "Entity not found",
                     Errors = new List<ErrorModel>()
@@ -107,17 +65,14 @@ namespace TechShop.Controllers
 
             
             categoryDto.Id = id;
-            _context.Entry(category).State = EntityState.Detached;
-            _context.Category.Update(categoryDto);
-            _context.SaveChanges();
-            return new OkResult();
+            await _categoryService.UpdateCategoryAsync(categoryDto);
+            return Ok();
         }
 
         [HttpDelete("{id}")]
-        public void DeleteCategory([Min(0)] int id)
+        public async void DeleteCategory([Min(0)] int id)
         {
-            _context.Category.Remove(new Category { Id = id });
-            _context.SaveChanges();
+            await _categoryService.DeleteCategoryAsync(id);
         }
     }
 }

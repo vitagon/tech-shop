@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchCategoriesAction, updateCategoryAction } from '../../actions/categoriesActions';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import Axios from 'axios';
+import { getCategoryByName } from '../../services/CategoryService';
 import * as Yup from 'yup';
 
 const form = Yup.object().shape({
@@ -21,14 +21,6 @@ class EditCategory extends Component {
     }
   }
 
-  getCategoryByName(name) {
-    return Axios.get(`http://localhost:5000/api/categories/name/${name}`)
-      .then(result => {
-
-        return result.data;
-      });
-  }
-
   render() {
     return (
       <div className="mb-3">
@@ -39,16 +31,16 @@ class EditCategory extends Component {
           onSubmit={async (values, actions) => {
             if (this.props.currentCategory.name !== values.name) {
               try {
-                await this.getCategoryByName(values.name);
+                await getCategoryByName(values.name);
                 actions.setErrors({
                   name: '*Name already exists!'
                 })
               } catch (e) {
               }
+              this.props.editCategory(values);
             }
             
             actions.setSubmitting(false);
-            this.props.editCategory(values);
           }}
           initialValues={{
             id: this.props.currentCategory.id,

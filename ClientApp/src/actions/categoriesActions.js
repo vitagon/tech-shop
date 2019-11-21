@@ -3,11 +3,11 @@ import { SHOW_DELETE_CATEGORY_MODAL, HIDE_DELETE_CATEGORY_MODAL, RECEIVE_CATEGOR
 
 export function fetchCategoriesAction() {
   return function(dispatch) {
-    return axios.get('http://localhost:5000/api/categories')
+    return axios.get('/api/categories')
       .then(response => {
         dispatch({
           type: RECEIVE_CATEGORIES,
-          data: response.data,
+          data: response.data.result,
           receivedAt: Date.now()
         });
       })
