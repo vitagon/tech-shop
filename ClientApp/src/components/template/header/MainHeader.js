@@ -83,16 +83,16 @@ class MainHeader extends Component {
                     </div>
                   </div>
                 </div>
-                
-								<div className="menu-toggle">
+
+                <div className="menu-toggle">
                   <a href="#">
                     <FontAwesomeIcon icon={faBars} />
                     <span>Menu</span>
                   </a>
                 </div>
-							</div>
+              </div>
             </div>
-					</div>
+          </div>
         </div>
       </div>
     );
