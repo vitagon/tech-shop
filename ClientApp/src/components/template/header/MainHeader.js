@@ -1,8 +1,11 @@
 ﻿import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faTimesCircle, faArrowCircleRight, faBars } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import './MainHeader.css'
+import { TOGGLE_SIDE_NAV_PANEL } from '../../../reducers/navPanelReducer';
 
 class MainHeader extends Component {
   render() {
@@ -85,7 +88,7 @@ class MainHeader extends Component {
                 </div>
 
                 <div className="menu-toggle">
-                  <a href="#">
+                  <a onClick={this.props.toggleSideNavPanel}>
                     <FontAwesomeIcon icon={faBars} />
                     <span>Menu</span>
                   </a>
@@ -99,4 +102,12 @@ class MainHeader extends Component {
   }
 }
 
-export default MainHeader;
+const mapStateToProps = (state) => ({
+  showSideNavPanel: state.navPanelReducer.showSideNavPanel
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  toggleSideNavPanel: () => (dispatch) => dispatch({ type: TOGGLE_SIDE_NAV_PANEL, payload: false })
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);
