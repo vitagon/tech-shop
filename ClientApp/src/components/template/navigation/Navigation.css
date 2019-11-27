@@ -76,6 +76,7 @@
     .main-nav {
         margin: 0px;
         float: none;
+        flex-direction: column!important;
     }
 
         .main-nav > li {
