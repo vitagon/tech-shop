@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import './Navigation.css';
 import { bindActionCreators } from 'redux';
-import { TOGGLE_SIDE_NAV_PANEL } from '../../../reducers/navPanelReducer';
 
 class Navigation extends Component {
 
@@ -34,7 +33,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  toggleSideNavPanel: () => (dispatch) => dispatch({ type: TOGGLE_SIDE_NAV_PANEL, payload: false })
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

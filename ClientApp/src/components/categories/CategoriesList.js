@@ -47,7 +47,7 @@ class CategoriesList extends Component {
               <th>#</th>
               <th>Name</th>
               <th>Parent</th>
-              <th style={{width: '117px'}}>Controls</th>
+              <th style={{width: '130px'}}>Controls</th>
             </tr>
           </thead>
           <tbody>
