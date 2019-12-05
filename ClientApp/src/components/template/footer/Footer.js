@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TopFooter from './TopFooter';
 import BottomFooter from './BottomFooter';
-//import './Curtain.css';
+import './Footer.css';
 
 
 class Footer extends Component {
