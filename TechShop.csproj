@@ -39,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\public\fonts\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Extensions\" />
   </ItemGroup>

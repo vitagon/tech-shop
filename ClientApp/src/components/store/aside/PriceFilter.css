@@ -1,0 +1,44 @@
+﻿/*-- Price Filter --*/
+
+
+
+#price-slider {
+    margin-bottom: 15px;
+}
+
+#price-slider.noUi-target {
+    background-color: #FFF;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #E4E7ED;
+    border-radius: 0px;
+}
+
+#price-slider .noUi-connect {
+    background-color: #D10024;
+}
+
+#price-slider.noUi-horizontal {
+    height: 6px;
+}
+
+#price-slider.noUi-horizontal .noUi-handle {
+    width: 12px;
+    height: 12px;
+    right: -6px;
+    top: -4px;
+    border: none;
+    background: #D10024;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 50%;
+}
+
+#price-slider .noUi-handle:before, #price-slider .noUi-handle:after {
+    display: none;
+}
+
+.price-filter .input-number {
+    display: inline-block;
+    width: calc(50% - 7px);
+}

@@ -1,0 +1,27 @@
+﻿/*----------------------------*\
+	Aside
+\*----------------------------*/
+
+.aside + .aside {
+    margin-top: 30px;
+}
+
+.aside > .aside-title {
+    text-transform: uppercase;
+    font-size: 18px;
+    margin: 15px 0px 30px;
+}
+
+/*-- checkbox Filter --*/
+
+.checkbox-filter > div + div {
+    margin-top: 10px;
+}
+
+.checkbox-filter .input-radio label, .checkbox-filter .input-checkbox label {
+    font-size: 12px;
+}
+
+    .checkbox-filter .input-radio label small, .checkbox-filter .input-checkbox label small {
+        color: #8D99AE;
+    }
