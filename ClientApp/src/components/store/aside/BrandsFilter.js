@@ -11,7 +11,7 @@ class BrandsFilter extends Component {
             <label for="brand-1">
               <span></span>
               SAMSUNG
-										<small>(578)</small>
+							<small>(578)</small>
             </label>
           </div>
           <div class="input-checkbox">
@@ -19,7 +19,7 @@ class BrandsFilter extends Component {
             <label for="brand-2">
               <span></span>
               LG
-										<small>(125)</small>
+							<small>(125)</small>
             </label>
           </div>
           <div class="input-checkbox">
@@ -27,7 +27,7 @@ class BrandsFilter extends Component {
             <label for="brand-3">
               <span></span>
               SONY
-										<small>(755)</small>
+							<small>(755)</small>
             </label>
           </div>
           <div class="input-checkbox">
@@ -35,7 +35,7 @@ class BrandsFilter extends Component {
             <label for="brand-4">
               <span></span>
               SAMSUNG
-										<small>(578)</small>
+							<small>(578)</small>
             </label>
           </div>
           <div class="input-checkbox">
@@ -43,7 +43,7 @@ class BrandsFilter extends Component {
             <label for="brand-5">
               <span></span>
               LG
-										<small>(125)</small>
+							<small>(125)</small>
             </label>
           </div>
           <div class="input-checkbox">
@@ -51,7 +51,7 @@ class BrandsFilter extends Component {
             <label for="brand-6">
               <span></span>
               SONY
-										<small>(755)</small>
+							<small>(755)</small>
             </label>
           </div>
         </div>

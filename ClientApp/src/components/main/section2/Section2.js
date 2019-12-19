@@ -1,6 +1,5 @@
 ﻿import React, { Component } from "react";
 import TabsWithSliders from '../../tabsWithSlider/TabsWithSliders';
-import './Section2.css';
 
 const bestSellersProducts = {
   laptops: [

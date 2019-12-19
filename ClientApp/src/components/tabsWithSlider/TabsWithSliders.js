@@ -1,7 +1,9 @@
 ﻿import React, { Component } from "react";
 import Slider from "react-slick";
+import SliderArrows from './../sliderArrows/SliderArrows';
 import { SliderProducts } from './SliderProducts';
 import { Tab, Nav } from "react-bootstrap";
+import styles from './TabsWithSliders.module.css';
 import './TabsWithSliders.css';
 
 class TabsWithSliders extends Component {
@@ -75,13 +77,6 @@ class TabsWithSliders extends Component {
   }
 
   render() {
-    let slickNav = (
-      <div id="slick-nav-1" className="products-slick-nav">
-        <button className="slick-prev slick-arrow" style={{ display: 'inline-block' }} onClick={this.previous}>Prev</button>
-        <button className="slick-next slick-arrow" style={{ display: 'inline-block' }} onClick={this.next}>Next</button>
-      </div>
-    );
-
     return (
       <div className="section">
         <div className="container">
@@ -106,7 +101,7 @@ class TabsWithSliders extends Component {
                 </div>
               </div>
 
-              <div className="col-md-12">
+              <div className="col-md-12 main__products-slick-wrap">
                 <Tab.Content>
                   {this.sliders.map((sliderName, i) => {
                     return (
@@ -116,11 +111,12 @@ class TabsWithSliders extends Component {
                           <Slider
                             ref={c => (this.sliderComponentsRefs[sliderName] = c)}
                             {...this.state.settings[sliderName]}
-                            className="products-slick"
+                            className={styles['product-slick']}
                           >
                             {SliderProducts(this.products[sliderName])}
                           </Slider>
-                          {slickNav}
+
+                          <SliderArrows bottom={'20px'} previous={this.previous} next={this.next} />
                         </Tab.Pane>
                       )
                     );

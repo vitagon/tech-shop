@@ -1,0 +1,6 @@
+﻿/*
+ *  If we place it in style={{}}, then Slick JS erases our styles
+ */
+.main__products-slick-wrap .slick-list .product-wrap {
+    padding: .6em;
+}

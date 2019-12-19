@@ -2,17 +2,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faExchangeAlt, faEye, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartO, faStar as faStarO } from '@fortawesome/free-regular-svg-icons';
-import styles from './../../styles/Product.module.css';
-import './SliderProducts.css';
+import styles from './../../../styles/Product.module.css';
 
-export const SliderProducts = (products) => {
+export const ProductsGridView = (products) => {
   let oneToFiveArray = [];
   for (let i = 0; i < 5; i++) {
     oneToFiveArray[i] = i + 1;
   }
-  let sliderProductsElements = products.map((product, i) => {
+  let productsListElement = products.map((product, i) => {
     return (
-      <div key={product.id}  className="product-wrap">
+      <div key={product.id} className="col-md-4 col-xs-6">
         <div className={styles.product}>
           <div className={styles['product-img']}>
             <img src={product.img} alt="" style={{ width: '100%' }} />
@@ -48,5 +47,5 @@ export const SliderProducts = (products) => {
     )
   });
 
-  return sliderProductsElements;
+  return productsListElement;
 }

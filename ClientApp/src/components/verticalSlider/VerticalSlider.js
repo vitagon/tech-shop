@@ -1,5 +1,6 @@
 ﻿import React, { Component } from "react";
 import Slider from "react-slick";
+import SliderArrows from './../sliderArrows/SliderArrows';
 import './VerticalSlider.css';
 
 const widgetGroup = (products) => {
@@ -55,19 +56,12 @@ class VerticalSlider extends Component {
   
   render() {
 
-    let slickNav = (
-      <div className="products-slick-nav">
-        <button className="slick-prev slick-arrow" style={{ display: 'inline-block' }} onClick={this.previous}>Prev</button>
-        <button className="slick-next slick-arrow" style={{ display: 'inline-block' }} onClick={this.next}>Next</button>
-      </div>
-    );
-
     return (
       <>
         <div className="section-title">
           <h4 className="title">{this.title}</h4>
           <div className="section-nav">
-            {slickNav}
+            <SliderArrows bottom={'0px'} previous={this.previous} next={this.next} />
           </div>
         </div>
 
