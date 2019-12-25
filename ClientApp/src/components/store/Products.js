@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { ProductsGridView } from './products/ProductsGridView';
-import { ProductsListView } from './products/ProductsListView';
+import ProductsListView from './products/ProductsListView';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTh, faThList } from '@fortawesome/free-solid-svg-icons';
 import './Products.css'
@@ -14,8 +14,8 @@ const products = [
     category: 'Category',
     name: 'Laptop ASUS Air G3425',
     description: '[Intel Celeron J4005, 2x2000 MGz, 4 GB DDR3, SSD 120 GB, without OS]',
-    price: '$980.00',
-    oldPrice: '$990.00',
+    price: '150',
+    oldPrice: '183',
     rating: 5
   },
   {
@@ -26,8 +26,8 @@ const products = [
     category: 'Category',
     name: 'Headphones Lenovo C1124',
     description: '',
-    price: '$980.00',
-    oldPrice: '$990.00',
+    price: '60',
+    oldPrice: '72',
     rating: 0
   },
   {
@@ -38,8 +38,8 @@ const products = [
     category: 'Category',
     name: 'Laptop Mackbook Air 2',
     description: '',
-    price: '$980.00',
-    oldPrice: '$990.00',
+    price: '980.00',
+    oldPrice: '990.00',
     rating: 3
   },
   {
@@ -50,8 +50,8 @@ const products = [
     category: 'Category',
     name: 'Tablet Sony Z3',
     description: '',
-    price: '$980.00',
-    oldPrice: '$990.00',
+    price: '980.00',
+    oldPrice: '990.00',
     rating: 5
   },
   {
@@ -62,8 +62,8 @@ const products = [
     category: 'Category',
     name: 'Headphones Epson GT23',
     description: '',
-    price: '$980.00',
-    oldPrice: '$990.00',
+    price: '980.00',
+    oldPrice: '990.00',
     rating: 5
   },
   {
@@ -74,8 +74,8 @@ const products = [
     category: 'Category',
     name: 'Laptop Acer H2451',
     description: '',
-    price: '$980.00',
-    oldPrice: '$990.00',
+    price: '980.00',
+    oldPrice: '990.00',
     rating: 4
   },
   {
@@ -86,8 +86,8 @@ const products = [
     category: 'Category',
     name: 'Samsung Galaxy S8 Pro',
     description: '',
-    price: '$980.00',
-    oldPrice: '$990.00',
+    price: '980.00',
+    oldPrice: '990.00',
     rating: 2
   },
 ];
@@ -145,7 +145,7 @@ class Products extends Component {
 
         <div class="row">
           {this.state.productsView === 'grid' && ProductsGridView(products)}
-          {this.state.productsView === 'list' && ProductsListView(products)}
+          {this.state.productsView === 'list' && <ProductsListView products={products} />}
         </div>
 
         <div class="store-filter clearfix">

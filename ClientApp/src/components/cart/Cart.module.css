@@ -1,0 +1,142 @@
+﻿.cart {
+}
+
+.cart-list, .order-total {
+    border: solid 1px #e8e8e8;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+}
+
+.cart-item {
+    display: flex;
+    position: relative;
+    padding: .8em 1.9em .8em .8em;
+    flex-direction: column;
+}
+
+    .cart-item:not(:first-child) {
+        border-top: solid 1px #e8e8e8;
+    }
+
+.cart-item__main, .cart-item__footer {
+    display: flex;
+}
+
+.cart-item-image {
+    flex: 0 0 20%;
+    text-align: center;
+}
+
+    .cart-item-image img {
+        width: 75%;
+    }
+
+.cart-item-info {
+    display: flex;
+    flex: 0 0 80%;
+    justify-content: space-between;
+    padding-left: 1em;
+    padding-top: 1em;
+}
+
+.cart-item-title {
+    color: rgba(0,0,0,0.5);
+    font-weight: bold;
+}
+
+.cart-item-value {
+    margin-top: 3em;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.cart-item-name {
+    flex: 0 0 30%;
+}
+
+.cart-item-price, .cart-item-total {
+    text-align: right;
+}
+
+/*.cart-item-remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-8px, 4px);
+    color: grey;
+}*/
+
+.cart-item-btns {
+    margin-left: 20%;
+    padding-left: 1em;
+}
+
+    .cart-item-btns button {
+        margin-right: 1em;
+        color: #fff;
+        background: #ff4a4a;
+        border: 1px solid red;
+        border-radius: .25em;
+    }
+
+        .cart-item-btns button:hover {
+            background: #ea0101;
+            box-shadow: 0 0 10px 2px red;
+        }
+/*
+    Footer panel
+*/
+.order-total {
+    text-align: right;
+    margin-top: 3em;
+    padding: .8em 2.9em .8em .8em;
+}
+
+.order-total-title, .order-total-amount {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.order-total-title {
+    font-size: 1.1em;
+    color: rgba(0,0,0,0.5);
+}
+
+.order-total-amount {
+    margin-left: 1em;
+    font-size: 1.3em;
+}
+
+.cart-buttons {
+    margin-top: 2em;
+    text-align: right;
+}
+
+    .cart-buttons .cart-button-clear {
+        padding: .6em .7em;
+        color: #d10024;
+        background: #fff;
+        font-size: 1.1em;
+        font-weight: bold;
+        border: 1px solid #D10024;
+        border-radius: .25em;
+    }
+
+        .cart-buttons .cart-button-clear:hover {
+            background: #D10024;
+            color: #fff;
+        }
+
+    .cart-buttons .cart-button-checkout {
+        margin-left: 1em;
+        padding: .6em .7em;
+        color: #fff;
+        background: #D10024;
+        font-size: 1.1em;
+        font-weight: bold;
+        border: 1px solid #D10024;
+        border-radius: .25em;
+    }
+
+        .cart-buttons .cart-button-checkout:hover {
+            background: #ab011e;
+        }

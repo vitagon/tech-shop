@@ -6,8 +6,20 @@ import { faShoppingCart, faTimesCircle, faArrowCircleRight, faBars } from '@fort
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import './MainHeader.css'
 import { TOGGLE_SIDE_NAV_PANEL } from '../../../reducers/navPanelReducer';
+import { compose } from 'redux';
+import {withRouter} from 'react-router-dom';
 
 class MainHeader extends Component {
+
+  constructor(props) {
+    super(props);
+    this.navigateToCart = this.navigateToCart.bind(this);
+  }
+
+  navigateToCart() {
+    this.props.history.push('/cart');
+  }
+
   render() {
     return (
       <div id="header">
@@ -45,7 +57,7 @@ class MainHeader extends Component {
                   </a>
                 </div>
 
-                <div className="dropdown">
+                <div className="dropdown" onClick={this.navigateToCart}>
                   <a className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                     <FontAwesomeIcon icon={faShoppingCart} />
                     <span>Your Cart</span>
@@ -110,4 +122,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   toggleSideNavPanel: () => (dispatch) => dispatch({ type: TOGGLE_SIDE_NAV_PANEL, payload: false })
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(MainHeader);
