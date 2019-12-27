@@ -57,6 +57,19 @@
     text-align: right;
 }
 
+.quantity-buttons {
+    max-width: 91px;
+}
+
+.quantity-button-minus, .quantity-button-plus, .quantity-input {
+    display: inline-block;
+}
+
+.quantity-input {
+    width: calc(100% / 3);
+    text-align: center;
+}
+
 /*.cart-item-remove {
     position: absolute;
     top: 0;
@@ -64,7 +77,6 @@
     transform: translate(-8px, 4px);
     color: grey;
 }*/
-
 .cart-item-btns {
     margin-left: 20%;
     padding-left: 1em;

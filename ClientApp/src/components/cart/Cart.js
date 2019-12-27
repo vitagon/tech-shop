@@ -1,15 +1,22 @@
 ﻿import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faTh, faThList } from '@fortawesome/free-solid-svg-icons';
 import styles from './Cart.module.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deleteItemFromCart } from '../../actions/cartActions';
+import {
+  deleteItemFromCart, decrementItemQuantity,
+  setItemQuantity, incrementItemQuantity, setRawItemQuantity
+} from '../../actions/cartActions';
 
 
 class Cart extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      quantity: 1
+    }
   }
 
   render() {
@@ -55,7 +62,18 @@ class Cart extends React.Component {
 
                               <div className={styles['cart-item-quantity']}>
                                 <div className={styles['cart-item-title']}>Quantity</div>
-                                <div className={styles['cart-item-value']}>{item.quantity}</div>
+                                <div className={styles['cart-item-value']}>
+                                  <div className={styles['quantity-buttons']}>
+                                    <button className={styles['quantity-button-minus']} onClick={() => this.props.decrementItemQuantity(item)}>-</button>
+                                    <input
+                                      className={styles['quantity-input']}
+                                      value={item.quantity}
+                                      onChange={(e) => this.props.setRawItemQuantity(item, e.target.value)}
+                                      onBlur={(e) => this.props.setItemQuantity(item, e.target.value)}
+                                    />
+                                    <button className={styles['quantity-button-plus']} onClick={() => this.props.incrementItemQuantity(item) }>+</button>
+                                  </div>
+                                </div>
                               </div>
 
                               <div className={styles['cart-item-price']}>
@@ -107,7 +125,11 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  deleteItemFromCart: deleteItemFromCart
+  deleteItemFromCart: deleteItemFromCart,
+  setRawItemQuantity: setRawItemQuantity,
+  setItemQuantity: setItemQuantity,
+  decrementItemQuantity: decrementItemQuantity,
+  incrementItemQuantity: incrementItemQuantity
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
