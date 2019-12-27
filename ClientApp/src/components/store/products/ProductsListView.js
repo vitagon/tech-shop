@@ -6,8 +6,23 @@ import styles from './ProductsListView.module.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addItemToCart } from "../../../actions/cartActions";
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 class ProductsListView extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.processBuyButton = this.processBuyButton.bind(this);
+  }
+
+  processBuyButton(isInCart, product) {
+    if (isInCart) {
+      this.props.history.push('/cart');
+    } else {
+      this.props.addToCart(product);
+    }
+  }
 
   render() {
     let productsListElement = this.props.products.map((product, i) => {
@@ -54,28 +69,12 @@ class ProductsListView extends React.Component {
                     <button className={styles['quick-view']}><FontAwesomeIcon icon={faEye} /><span className={styles['tooltipp']}>quick view</span></button>
                   </div>
 
-                  <button className={styles['buy-btn']} onClick={() => { this.props.addToCart(product) }}>
+                  <button className={styles['buy-btn']} onClick={() => { this.processBuyButton(isInCart, product) }}>
                     {isInCart ? 'In cart' : 'Buy'}
                   </button>
                 </div>
               </div>
             </div>
-
-            {/*<div className="product__footer">
-            <div className="product-btns">
-              <div className="left-panel">
-                <button className="add-to-wishlist"><FontAwesomeIcon icon={faHeartO} /><span className="tooltipp">add to wishlist</span></button>
-                <button className="add-to-compare"><FontAwesomeIcon icon={faExchangeAlt} /><span className="tooltipp">add to compare</span></button>
-                <button className="quick-view"><FontAwesomeIcon icon={faEye} /><span className="tooltipp">quick view</span></button>
-              </div>
-              
-              <button className="buy-btn">Buy</button>
-            </div>
-          </div>*/}
-
-            {/*<div className="add-to-cart">
-            <button className="add-to-cart-btn"><FontAwesomeIcon icon={faShoppingCart} /> add to cart</button>
-          </div>*/}
           </div>
         </div>
       )
@@ -99,4 +98,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   addToCart: addItemToCart
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsListView);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(ProductsListView);

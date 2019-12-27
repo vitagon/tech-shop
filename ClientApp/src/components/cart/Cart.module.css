@@ -63,13 +63,41 @@
 
 .quantity-button-minus, .quantity-button-plus, .quantity-input {
     display: inline-block;
+    font-size: .9em;
+    padding: .4em .5em;
+}
+
+.quantity-button-minus, .quantity-button-plus {
+    color: #888;
+}
+
+.quantity-button-minus {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-right: none;
+    border-radius: .4em 0 0 .4em;
 }
 
 .quantity-input {
     width: calc(100% / 3);
     text-align: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
 }
 
+.quantity-button-plus {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-radius: 0 .4em .4em 0;
+}
+
+    .quantity-button-minus:hover, .quantity-button-plus:hover {
+        color: #333;
+        border-color: #aaa;
+    }
 /*.cart-item-remove {
     position: absolute;
     top: 0;

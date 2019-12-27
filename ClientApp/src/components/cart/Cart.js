@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTh, faThList } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import styles from './Cart.module.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -64,14 +64,24 @@ class Cart extends React.Component {
                                 <div className={styles['cart-item-title']}>Quantity</div>
                                 <div className={styles['cart-item-value']}>
                                   <div className={styles['quantity-buttons']}>
-                                    <button className={styles['quantity-button-minus']} onClick={() => this.props.decrementItemQuantity(item)}>-</button>
+                                    <button
+                                      className={styles['quantity-button-minus']}
+                                      onClick={() => this.props.decrementItemQuantity(item)}
+                                    >
+                                      <FontAwesomeIcon icon={faMinus} />
+                                    </button>
                                     <input
                                       className={styles['quantity-input']}
                                       value={item.quantity}
                                       onChange={(e) => this.props.setRawItemQuantity(item, e.target.value)}
                                       onBlur={(e) => this.props.setItemQuantity(item, e.target.value)}
                                     />
-                                    <button className={styles['quantity-button-plus']} onClick={() => this.props.incrementItemQuantity(item) }>+</button>
+                                    <button
+                                      className={styles['quantity-button-plus']}
+                                      onClick={() => this.props.incrementItemQuantity(item)}
+                                    >
+                                      <FontAwesomeIcon icon={faPlus} />
+                                    </button>
                                   </div>
                                 </div>
                               </div>
