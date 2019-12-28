@@ -2,7 +2,7 @@
 import { ProductsGridView } from './products/ProductsGridView';
 import ProductsListView from './products/ProductsListView';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTh, faThList } from '@fortawesome/free-solid-svg-icons';
+import { faTh, faThList, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import './Products.css'
 
 const products = [
@@ -155,7 +155,7 @@ class Products extends Component {
             <li><a href="#">2</a></li>
             <li><a href="#">3</a></li>
             <li><a href="#">4</a></li>
-            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+            <li><a href="#"><FontAwesomeIcon icon={faAngleRight}/></a></li>
           </ul>
         </div>
       </div>

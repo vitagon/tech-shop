@@ -99,6 +99,7 @@
     }
 
 .list-view .buy-btn {
+    position: relative;
     margin-left: auto;
     background: #d10024;
     color: #fff;
@@ -113,6 +114,17 @@
     .list-view .buy-btn:hover {
         background: #ad011f;
         border-color: #ad011f;
+    }
+
+    .list-view .buy-btn .tooltipp {
+        font-weight: normal;
+        text-transform: initial;
+    }
+
+    .list-view .buy-btn:hover .tooltipp {
+        visibility: visible;
+        opacity: 1;
+        transform: translate(-50%, -5px);
     }
 
 .list-view .product-options {

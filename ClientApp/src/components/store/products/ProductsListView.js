@@ -71,6 +71,8 @@ class ProductsListView extends React.Component {
 
                   <button className={styles['buy-btn']} onClick={() => { this.processBuyButton(isInCart, product) }}>
                     {isInCart ? 'In cart' : 'Buy'}
+                    {isInCart && <span className={styles['tooltipp']}>Go to cart</span>}
+                    {!isInCart && <span className={styles['tooltipp']}>Add to cart</span>}
                   </button>
                 </div>
               </div>
