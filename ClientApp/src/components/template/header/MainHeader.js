@@ -7,7 +7,7 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import './MainHeader.css'
 import { TOGGLE_SIDE_NAV_PANEL } from '../../../reducers/navPanelReducer';
 import { compose } from 'redux';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 
 class MainHeader extends Component {
 
@@ -57,12 +57,12 @@ class MainHeader extends Component {
                   </a>
                 </div>
 
-                <div className="dropdown" onClick={this.navigateToCart}>
-                  <a className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                <div className="dropdown">
+                  <Link className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" to="/cart">
                     <FontAwesomeIcon icon={faShoppingCart} />
                     <span>Your Cart</span>
                     <div className="qty">3</div>
-                  </a>
+                  </Link>
                   <div className="cart-dropdown">
                     <div className="cart-list">
                       <div className="product-widget">

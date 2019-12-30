@@ -20,7 +20,7 @@
     padding: 20px 0px;
 }
 
-    .main-nav > li > a:hover, .main-nav > li > a:focus, .main-nav > li.active > a {
+    .main-nav > li > a:hover, .main-nav > li > a:focus, .main-nav > li > a.active {
         color: #D10024;
         background-color: transparent;
     }
@@ -35,7 +35,7 @@
         transition: 0.2s all;
     }
 
-    .main-nav > li > a:hover:after, .main-nav > li > a:focus:after, .main-nav > li.active > a:after {
+    .main-nav > li > a:hover:after, .main-nav > li > a:focus:after, .main-nav > li > a.active:after {
         width: 100%;
     }
 

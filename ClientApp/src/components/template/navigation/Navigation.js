@@ -15,7 +15,7 @@ class Navigation extends Component {
             <ul className="main-nav nav">
               <li className="nav-item active"><NavLink className="nav-link" to="/" exact>Home</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/hot-deals">Hot Deals</NavLink></li>
-              <li className="nav-item"><NavLink className="nav-link" to="/categories">Categories</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link" to="/store">Store</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/categories/laptops">Laptops</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/categories/smartphones">Smartphones</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/categories/cameras">Cameras</NavLink></li>

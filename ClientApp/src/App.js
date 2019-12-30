@@ -5,17 +5,19 @@ import Header from './components/template/header/Header';
 import Footer from './components/template/footer/Footer';
 import Navigation from './components/template/navigation/Navigation';
 import Curtain from './components/template/curtain/Curtain';
+import Breadcrumb from './components/template/breadcrumb/Breadcrumb';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div>
-          <Header></Header>
-          <Navigation></Navigation>
-          <Curtain></Curtain>
-          <Router></Router>
-          <Footer></Footer>
+          <Header />
+          <Navigation />
+          <Breadcrumb />
+          <Curtain />
+          <Router />
+          <Footer />
         </div>
       </BrowserRouter>
     )

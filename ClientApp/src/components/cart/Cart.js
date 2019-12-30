@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import Breadcrumb from './../template/breadcrumb/Breadcrumb';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import styles from './Cart.module.css';
@@ -25,19 +26,6 @@ class Cart extends React.Component {
     }, 0);
     return (
       <div className={styles.cart}>
-        <div id="breadcrumb" class="section">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <h3 class="breadcrumb-header">Shopping cart</h3>
-                <ul class="breadcrumb-tree">
-                  <li><a href="#">Home</a></li>
-                  <li class="active">Cart</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <div className="section">
           <div class="container">
