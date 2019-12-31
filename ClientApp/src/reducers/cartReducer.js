@@ -1,11 +1,13 @@
 ﻿export const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART';
-export const DELETE_ITEM_FROM_CART = 'DELETE_ITEM_FROM_CART'; 
+export const DELETE_ITEM_FROM_CART = 'DELETE_ITEM_FROM_CART';
 export const SET_RAW_ITEM_QUANTITY = 'SET_RAW_ITEM_QUANTITY';
 export const SET_ITEM_QUANTITY = 'SET_ITEM_QUANTITY';
 export const DECREMENT_ITEM_QUANTITY = 'DECREMENT_ITEM_QUANTITY';
 export const INCREMENT_ITEM_QUANTITY = 'INCREMENT_ITEM_QUANTITY';
+export const COUNT_ITEMS = 'COUNT_ITEMS';
+export const COUNT_ITEMS_TOTAL = 'COUNT_ITEMS_TOTAL';
 
-function getCartItemsFromLocalStorage() {
+const getCartItemsFromLocalStorage = () => {
   let cartItems = localStorage.getItem('cart-items');
   if (cartItems && cartItems !== '') {
 
@@ -19,8 +21,20 @@ function getCartItemsFromLocalStorage() {
   return [];
 }
 
+const countItems = (cartItems) => {
+  return cartItems.length;
+}
+
+const countTotal = (cartItems) => {
+  return cartItems.reduce(function (totalAccum, item) {
+    return totalAccum + (item.product.price * item.quantity);
+  }, 0);
+}
+
 const initialState = {
-  cartItems: getCartItemsFromLocalStorage()
+  cartItems: getCartItemsFromLocalStorage(),
+  itemsQuantity: countItems(getCartItemsFromLocalStorage()),
+  itemsTotal: countTotal(getCartItemsFromLocalStorage())
 }
 
 function cartReducer(state = initialState, action) {
@@ -35,7 +49,7 @@ function cartReducer(state = initialState, action) {
         cartItem
       ];
       localStorage.setItem('cart-items', JSON.stringify(items));
-      return Object.assign({}, state, { cartItems: items });
+      return Object.assign({}, state, { cartItems: items, itemsQuantity: ++(state.itemsQuantity) });
       break;
     }
     case DELETE_ITEM_FROM_CART: {
@@ -45,7 +59,7 @@ function cartReducer(state = initialState, action) {
         ...state.cartItems.slice(itemIndex + 1)
       ];
       localStorage.setItem('cart-items', JSON.stringify(items));
-      return Object.assign({}, state, { cartItems: items });
+      return Object.assign({}, state, { cartItems: items, itemsQuantity: --(state.itemsQuantity) });
       break;
     }
     case INCREMENT_ITEM_QUANTITY: {
@@ -115,6 +129,14 @@ function cartReducer(state = initialState, action) {
 
       localStorage.setItem('cart-items', JSON.stringify(items));
       return Object.assign({}, state, { cartItems: items });
+      break;
+    }
+    case COUNT_ITEMS: {
+      return Object.assign({}, state, { itemsQuantity: state.cartItems.length });
+      break;
+    }
+    case COUNT_ITEMS_TOTAL: {
+      return Object.assign({}, state, { itemsTotal: countTotal(state.cartItems) });
       break;
     }
     default: {

@@ -5,6 +5,7 @@ import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import styles from './Cart.module.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import {
   deleteItemFromCart, decrementItemQuantity,
   setItemQuantity, incrementItemQuantity, setRawItemQuantity
@@ -21,9 +22,6 @@ class Cart extends React.Component {
   }
 
   render() {
-    let total = this.props.cartItems.reduce(function(totalAccum, item) {
-      return totalAccum + (item.product.price * item.quantity);
-    }, 0);
     return (
       <div className={styles.cart}>
 
@@ -101,13 +99,13 @@ class Cart extends React.Component {
                 <div className={styles['order-total']}>
                   <div className={styles['order-total-content']}>
                     <div className={styles['order-total-title']}>Order Total:</div>
-                    <div className={styles['order-total-amount']}>${total}</div>
+                    <div className={styles['order-total-amount']}>${this.props.itemsTotal}</div>
                   </div>
                 </div>
 
                 <div className={styles['cart-buttons']}>
                   <button type="button" className={styles['cart-button-clear']}>Clear cart</button>
-                  <button type="button" className={styles['cart-button-checkout']}>Proceed to checkout</button>
+                  <Link className={styles['cart-button-checkout']} to="/checkout">Proceed to checkout</Link>
                 </div>
               </div>
             </div>
@@ -119,7 +117,8 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  cartItems: state.cartReducer.cartItems
+  cartItems: state.cartReducer.cartItems,
+  itemsTotal: state.cartReducer.itemsTotal
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
