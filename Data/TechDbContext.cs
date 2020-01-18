@@ -13,6 +13,14 @@ namespace TechShop.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CategoryProduct>()
+                .HasKey(table => new { table.CategoryId, table.ProductId });
+        }
+
         public DbSet<Category> Category { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<CategoryProduct> CategoryProduct { get; set; }
     }
 }

@@ -15,18 +15,20 @@ namespace TechShop.Models
         public int Id { get; set; }
 
         [Required]
+        public int Lft { get; set; }
+
+        [Required]
+        public int Rgt { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
         [Required]
         public int ParentId { get; set; }
 
-        public override string ToString()
-        {
-            string str = String.Empty;
-            str = String.Concat(str, "Id = ", Id, "\r\n");
-            str = String.Concat(str, "Name = ", Name, "\r\n");
-            str = String.Concat(str, "ParentId = ", ParentId, "\r\n");
-            return str;
-        }
+        [Required]
+        public int Level { get; set; }
+
+        public List<CategoryProduct> CategoryProducts { get; set; }
     }
 }

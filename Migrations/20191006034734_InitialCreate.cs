@@ -11,12 +11,13 @@ namespace TechShop.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    //Id = table.Column<int>(nullable: false)
-                    //    .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Lft = table.Column<int>(nullable: false),
+                    Rgt = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: false, maxLength: 450),
-                    ParentId = table.Column<int>(nullable: false)
+                    ParentId = table.Column<int>(nullable: false),
+                    Level = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

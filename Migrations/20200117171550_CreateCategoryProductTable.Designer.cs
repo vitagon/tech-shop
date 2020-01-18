@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TechShop.Data;
 
 namespace TechShop.Migrations
 {
     [DbContext(typeof(TechDbContext))]
-    partial class TechDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200117171550_CreateCategoryProductTable")]
+    partial class CreateCategoryProductTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,24 +42,13 @@ namespace TechShop.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("TechShop.Models.CategoryProduct", b =>
-                {
-                    b.Property<int>("CategoryId");
-
-                    b.Property<int>("ProductId");
-
-                    b.HasKey("CategoryId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("CategoryProduct");
-                });
-
             modelBuilder.Entity("TechShop.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId");
 
                     b.Property<string>("Description")
                         .IsRequired();
@@ -70,29 +61,24 @@ namespace TechShop.Migrations
 
                     b.Property<int>("OldPrice");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Price");
 
-                    b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal>("Rating");
 
                     b.Property<int>("Sale");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("TechShop.Models.CategoryProduct", b =>
+            modelBuilder.Entity("TechShop.Models.Product", b =>
                 {
-                    b.HasOne("TechShop.Models.Category", "Category")
-                        .WithMany("CategoryProducts")
+                    b.HasOne("TechShop.Models.Category", "category")
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TechShop.Models.Product", "Product")
-                        .WithMany("CategoryProducts")
-                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -14,10 +14,8 @@ namespace TechShop.Installers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddDbContext<TechDbContext>(options =>
-            //    options.UseSqlServer(configuration.GetConnectionString("InMemoryTechShopContext")));
-            services.AddDbContext<TechDbContext>(options =>
-                   options.UseSqlite("Filename=TestDatabase.db"));
+            services.AddDbContext<TechDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("TechShopContext")));
+            //services.AddDbContext<TechDbContext>(options => options.UseSqlite("Filename=TechShop.db"));
 
             services.AddScoped<ICategoryService, CategoryService>();
         }
