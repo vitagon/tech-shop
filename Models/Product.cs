@@ -25,8 +25,9 @@ namespace TechShop.Models
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
-        
-        public int OldPrice { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal OldPrice { get; set; }
         
         public int Sale { get; set; }
 

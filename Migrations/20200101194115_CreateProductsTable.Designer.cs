@@ -48,9 +48,9 @@ namespace TechShop.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<int>("OldPrice");
+                    b.Property<decimal>("OldPrice");
 
-                    b.Property<int>("Price");
+                    b.Property<decimal>("Price");
 
                     b.Property<decimal>("Rating");
 

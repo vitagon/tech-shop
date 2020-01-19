@@ -16,8 +16,6 @@ namespace TechShop.Migrations
                 },
                 constraints: table =>
                 {
-
-
                     table.ForeignKey(
                         name: "FK_CategoryProduct_Category_CategoryId",
                         column: x => x.CategoryId,

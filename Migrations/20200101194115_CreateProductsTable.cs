@@ -17,7 +17,7 @@ namespace TechShop.Migrations
                     Description = table.Column<string>(nullable: false),
                     Img = table.Column<string>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
-                    OldPrice = table.Column<int>(nullable: false),
+                    OldPrice = table.Column<decimal>(nullable: false),
                     Sale = table.Column<int>(nullable: false),
                     Rating = table.Column<decimal>(nullable: false)
                 },
@@ -25,19 +25,10 @@ namespace TechShop.Migrations
                 {
                     table.PrimaryKey("PK_Product", x => x.Id);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Product_CategoryId",
-                table: "Product",
-                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "IX_Product_CategoryId",
-                table: "Product");
-
             migrationBuilder.DropTable(
                 name: "Product");
         }
