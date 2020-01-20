@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,7 +51,22 @@ namespace TechShop.Controllers
                                 select p;
             }
 
-            List<Product> products = fetchProducts.Take(100).ToList();
+            PagedList<Product> products = PagedList<Product>.ToPagedList(
+                fetchProducts,
+                productFilters.PageNumber,
+                productFilters.PageSize);
+
+            var metadata = new
+            {
+                products.TotalCount,
+                products.PageSize,
+                products.CurrentPage,
+                products.TotalPages,
+                products.HasNext,
+                products.HasPrevious
+            };
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
             return Ok(products);
         }
     }

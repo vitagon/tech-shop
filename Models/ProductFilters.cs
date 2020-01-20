@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TechShop.Models
 {
-    public class ProductFilters
+    public class ProductFilters : QueryStringParameters
     {
         public string CategoryName { get; set; }
         public decimal UpPrice { get; set; }
