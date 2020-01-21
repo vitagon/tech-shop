@@ -14,5 +14,7 @@ namespace TechShop.Services
         Task<bool> CreateCategoryAsync(Category category);
         Task<bool> UpdateCategoryAsync(Category category);
         Task<bool> DeleteCategoryAsync(int id);
+        Task<List<Category>> GetTreeFromRoot();
+        Task<List<Category>> GetTreeFromNode(int parentId);
     }
 }

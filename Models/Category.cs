@@ -9,25 +9,25 @@ using TechShop.Utilities.Attributes;
 namespace TechShop.Models
 {
     [Table("Category")]
-    public class Category
+    public class Category : NestedSet<Category>
     {
         [Key]
-        public int Id { get; set; }
+        public override int Id { get; set; }
 
         [Required]
-        public int Lft { get; set; }
+        public override int Lft { get; set; }
 
         [Required]
-        public int Rgt { get; set; }
+        public override int Rgt { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public override string Name { get; set; }
 
         [Required]
-        public int ParentId { get; set; }
+        public override int ParentId { get; set; }
 
         [Required]
-        public int Level { get; set; }
+        public override int Level { get; set; }
 
         public List<CategoryProduct> CategoryProducts { get; set; }
     }

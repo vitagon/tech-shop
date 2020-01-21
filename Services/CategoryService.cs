@@ -11,10 +11,12 @@ namespace TechShop.Services
     public class CategoryService : ICategoryService
     {
         private readonly TechDbContext _techDbContext;
+        private INestedSetService nestedSetService;
 
-        public CategoryService(TechDbContext techDbContext)
+        public CategoryService(TechDbContext techDbContext, INestedSetService nestedSetService)
         {
             this._techDbContext = techDbContext;
+            this.nestedSetService = nestedSetService;
         }
 
         public async Task<List<Category>> GetCategoriesAsync()
@@ -71,6 +73,18 @@ namespace TechShop.Services
         private void detach(Category category)
         {
             _techDbContext.Entry(category).State = EntityState.Detached;
+        }
+
+        public async Task<List<Category>> GetTreeFromRoot()
+        {
+            List<Category> categories = await _techDbContext.Category.ToListAsync();
+            List<Category> catsListCopy = new List<Category>(categories);
+            return nestedSetService.BuildTreeAsList(ref catsListCopy);
+        }
+
+        public Task<List<Category>> GetTreeFromNode(int parentId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
