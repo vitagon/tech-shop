@@ -24,11 +24,11 @@ namespace TechShop.Migrations
                     (20, 21, 'TVs',                                      11, 3),
                     (22, 23, 'TV wall brackets',                         11, 3),
                     (24, 25, 'TV stands and cabinets',                   11, 3),
-                    (28, 37, 'Smartphones, tablets and photo equipment', 11, 1),
-                    (29, 32, 'Smartphones and gadgets',                  11, 2),
-                    (30, 31, 'Smartphones',                              11, 3),
-                    (33, 36, 'Tablets, e-books',                         11, 2),
-                    (34, 35, 'Tablets',                                  11, 3)
+                    (28, 37, 'Smartphones, tablets and photo equipment',  1, 1),
+                    (29, 32, 'Smartphones and gadgets',                  15, 2),
+                    (30, 31, 'Smartphones',                              16, 3),
+                    (33, 36, 'Tablets, e-books',                         15, 2),
+                    (34, 35, 'Tablets',                                  18, 3)
             ");
         }
 

@@ -16,5 +16,6 @@ namespace TechShop.Services
 
         void PrintTree<T>(List<T> treeList) where T : NestedSet<T>;
         void PrintTree<T>(SortedDictionary<int, T> tree) where T : NestedSet<T>;
+        string PrintTreeToString<T>(List<T> treeList) where T : NestedSet<T>;
     }
 }

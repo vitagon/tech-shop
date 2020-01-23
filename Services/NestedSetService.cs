@@ -33,7 +33,7 @@ namespace TechShop.Services
 
         public List<T> BuildTreeAsList<T>(ref List<T> entitiesList, int parentId = 0) where T : NestedSet<T>
         {
-            SortedDictionary<int, T> treeAsDictionary = BuildTreeAsDictionary(ref entitiesList);
+            SortedDictionary<int, T> treeAsDictionary = BuildTreeAsDictionary(ref entitiesList, parentId);
             List<T> treeAsList = DictionaryTreeToList(treeAsDictionary);
             return SortListTree(treeAsList);
         }
@@ -77,6 +77,42 @@ namespace TechShop.Services
                     PrintTree(entity.ChildrenList);
                 }
             }
+        }
+
+        public string PrintTreeToString<T>(List<T> treeList) where T : NestedSet<T>
+        {
+            StringBuilder treeString = new StringBuilder();
+            foreach (T entity in treeList)
+            {
+                int lvl = entity.Level;
+                string lvlPrefix = "";
+                for (int i = 1; i < lvl; i++)
+                {
+                    lvlPrefix += "-";
+                }
+                StringBuilder description = new StringBuilder();
+                description.Append("{");
+                description.Append($"lft: {entity.Lft}, ");
+                description.Append($"rgt: {entity.Rgt}");
+                description.Append("}");
+                if (lvl == 0)
+                {
+                    treeString.Append(lvlPrefix + entity.Name + " " + description.ToString() + "\r\n\r\n");
+                }
+                else
+                {
+                    treeString.Append(lvlPrefix + entity.Name + " " + description.ToString() + "\r\n");
+                }
+                
+                if (entity.ChildrenList != null && entity.ChildrenList.Count != 0)
+                {
+                    string childStr = PrintTreeToString(entity.ChildrenList);
+                    treeString.Append(childStr);
+                }
+
+                if (lvl == 1) treeString.Append("\r\n");
+            }
+            return treeString.ToString();
         }
 
         public void PrintTree<T>(SortedDictionary<int, T> tree) where T : NestedSet<T>

@@ -82,9 +82,20 @@ namespace TechShop.Services
             return nestedSetService.BuildTreeAsList(ref catsListCopy);
         }
 
-        public Task<List<Category>> GetTreeFromNode(int parentId)
+        public async Task<List<Category>> GetTreeFromNode(int parentId)
         {
-            throw new NotImplementedException();
+            var getParentNode = from c in _techDbContext.Category
+                                where c.Id == parentId
+                                select c;
+            Category parentNode = await getParentNode.FirstOrDefaultAsync();
+
+            var query = from c in _techDbContext.Category
+                        where c.Lft >= parentNode.Lft && c.Rgt <= parentNode.Rgt
+                        select c;
+            List<Category> categories = await query.ToListAsync();
+
+            List<Category> categoriesCopy = new List<Category>(categories);
+            return nestedSetService.BuildTreeAsList(ref categoriesCopy, parentNode.ParentId);
         }
     }
 }
