@@ -2,8 +2,8 @@
 import { Table, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import { fetchCategoriesAction, showDeleteCategoryModal } from '../../actions/categoriesActions';
-import { TOGGLE_EDIT_CATEGORY_COMP } from '../../reducers/categoriesReducer';
+import { fetchCategoriesAction, showDeleteCategoryModal } from '../../../actions/categoriesActions';
+import { TOGGLE_EDIT_CATEGORY_COMP } from '../../../reducers/admin/categoriesReducer';
 
 class CategoriesList extends Component {
 

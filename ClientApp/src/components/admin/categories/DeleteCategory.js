@@ -1,7 +1,7 @@
 ﻿import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { hideDeleteCategoryModal, deleteCategoryAction } from '../../actions/categoriesActions';
+import { hideDeleteCategoryModal, deleteCategoryAction } from '../../../actions/categoriesActions';
 import { Modal, Button } from 'react-bootstrap';
 
 class DeleteCategory extends Component {

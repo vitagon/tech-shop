@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { matchPath, withRouter } from 'react-router-dom';
+import { match } from 'path-to-regexp';
 
 /*
  * I took snippets from here
@@ -11,9 +12,12 @@ import { matchPath, withRouter } from 'react-router-dom';
 export const appRoutes = [
   { path: '/admin/', breadcrumb: 'admin', header: 'Admin' },
   { path: '/admin/categories', breadcrumb: 'categories', header: 'Categories' },
-  { path: '/store', breadcrumb: 'Store', header: 'Store' },
-  { path: '/cart', breadcrumb: 'Cart', header: 'Shopping cart' },
-  { path: '/checkout', breadcrumb: 'Checkout', header: 'Checkout' }
+  { path: '/d', breadcrumb: 'categories', header: 'Categories' },
+  { path: '/d/:category', breadcrumb: ':category', header: ':category' },
+  { path: '/d/:category/b/:brand', breadcrumb: ':brand', header: ':category :brand' },
+  { path: '/store', breadcrumb: 'store', header: 'Store' },
+  { path: '/cart', breadcrumb: 'cart', header: 'Shopping cart' },
+  { path: '/checkout', breadcrumb: 'checkout', header: 'Checkout' }
 ]
 
 const Breadcrumb = ({ breadcrumbs, header, route }) => {
@@ -54,23 +58,30 @@ const Breadcrumb = ({ breadcrumbs, header, route }) => {
   );
 }
 
+const replaceUrlParams = (pathname, routes) => {
+  return routes;
+}
+
 const withBreadcrumbs = (routes) => {
   return (Component) => {
     return withRouter(props => {
       if (props.location.pathname === "/") {
         return null;
       }
+      let route = getExactRouter(props.location.pathname, routes);
+      let header = getHeader(props.location.pathname, routes);
+      let replacedUrlParamsRoutes = replaceUrlParams(props.location.pathname, routes);
       return (
         <Component
           {...props}
           breadcrumbs={
             getBreadcrumbs({
               pathname: props.location.pathname,
-              routes,
+              routes: replacedUrlParamsRoutes,
             })
           }
-          header={getHeader(props.location.pathname, routes)}
-          route={getExactRouter(props.location.pathname, routes)}
+          header={header}
+          route={route}
         />
       )
     });
@@ -78,12 +89,21 @@ const withBreadcrumbs = (routes) => {
   }
 }
 
+const test = () => {
+  const prepMatch = match("/d/:cat/:subcat", { decode: decodeURIComponent });
+  console.log(prepMatch("/d/laptops/transformers"));
+}
+
 const getExactRouter = (pathname, routes) => {
-  return routes.find(x => x.path === pathname);
+  let route = routes.find(x => matchPath(pathname, {
+    path: x.path,
+    exact: true
+  }));
+  return route;
 }
 
 const getHeader = (pathname, routes) => {
-  let route = routes.find(x => x.path === pathname);
+  let route = getExactRouter(pathname, routes);
   return route ? route.header : null;
 }
 
@@ -100,7 +120,7 @@ export const getBreadcrumbs = ({ routes, pathname }) => {
     .split('/')
     .reduce((previous, current) => {
       const pathSection = `${previous}/${current}`;
-
+      
       let breadcrumbMatch;
 
       routes.some(({ breadcrumb, path }) => {

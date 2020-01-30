@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SHOW_DELETE_CATEGORY_MODAL, HIDE_DELETE_CATEGORY_MODAL, RECEIVE_CATEGORIES } from '../reducers/categoriesReducer';
+import { SHOW_DELETE_CATEGORY_MODAL, HIDE_DELETE_CATEGORY_MODAL, RECEIVE_CATEGORIES } from '../reducers/admin/categoriesReducer';
 
 export function fetchCategoriesAction() {
   return function(dispatch) {

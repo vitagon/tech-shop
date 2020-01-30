@@ -1,0 +1,32 @@
+﻿.cat-header {
+    display: flex;
+}
+.cat-header .img-wrap {
+    display: flex;
+    align-items: center;
+    font-size: 2.6em;
+    margin-right: .4em;
+    opacity: .8;
+}
+.subcat-img-wrap {
+    font-size: 2em;
+    opacity: .8;
+}
+.subcat-lvl2_wrap {
+    display: flex;
+    padding: 1em 1.5em;
+    background-color: rgb(252, 252, 252);
+}
+.cat_link {
+    font-weight: 500;
+    font-size: 1.8em;
+    color: rgb(67, 67, 67);
+}
+.subcat-lvl2_link {
+    font-size: 1em;
+    font-weight: bold;
+}
+.subcat-lvl3_link {
+    font-size: .9em;
+    font-weight: initial;
+}

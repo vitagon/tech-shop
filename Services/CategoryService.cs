@@ -97,5 +97,15 @@ namespace TechShop.Services
             List<Category> categoriesCopy = new List<Category>(categories);
             return nestedSetService.BuildTreeAsList(ref categoriesCopy, parentNode.ParentId);
         }
+
+        public async Task<Category> GetCategoryByUrlAsync(string url)
+        {
+            var result = from c in _techDbContext.Category
+                         where c.Url == url
+                         select c;
+            Category category = await result.SingleOrDefaultAsync();
+            detach(category);
+            return category;
+        }
     }
 }

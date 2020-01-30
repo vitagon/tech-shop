@@ -134,7 +134,7 @@ namespace TechShop.Services
             }
         }
 
-        public List<T> SortListTree<T>(List<T> treeList) where T : NestedSet<T>
+        private List<T> SortListTree<T>(List<T> treeList) where T : NestedSet<T>
         {
             treeList.Sort((a, b) =>
             {
@@ -154,7 +154,7 @@ namespace TechShop.Services
             return treeList;
         }
 
-        public SortedDictionary<int, T> SortDictionaryTree<T>(SortedDictionary<int, T> tree) where T : NestedSet<T>
+        private SortedDictionary<int, T> SortDictionaryTree<T>(SortedDictionary<int, T> tree) where T : NestedSet<T>
         {
             SortedDictionary<int, T> sortedDictionary = new SortedDictionary<int, T>(tree);
             sortedDictionary.OrderBy(kSelector => kSelector.Value.Rgt);

@@ -30,7 +30,7 @@ class ProductsListView extends React.Component {
       for (let i = 0; i < 5; i++) {
         oneToFiveArray[i] = i + 1;
       }
-      let isInCart = this.props.items && this.props.items.find(x => x.product.id == product.id) && true;
+      let isInCart = this.props.items && this.props.items.find(x => x.product.id === product.id) && true;
       return (
         <div key={product.id} className={styles['product-wrap']}>
           <div className="product">

@@ -50,20 +50,18 @@ function cartReducer(state = initialState, action) {
       ];
       localStorage.setItem('cart-items', JSON.stringify(items));
       return Object.assign({}, state, { cartItems: items, itemsQuantity: ++(state.itemsQuantity) });
-      break;
     }
     case DELETE_ITEM_FROM_CART: {
-      let itemIndex = state.cartItems.findIndex(x => x.product.id == action.data);
+      let itemIndex = state.cartItems.findIndex(x => x.product.id === action.data);
       let items = [
         ...state.cartItems.slice(0, itemIndex),
         ...state.cartItems.slice(itemIndex + 1)
       ];
       localStorage.setItem('cart-items', JSON.stringify(items));
       return Object.assign({}, state, { cartItems: items, itemsQuantity: --(state.itemsQuantity) });
-      break;
     }
     case INCREMENT_ITEM_QUANTITY: {
-      let itemIndex = state.cartItems.findIndex(x => x.product.id == action.data);
+      let itemIndex = state.cartItems.findIndex(x => x.product.id === action.data);
       let item = state.cartItems[itemIndex];
       item.quantity = Number(item.quantity) + 1;
       let items = [
@@ -73,10 +71,9 @@ function cartReducer(state = initialState, action) {
       ];
       localStorage.setItem('cart-items', JSON.stringify(items));
       return Object.assign({}, state, { cartItems: items });
-      break;
     }
     case DECREMENT_ITEM_QUANTITY: {
-      let itemIndex = state.cartItems.findIndex(x => x.product.id == action.data);
+      let itemIndex = state.cartItems.findIndex(x => x.product.id === action.data);
       let item = state.cartItems[itemIndex];
       if (Number(item.quantity) - 1 <= 0) {
         return state;
@@ -89,12 +86,11 @@ function cartReducer(state = initialState, action) {
       ];
       localStorage.setItem('cart-items', JSON.stringify(items));
       return Object.assign({}, state, { cartItems: items });
-      break;
     }
     case SET_RAW_ITEM_QUANTITY: {
       let id = action.data.id;
       let qty = action.data.qty;
-      let itemIndex = state.cartItems.findIndex(x => x.product.id == id);
+      let itemIndex = state.cartItems.findIndex(x => x.product.id === id);
       let item = state.cartItems[itemIndex];
       item.quantity = qty.trim();
       if (!/^\d+$/.test(qty) && qty !== "") {
@@ -106,12 +102,11 @@ function cartReducer(state = initialState, action) {
         ...state.cartItems.slice(itemIndex + 1)
       ];
       return Object.assign({}, state, { cartItems: items });
-      break;
     }
     case SET_ITEM_QUANTITY: {
       let id = action.data.id;
       let qty = action.data.qty;
-      let itemIndex = state.cartItems.findIndex(x => x.product.id == id);
+      let itemIndex = state.cartItems.findIndex(x => x.product.id === id);
       let item = state.cartItems[itemIndex];
       
       
@@ -129,15 +124,12 @@ function cartReducer(state = initialState, action) {
 
       localStorage.setItem('cart-items', JSON.stringify(items));
       return Object.assign({}, state, { cartItems: items });
-      break;
     }
     case COUNT_ITEMS: {
       return Object.assign({}, state, { itemsQuantity: state.cartItems.length });
-      break;
     }
     case COUNT_ITEMS_TOTAL: {
       return Object.assign({}, state, { itemsTotal: countTotal(state.cartItems) });
-      break;
     }
     default: {
       return state;

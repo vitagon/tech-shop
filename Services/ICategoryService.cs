@@ -11,6 +11,7 @@ namespace TechShop.Services
         Task<List<Category>> GetCategoriesAsync();
         Task<Category> GetCategoryByIdAsync(int id);
         Task<Category> GetCategoryByNameAsync(string name);
+        Task<Category> GetCategoryByUrlAsync(string url);
         Task<bool> CreateCategoryAsync(Category category);
         Task<bool> UpdateCategoryAsync(Category category);
         Task<bool> DeleteCategoryAsync(int id);

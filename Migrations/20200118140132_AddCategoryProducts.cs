@@ -9,8 +9,8 @@ namespace TechShop.Migrations
             migrationBuilder.Sql(@"
                 insert into CategoryProduct (CategoryId, ProductId) values
                     (4, 1), (4, 3), (4, 6), (4,7), (4, 8), (4, 9),
-                    (9, 2), (9, 5),
-                    (19, 4)
+                    (18, 2), (18, 5),
+                    (18, 4)
             ");
         }
 
@@ -19,8 +19,8 @@ namespace TechShop.Migrations
             migrationBuilder.Sql(@"
                 delete from CategoryProduct where (CategoryId, ProductId) in (
                     (4, 1), (4, 3), (4, 6), (4,7), (4, 8), (4, 9),
-                    (9, 2), (9, 5),
-                    (19, 4)
+                    (18, 2), (18, 5),
+                    (18, 4)
                 )
             ");
         }

@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import Breadcrumb from './../template/breadcrumb/Breadcrumb';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import styles from './Cart.module.css';

@@ -17,12 +17,14 @@ namespace TechShop.Migrations
                     Rgt = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: false, maxLength: 450),
                     ParentId = table.Column<int>(nullable: false),
-                    Level = table.Column<int>(nullable: false)
+                    Level = table.Column<int>(nullable: false),
+                    Url = table.Column<string>(nullable: false, maxLength: 450)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_categories", x => x.Id);
                     table.UniqueConstraint("UQ_categories_name", x => x.Name);
+                    table.UniqueConstraint("UQ_categories_url", x => x.Url);
                 });
         }
 

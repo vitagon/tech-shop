@@ -7,12 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLaptop, faMobile } from '@fortawesome/free-solid-svg-icons';
 import styles from './Categories.module.css';
 
-class Categories extends React.Component {
+class CategoryDetails extends React.Component {
 
   constructor(props) {
     super(props);
     this.props.getCategoriesTree();
     this.toUrl = this.toUrl.bind(this);
+    console.log(this.props);
   }
 
   replaceAll(searchValue, replaceValue, str) {
@@ -88,4 +89,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   getCategoriesTree: getCategoriesTree
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryDetails);

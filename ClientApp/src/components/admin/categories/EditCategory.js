@@ -1,9 +1,9 @@
 ﻿import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchCategoriesAction, updateCategoryAction } from '../../actions/categoriesActions';
+import { fetchCategoriesAction, updateCategoryAction } from '../../../actions/categoriesActions';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { getCategoryByName } from '../../services/CategoryService';
+import { getCategoryByName } from '../../../services/CategoryService';
 import * as Yup from 'yup';
 
 const form = Yup.object().shape({

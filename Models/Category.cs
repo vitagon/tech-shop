@@ -29,6 +29,9 @@ namespace TechShop.Models
         [Required]
         public override int Level { get; set; }
 
+        [Required]
+        public string Url { get; set; }
+
         public List<CategoryProduct> CategoryProducts { get; set; }
     }
 }
