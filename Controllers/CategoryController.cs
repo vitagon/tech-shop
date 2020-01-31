@@ -36,11 +36,24 @@ namespace TechShop.Controllers
         }
 
         [HttpGet("tree")]
-        public async Task<IActionResult> GetCategoriesTree([FromQuery] int parentId)
+        public async Task<IActionResult> GetCategoriesTree()
         {
-            if (parentId != 0)
+            return Ok(await _categoryService.GetTreeFromRoot());
+        }
+
+        [HttpGet("tree/url/{url}")]
+        public async Task<IActionResult> GetCategoriesTreeByCategoryUrl(string url)
+        {
+            Category category = await _categoryService.GetCategoryByUrlAsync(url);
+            return Ok(await _categoryService.GetTreeFromNode(category.Id));
+        }
+
+        [HttpGet("tree/id/{id:int}")]
+        public async Task<IActionResult> GetCategoriesTreeByCategoryId(int id)
+        {
+            if (id != 0)
             {
-                return Ok(await _categoryService.GetTreeFromNode(parentId));
+                return Ok(await _categoryService.GetTreeFromNode(id));
             }
 
             return Ok(await _categoryService.GetTreeFromRoot());

@@ -1,0 +1,8 @@
+﻿.flat-categories a h5 {
+    font-weight: 500;
+    transition: .4s;
+}
+
+.flat-categories a:hover h5 {
+    color: #ff0000;
+}

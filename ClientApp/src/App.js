@@ -12,12 +12,11 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          {/*<Header />
-          <Navigation />*/}
-          <Breadcrumb />
-          {/*<Curtain />
+          <Header />
+          <Navigation />
+          <Curtain />
           <Router />
-          <Footer />*/}
+          <Footer />
         </div>
       </BrowserRouter>
     )

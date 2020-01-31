@@ -22,6 +22,27 @@ namespace TechShop.Controllers
             this.categoryService = categoryService;
         }
 
+        [HttpGet]
+        public async Task<List<BreadcrumbResponse>> GetBreadcrumbList()
+        {
+            List<BreadcrumbResponse> breadcrumbResponseList = new List<BreadcrumbResponse>();
+
+            Category category = await categoryService.GetCategoryByUrlAsync("");
+
+            List<Breadcrumb> breadcrumbList = breadcrumbService.GetBreadcrumbTreeAsList(category.Id);
+            foreach (Breadcrumb b in breadcrumbList)
+            {
+                BreadcrumbResponse breadcrumbResponse = new BreadcrumbResponse();
+                breadcrumbResponse.Id = b.Id;
+                breadcrumbResponse.Name = b.Name;
+                breadcrumbResponse.ParentId = b.ParentId;
+                breadcrumbResponse.Url = b.Url;
+                breadcrumbResponseList.Add(breadcrumbResponse);
+            }
+
+            return breadcrumbResponseList;
+        }
+
         [HttpGet("{categoryUrl}")]
         public async Task<List<BreadcrumbResponse>> GetBreadcrumbList(string categoryUrl)
         {
@@ -36,14 +57,7 @@ namespace TechShop.Controllers
                 breadcrumbResponse.Id = b.Id;
                 breadcrumbResponse.Name = b.Name;
                 breadcrumbResponse.ParentId = b.ParentId;
-                if (b.Url == "" || b.Url == null)
-                {
-                    breadcrumbResponse.Url = "/d";
-                }
-                else
-                {
-                    breadcrumbResponse.Url = $"/d/{b.Url}";
-                }
+                breadcrumbResponse.Url = b.Url;
                 breadcrumbResponseList.Add(breadcrumbResponse);
             }
 

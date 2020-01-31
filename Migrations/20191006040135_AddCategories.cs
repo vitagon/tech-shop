@@ -10,7 +10,7 @@ namespace TechShop.Migrations
         {
             migrationBuilder.Sql(@"
                 insert into Category (Lft, Rgt, [Name], ParentId, Level, Url) values
-                    (1,  38, 'Home',                    0,  0, ''),
+                    (1,  38, 'Categories',              0,  0, ''),
                     (2,  7,  'Computers and laptops',   1,  1, 'computers-and-laptops'),
                     (3,  6,  'Laptops',                 2,  2, 'laptops'),
                     (4,  5,  'All Laptops',             3,  3, 'all-laptops'),

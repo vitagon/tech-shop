@@ -26,10 +26,11 @@ export const routes = [
   {
     path: '/d',
     name: 'Categories',
-    component: Categories
+    component: Categories,
+    exact: true
   },
   {
-    path: '/d/:category',
+    path: '/d/:categoryUrl',
     name: 'CategoryDetails',
     component: CategoryDetails
   },
@@ -55,7 +56,7 @@ const Router = () => {
     <Switch>
       <Route path='/' exact component={Main} />
       {routes.map((route, i) => {
-        return (<Route path={route.path} exact={route.exact || false} component={route.component} />);
+        return (<Route path={route.path} exact={route.exact || false} component={route.component} key={i} />);
       })}
     </Switch>
   );
