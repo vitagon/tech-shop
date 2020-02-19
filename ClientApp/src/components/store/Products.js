@@ -2,104 +2,32 @@
 import { ProductsGridView } from './products/ProductsGridView';
 import ProductsListView from './products/ProductsListView';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTh, faThList, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faTh, faThList, faAngleRight, faAngleLeft, faAngleDoubleRight, faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 import './Products.css'
+import qs from 'query-string';
+import { bindActionCreators, compose } from 'redux';
+import { getProducts } from '../../actions/productsActions';
 
-const products = [
-  {
-    id: 1,
-    img: './img/product01.png',
-    sale: '-30%',
-    new: true,
-    category: 'Category',
-    name: 'Laptop ASUS Air G3425',
-    description: '[Intel Celeron J4005, 2x2000 MGz, 4 GB DDR3, SSD 120 GB, without OS]',
-    price: '150',
-    oldPrice: '183',
-    rating: 5
-  },
-  {
-    id: 2,
-    img: './img/product02.png',
-    sale: '',
-    new: true,
-    category: 'Category',
-    name: 'Headphones Lenovo C1124',
-    description: '',
-    price: '60',
-    oldPrice: '72',
-    rating: 0
-  },
-  {
-    id: 3,
-    img: './img/product03.png',
-    sale: '-30%',
-    new: false,
-    category: 'Category',
-    name: 'Laptop Mackbook Air 2',
-    description: '',
-    price: '980.00',
-    oldPrice: '990.00',
-    rating: 3
-  },
-  {
-    id: 4,
-    img: './img/product04.png',
-    sale: '',
-    new: false,
-    category: 'Category',
-    name: 'Tablet Sony Z3',
-    description: '',
-    price: '980.00',
-    oldPrice: '990.00',
-    rating: 5
-  },
-  {
-    id: 5,
-    img: './img/product05.png',
-    sale: '',
-    new: false,
-    category: 'Category',
-    name: 'Headphones Epson GT23',
-    description: '',
-    price: '980.00',
-    oldPrice: '990.00',
-    rating: 5
-  },
-  {
-    id: 6,
-    img: './img/product06.png',
-    sale: '',
-    new: false,
-    category: 'Category',
-    name: 'Laptop Acer H2451',
-    description: '',
-    price: '980.00',
-    oldPrice: '990.00',
-    rating: 4
-  },
-  {
-    id: 7,
-    img: './img/product07.png',
-    sale: '',
-    new: false,
-    category: 'Category',
-    name: 'Samsung Galaxy S8 Pro',
-    description: '',
-    price: '980.00',
-    oldPrice: '990.00',
-    rating: 2
-  },
-];
 
 class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      productsView: 'list'
+      productsView: 'list',
+      curPageSizeOption: 10
     }
     this.setGridView = this.setGridView.bind(this);
     this.setListView = this.setListView.bind(this);
+    this.getNextPageUrl = this.getNextPageUrl.bind(this);
+    this.getPrevPageUrl = this.getPrevPageUrl.bind(this);
+    this.changePageSize = this.changePageSize.bind(this);
+    this.getFirstPageUrl = this.getFirstPageUrl.bind(this);
+    this.getLastPageUrl = this.getLastPageUrl.bind(this);
+    this.generatePageNumbersForPagination = this.generatePageNumbersForPagination.bind(this);
+    
+    this.pageSizeOptions = [2, 5, 10, 20, 50];
   }
 
   setGridView() {
@@ -116,14 +44,96 @@ class Products extends Component {
     });
   }
 
+  getNextPageUrl(url, parsedQueryStr) {
+    let queryObj = Object.assign({}, parsedQueryStr, { pageNumber: this.props.metadata.CurrentPage + 1 });
+    let queryStr = qs.stringify(queryObj);
+    return Object.assign({}, {}, {
+      pathname: url,
+      search: `?${queryStr}`
+    });
+  }
+
+  getPrevPageUrl(url, parsedQueryStr) {
+    let queryObj = Object.assign({}, parsedQueryStr, { pageNumber: this.props.metadata.CurrentPage - 1 });
+    let queryStr = qs.stringify(queryObj);
+    return Object.assign({}, {}, {
+      pathname: url,
+      search: `?${queryStr}`
+    });
+  }
+
+  getFirstPageUrl(url, parsedQueryStr) {
+    let queryObj = Object.assign({}, parsedQueryStr, { pageNumber: 1 });
+    let queryStr = qs.stringify(queryObj);
+    return Object.assign({}, {}, {
+      pathname: url,
+      search: `?${queryStr}`
+    });
+  }
+
+  getLastPageUrl(url, parsedQueryStr) {
+    let queryObj = Object.assign({}, parsedQueryStr, { pageNumber: this.props.metadata.TotalPages });
+    let queryStr = qs.stringify(queryObj);
+    return Object.assign({}, {}, {
+      pathname: url,
+      search: `?${queryStr}`
+    });
+  }
+
+  changePageSize(event) {
+    this.setState({
+      ...this.state,
+      curPageSizeOption: event.target.value
+    });
+    let parsedQueryStr = qs.parse(this.props.location.search);
+    let queryObj = Object.assign({}, parsedQueryStr, { pageSize: event.target.value });
+    let queryStr = qs.stringify(queryObj);
+    this.props.history.push(this.props.match.url + `?${queryStr}`);
+  }
+
+  generatePageNumbersForPagination() {
+    let maxSpaceForPagination = 8,
+        defaultLeftSpace = 4,
+        defaultRightSpace = 3,
+        numbersArr = [];
+
+    let curPage = this.props.metadata.CurrentPage;
+    let totalPages = this.props.metadata.TotalPages;
+    let prevPage = curPage - 1;
+    let nextPage = curPage + 1;
+
+    let showOnTheLeft = curPage < 5 ? curPage - 1 : 4;
+    let showOnTheRight = curPage > totalPages - 3 ? totalPages - curPage : 3;
+
+    if (showOnTheLeft < 4 && showOnTheRight === 3) showOnTheRight = showOnTheRight + (4 - showOnTheLeft);
+    if (showOnTheLeft === 4 && showOnTheRight < 3) showOnTheLeft = showOnTheLeft + (3 - showOnTheRight);
+
+    if (this.props.metadata.HasPrevious) {
+      for (let i = prevPage, count = 0; (i >= 1 && count < showOnTheLeft); i-- , count++) {
+        numbersArr.unshift(i);
+      }
+    }
+
+    numbersArr.push(this.props.metadata.CurrentPage);
+
+    if (this.props.metadata.HasNext) {
+      for (let i = nextPage, count = 0; (i <= totalPages && count < showOnTheRight); i++ , count++) {
+        numbersArr.push(i);
+      }
+    }
+    return numbersArr;
+  }
+
   render() {
+    let url = this.props.match.url;
+    let parsedQueryStr = qs.parse(this.props.location.search);
     return (
-      <div id="store" class="col-md-9">
-        <div class="store-filter clearfix">
-          <div class="store-sort">
+      <div id="store" className="col-md-9">
+        <div className="store-filter clearfix">
+          <div className="store-sort">
             <label>
               Sort By:
-							<select class="input-select">
+							<select className="input-select" disabled>
                 <option value="0">Popular</option>
                 <option value="1">Position</option>
               </select>
@@ -131,31 +141,69 @@ class Products extends Component {
 
             <label>
               Show:
-							<select class="input-select">
-                <option value="0">20</option>
-                <option value="1">50</option>
+							<select className="input-select" onChange={this.changePageSize} value={this.state.curPageSizeOption}>
+                {this.pageSizeOptions.map((val, index) => {
+                  return (<option value={val} key={index}>{val}</option>);
+                })}
               </select>
             </label>
           </div>
-          <ul class="store-grid">
-            <li class={this.state.productsView === 'grid' ? 'active' : ''} onClick={this.setGridView}><FontAwesomeIcon icon={faTh} /></li>
-            <li class={this.state.productsView === 'list' ? 'active' : ''} onClick={this.setListView}><FontAwesomeIcon icon={faThList} /></li>
+          <ul className="store-grid">
+            <li className={this.state.productsView === 'grid' ? 'active' : ''} onClick={this.setGridView}><FontAwesomeIcon icon={faTh} /></li>
+            <li className={this.state.productsView === 'list' ? 'active' : ''} onClick={this.setListView}><FontAwesomeIcon icon={faThList} /></li>
           </ul>
         </div>
 
-        <div class="row">
-          {this.state.productsView === 'grid' && ProductsGridView(products)}
-          {this.state.productsView === 'list' && <ProductsListView products={products} />}
+        <div className="row">
+          {this.state.productsView === 'grid' && ProductsGridView(this.props.products)}
+          {this.state.productsView === 'list' && <ProductsListView products={this.props.products} />}
         </div>
 
-        <div class="store-filter clearfix">
-          <span class="store-qty">Showing 20-100 products</span>
-          <ul class="store-pagination">
-            <li class="active">1</li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#"><FontAwesomeIcon icon={faAngleRight}/></a></li>
+
+        <div className="store-filter clearfix">
+          <div className="store-qty mb-2">Showing {this.props.metadata.PageSize} - {this.props.metadata.TotalCount} products</div>
+          <ul className="store-pagination">
+            {this.props.metadata.CurrentPage !== 1 ?
+              (<li>
+                <Link to={location => this.getFirstPageUrl(url, parsedQueryStr)}>
+                  <FontAwesomeIcon icon={faAngleDoubleLeft} />
+                </Link>
+              </li>) :
+              null}
+
+            {this.props.metadata.HasPrevious ?
+              (<li>
+                <Link to={location => this.getPrevPageUrl(url, parsedQueryStr)}>
+                  <FontAwesomeIcon icon={faAngleLeft} />
+                </Link>
+              </li>)
+              : null}
+
+            {this.generatePageNumbersForPagination().map((val) => {
+              let queryObj = Object.assign({}, parsedQueryStr, { pageNumber: val });
+              let queryStr = qs.stringify(queryObj);
+              let urlWithQueryParams = url + '?' + queryStr;
+              if (this.props.metadata.CurrentPage == val) {
+                return (<li className="active" key={val}>{val}</li>);
+              }
+              return (<li key={val}><Link to={urlWithQueryParams}>{val}</Link></li>);
+            })}
+
+            {this.props.metadata.HasNext ?
+              (<li>
+                <Link to={location => this.getNextPageUrl(url, parsedQueryStr)}>
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </Link>
+              </li>) :
+              null}
+
+            {this.props.metadata.CurrentPage !== this.props.metadata.TotalPages ?
+              (<li>
+                <Link to={location => this.getLastPageUrl(url, parsedQueryStr)}>
+                  <FontAwesomeIcon icon={faAngleDoubleRight} />
+                </Link>
+              </li>) :
+              null}
           </ul>
         </div>
       </div>
@@ -163,4 +211,12 @@ class Products extends Component {
   }
 }
 
-export default Products;
+const mapStateToProps = (state, ownProps) => ({
+  products: state.productsReducer.products,
+  metadata: state.productsReducer.metadata
+});
+
+export default compose(
+  connect(mapStateToProps, null),
+  withRouter
+)(Products);

@@ -28,6 +28,15 @@ namespace TechShop.Controllers
             var fetchProducts = from p in _techDbContext.Product
                                 select p;
 
+            if (productFilters.CategoryUrl != null)
+            {
+                fetchProducts = from p in fetchProducts
+                                join cp in _techDbContext.CategoryProduct on p.Id equals cp.ProductId
+                                join c in _techDbContext.Category on cp.CategoryId equals c.Id
+                                where c.Url == productFilters.CategoryUrl
+                                select p;
+            }
+
             if (productFilters.CategoryName != null)
             {
                 fetchProducts = from p in fetchProducts

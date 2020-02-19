@@ -39,7 +39,7 @@ class ProductsListView extends React.Component {
                 <img src={product.img} alt="" />
                 {(product.sale !== '' || product.new !== false) &&
                   <div className={styles['product-label']}>
-                    {product.sale !== '' && <span className={styles['sale']}>{product.sale}</span>}
+                    {product.sale !== 0 && <span className={styles['sale']}>-{product.sale}%</span>}
                     {product.new !== false && <span className={styles['new']}>NEW</span>}
                   </div>
                 }

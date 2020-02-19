@@ -35,7 +35,7 @@ export const routes = [
     component: CategoryDetails
   },
   {
-    path: '/store',
+    path: '/c/:categoryUrl',
     name: "Store",
     component: Store
   },

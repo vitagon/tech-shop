@@ -68,7 +68,7 @@
 /*-- Store Pagination --*/
 
 .store-pagination {
-    float: right;
+    text-align: center;
 }
 
     .store-pagination li {

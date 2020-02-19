@@ -7,6 +7,7 @@ namespace TechShop.Models
 {
     public class ProductFilters : QueryStringParameters
     {
+        public string CategoryUrl { get; set; }
         public string CategoryName { get; set; }
         public decimal UpPrice { get; set; }
         public decimal DownPrice { get; set; }

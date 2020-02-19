@@ -17,7 +17,7 @@ export const ProductsGridView = (products) => {
             <img src={product.img} alt="" style={{ width: '100%' }} />
             {(product.sale !== '' || product.new !== false) &&
               <div className={styles['product-label']}>
-                {product.sale !== '' && <span className={styles.sale}>{product.sale}</span>}
+                {product.sale !== 0 && <span className={styles.sale}>-{product.sale}%</span>}
                 {product.new !== false && <span className={styles.new}>NEW</span>}
               </div>
             }
@@ -25,7 +25,7 @@ export const ProductsGridView = (products) => {
           <div className={styles['product-body']}>
             <p className={styles['product-category']}>{product.category}</p>
             <h3 className={styles['product-name']}><a href="/">{product.name}</a></h3>
-            <h4 className={styles['product-price']}>{product.price} <del className={styles['product-old-price']}>{product.oldPrice}</del></h4>
+            <h4 className={styles['product-price']}>${product.price} <del className={styles['product-old-price']}>${product.oldPrice}</del></h4>
             <div className={styles['product-rating']}>
               {oneToFiveArray.map((value, i) => {
                 return product.rating >= value ?
