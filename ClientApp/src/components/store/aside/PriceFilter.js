@@ -2,6 +2,9 @@
 import noUiSlider from 'nouislider';
 import './PriceFilter.css';
 
+const DEFAULT_MIN_PRICE = 1.00;
+const DEFAULT_MAX_PRICE = 999.00;
+
 class PriceFilter extends Component {
 
   constructor(props) {
@@ -19,6 +22,8 @@ class PriceFilter extends Component {
     this.priceInputMin = document.getElementById('price-min');
     this.priceInputs = document.getElementsByClassName('input-number');
     this.createSlider();
+    this.initializeInputs();
+
     this.updateInputWhenSliderUpdates();
     this.updateInputAndSliderWhenBtnIsClicked();
     this.updateSliderOnInputChange();
@@ -30,17 +35,43 @@ class PriceFilter extends Component {
       connect: true,
       step: 1,
       range: {
-        'min': 1,
-        'max': 999
+        'min': DEFAULT_MIN_PRICE,
+        'max': DEFAULT_MAX_PRICE
       }
     });
   }
 
+  initializeInputs() {
+    this.priceInputMin.value = DEFAULT_MIN_PRICE;
+    this.priceInputMax.value = DEFAULT_MAX_PRICE;
+  }
+
+  showApplyBtn(el, value) {
+    let aside = el.closest('.aside');
+    let asideTop = aside.getBoundingClientRect().top;
+    let curElTop = el.getBoundingClientRect().top;
+    let curElBottom = el.getBoundingClientRect().bottom;
+    let curElHalfHeight = Math.round(Math.abs(curElTop - curElBottom) / 2);
+    let distance = Math.abs(asideTop - curElTop) + curElHalfHeight;
+    console.log(el.getBoundingClientRect());
+
+    let applyFiltersBtn = aside.querySelector('.apply-filters-btn');
+    let btnHalfHeight = Math.round(applyFiltersBtn.offsetHeight / 2);
+    let top = distance - btnHalfHeight;
+    applyFiltersBtn.style.top = `${top}px`;
+    applyFiltersBtn.style.visibility = 'visible';
+    setTimeout(function () {
+      applyFiltersBtn.style.visibility = 'hidden';
+    }, 3500);
+  }
+
   updateInputWhenSliderUpdates() {
     let _this = this;
-    this.priceSlider.noUiSlider.on('update', function (values, handle) {
-      var value = values[handle];
+    this.priceSlider.noUiSlider.on('change', function (values, handle) {
+      var value = Math.round(values[handle]);
+
       handle ? _this.priceInputMax.value = value : _this.priceInputMin.value = value;
+      _this.showApplyBtn(_this.priceSlider, value);
     });
   }
 
@@ -48,8 +79,8 @@ class PriceFilter extends Component {
     let _this = this;
     Array.prototype.forEach.call(this.priceInputs, function (el, index, array) {
       let input = el.querySelector('input[type="number"]'),
-        up = el.querySelector('.qty-up'),
-        down = el.querySelector('.qty-down');
+          up = el.querySelector('.qty-up'),
+          down = el.querySelector('.qty-down');
       
       up.addEventListener('click', function () {
         let value = parseInt(input.value) + 1;
@@ -78,16 +109,18 @@ class PriceFilter extends Component {
   }
 
   updatePriceSlider(elem, value) {
+    let val = Math.round(value);
     if (elem.classList.contains('price-min')) {
-      console.log('min');
-      this.priceSlider.noUiSlider.set([value, null]);
+      this.showApplyBtn(this.priceInputMin, val);
+      this.priceSlider.noUiSlider.set([val, null]);
     } else if (elem.classList.contains('price-max')) {
-      console.log('max');
-      this.priceSlider.noUiSlider.set([null, value]);
+      this.showApplyBtn(this.priceInputMax, val);
+      this.priceSlider.noUiSlider.set([null, val]);
     }
   }
 
   render() {
+
     return (
       <div className="aside">
         <h3 className="aside-title">Price</h3>
@@ -104,6 +137,10 @@ class PriceFilter extends Component {
             <span className="qty-up">+</span>
             <span className="qty-down">-</span>
           </div>
+        </div>
+
+        <div className="apply-filters-btn">
+          <button className="apply-filters-btn__button">Apply</button>
         </div>
       </div>
     )

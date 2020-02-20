@@ -1,42 +1,80 @@
 ﻿/*-- Price Filter --*/
 
+.aside {
+    position: relative;
+}
 
+.apply-filters-btn {
+    visibility: hidden;
+    position: absolute;
+    right: -13px;
+    transform: translateX(100%);
+    z-index: 901;
+}
+
+.apply-filters-btn__button {
+    position: relative;
+    border-radius: .25em;
+    border: 2px solid #c50324;
+    padding: .4em 1.8em;
+    background: #d10024;
+    color: #fff;
+    font-size: 1.3em;
+    z-index: inherit;
+}
+
+    .apply-filters-btn__button:hover {
+        box-shadow: 0px 0px 8px 1px #c50324;
+    }
+
+    .apply-filters-btn__button:before {
+        position: absolute;
+        content: '';
+        width: 13px;
+        height: 13px;
+        top: 50%;
+        left: 0;
+        transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+        background: #d10024;
+        border-top: 2px solid #c50324;
+        border-left: 2px solid #c50324;
+    }
 
 #price-slider {
     margin-bottom: 15px;
 }
 
-#price-slider.noUi-target {
-    background-color: #FFF;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border: 1px solid #E4E7ED;
-    border-radius: 0px;
-}
+    #price-slider.noUi-target {
+        background-color: #FFF;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: 1px solid #E4E7ED;
+        border-radius: 0px;
+    }
 
-#price-slider .noUi-connect {
-    background-color: #D10024;
-}
+    #price-slider .noUi-connect {
+        background-color: #D10024;
+    }
 
-#price-slider.noUi-horizontal {
-    height: 6px;
-}
+    #price-slider.noUi-horizontal {
+        height: 6px;
+    }
 
-#price-slider.noUi-horizontal .noUi-handle {
-    width: 12px;
-    height: 12px;
-    right: -6px;
-    top: -4px;
-    border: none;
-    background: #D10024;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border-radius: 50%;
-}
+        #price-slider.noUi-horizontal .noUi-handle {
+            width: 12px;
+            height: 12px;
+            right: -6px;
+            top: -4px;
+            border: none;
+            background: #D10024;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            border-radius: 50%;
+        }
 
-#price-slider .noUi-handle:before, #price-slider .noUi-handle:after {
-    display: none;
-}
+    #price-slider .noUi-handle:before, #price-slider .noUi-handle:after {
+        display: none;
+    }
 
 .price-filter .input-number {
     display: inline-block;

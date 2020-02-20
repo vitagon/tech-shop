@@ -7,8 +7,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import './Products.css'
 import qs from 'query-string';
-import { bindActionCreators, compose } from 'redux';
-import { getProducts } from '../../actions/productsActions';
+import { compose } from 'redux';
 
 
 class Products extends Component {
@@ -86,6 +85,7 @@ class Products extends Component {
       curPageSizeOption: event.target.value
     });
     let parsedQueryStr = qs.parse(this.props.location.search);
+    delete parsedQueryStr.pageNumber;
     let queryObj = Object.assign({}, parsedQueryStr, { pageSize: event.target.value });
     let queryStr = qs.stringify(queryObj);
     this.props.history.push(this.props.match.url + `?${queryStr}`);
@@ -105,8 +105,8 @@ class Products extends Component {
     let showOnTheLeft = curPage < 5 ? curPage - 1 : 4;
     let showOnTheRight = curPage > totalPages - 3 ? totalPages - curPage : 3;
 
-    if (showOnTheLeft < 4 && showOnTheRight === 3) showOnTheRight = showOnTheRight + (4 - showOnTheLeft);
-    if (showOnTheLeft === 4 && showOnTheRight < 3) showOnTheLeft = showOnTheLeft + (3 - showOnTheRight);
+    if (showOnTheLeft < 4 && showOnTheRight == 3) showOnTheRight = showOnTheRight + (4 - showOnTheLeft);
+    if (showOnTheLeft == 4 && showOnTheRight < 3) showOnTheLeft = showOnTheLeft + (3 - showOnTheRight);
 
     if (this.props.metadata.HasPrevious) {
       for (let i = prevPage, count = 0; (i >= 1 && count < showOnTheLeft); i-- , count++) {
