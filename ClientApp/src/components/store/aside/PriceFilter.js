@@ -1,9 +1,19 @@
 ﻿import React, { Component } from 'react';
 import noUiSlider from 'nouislider';
 import './PriceFilter.css';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addFilterToApply } from '../../../actions/productsFiltersActions';
+import { getProducts } from '../../../actions/productsActions';
 
 const DEFAULT_MIN_PRICE = 1.00;
 const DEFAULT_MAX_PRICE = 999.00;
+
+const PRICE_MAX_INPUT_ID = 'price-max';
+const PRICE_MIN_INPUT_ID = 'price-min';
+
+const PRICE_MIN_FILTER = 'minPrice';
+const PRICE_MAX_FILTER = 'maxPrice';
 
 class PriceFilter extends Component {
 
@@ -46,7 +56,9 @@ class PriceFilter extends Component {
     this.priceInputMax.value = DEFAULT_MAX_PRICE;
   }
 
-  showApplyBtn(el, value) {
+  showApplyBtn(el, value, filterType) {
+    this.props.addFilterToApply(filterType, value);
+
     let aside = el.closest('.aside');
     let asideTop = aside.getBoundingClientRect().top;
     let curElTop = el.getBoundingClientRect().top;
@@ -71,7 +83,8 @@ class PriceFilter extends Component {
       var value = Math.round(values[handle]);
 
       handle ? _this.priceInputMax.value = value : _this.priceInputMin.value = value;
-      _this.showApplyBtn(_this.priceSlider, value);
+      let filterType = handle ? PRICE_MAX_FILTER : PRICE_MIN_FILTER;
+      _this.showApplyBtn(_this.priceSlider, value, filterType);
     });
   }
 
@@ -111,10 +124,10 @@ class PriceFilter extends Component {
   updatePriceSlider(elem, value) {
     let val = Math.round(value);
     if (elem.classList.contains('price-min')) {
-      this.showApplyBtn(this.priceInputMin, val);
+      this.showApplyBtn(this.priceInputMin, val, PRICE_MIN_FILTER);
       this.priceSlider.noUiSlider.set([val, null]);
     } else if (elem.classList.contains('price-max')) {
-      this.showApplyBtn(this.priceInputMax, val);
+      this.showApplyBtn(this.priceInputMax, val, PRICE_MAX_FILTER);
       this.priceSlider.noUiSlider.set([null, val]);
     }
   }
@@ -140,11 +153,20 @@ class PriceFilter extends Component {
         </div>
 
         <div className="apply-filters-btn">
-          <button className="apply-filters-btn__button">Apply</button>
+          <button className="apply-filters-btn__button" onClick={() => this.props.getProducts(this.props.filters)}>Apply</button>
         </div>
       </div>
     )
   }
 }
 
-export default PriceFilter;
+const mapStateToProps = (state, ownProps) => ({
+  filters: state.productsFiltersReducer.filtersToApply
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  addFilterToApply: addFilterToApply,
+  getProducts: getProducts
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PriceFilter);

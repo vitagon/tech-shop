@@ -9,7 +9,7 @@ namespace TechShop.Models
     {
         public string CategoryUrl { get; set; }
         public string CategoryName { get; set; }
-        public decimal UpPrice { get; set; }
-        public decimal DownPrice { get; set; }
+        public decimal MinPrice { get; set; }
+        public decimal MaxPrice { get; set; }
     }
 }

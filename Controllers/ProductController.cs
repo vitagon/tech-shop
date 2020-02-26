@@ -46,17 +46,17 @@ namespace TechShop.Controllers
                                 select p;
             }
 
-            if (productFilters.UpPrice > 0)
+            if (productFilters.MaxPrice > 0)
             {
                 fetchProducts = from p in fetchProducts
-                                where p.Price <= productFilters.UpPrice
+                                where p.Price <= productFilters.MaxPrice
                                 select p;
             }
 
-            if (productFilters.DownPrice > 0)
+            if (productFilters.MinPrice > 0)
             {
                 fetchProducts = from p in fetchProducts
-                                where p.Price >= productFilters.DownPrice
+                                where p.Price >= productFilters.MinPrice
                                 select p;
             }
 

@@ -4,6 +4,7 @@ import navPanelReducer from './navPanelReducer';
 import cartReducer from './cartReducer';
 import breadcrumbsReducer from './breadcrumbsReducer';
 import productsReducer from './productsReducer';
+import productsFiltersReducer from './productsFiltersReducer';
 import {combineReducers} from 'redux';
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
   navPanelReducer,
   cartReducer,
   breadcrumbsReducer,
-  productsReducer
+  productsReducer,
+  productsFiltersReducer
 });

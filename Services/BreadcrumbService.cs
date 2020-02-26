@@ -10,7 +10,7 @@ namespace TechShop.Services
 {
     public class BreadcrumbService : IBreadcrumbService
     {
-        private TechDbContext techDbContext;
+        private readonly TechDbContext techDbContext;
 
         public BreadcrumbService(TechDbContext techDbContext)
         {
@@ -19,7 +19,7 @@ namespace TechShop.Services
 
         public List<Breadcrumb> GetBreadcrumbTreeAsList(int categoryId)
         {
-            List<Breadcrumb> breadcrumbs = techDbContext.Breadcrumb.FromSql("GetCategoryPath @p0", categoryId).ToList();
+            List<Breadcrumb> breadcrumbs = techDbContext.Breadcrumb.FromSqlRaw("GetCategoryPath @p0", categoryId).ToList();
             return breadcrumbs;
         }
     }

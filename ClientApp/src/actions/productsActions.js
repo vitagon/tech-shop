@@ -5,7 +5,9 @@ import { RECEIVE_PRODUCTS } from './../reducers/productsReducer';
 export function getProducts(filters) {
   return function (dispatch) {
     let urlParams = '',
-        url = '/api/products';
+      url = '/api/products';
+
+    console.log(filters);
     if (filters != null) {
       urlParams = new URLSearchParams(filters).toString();
       url = url + '?' + urlParams;
