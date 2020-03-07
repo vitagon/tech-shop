@@ -23,7 +23,7 @@ namespace TechShop.Controllers
         }
 
         [HttpGet]
-        public IActionResult getProducts([FromQuery] ProductFilters productFilters)
+        public IActionResult GetProducts([FromQuery] ProductFilters productFilters)
         {
             var fetchProducts = from p in _techDbContext.Product
                                 select p;

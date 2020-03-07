@@ -20,6 +20,7 @@ namespace TechShop.Installers
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<INestedSetService, NestedSetService>();
             services.AddScoped<IBreadcrumbService, BreadcrumbService>();
+            services.AddScoped<IProductFilterService, ProductFilterService>();
         }
     }
 }
