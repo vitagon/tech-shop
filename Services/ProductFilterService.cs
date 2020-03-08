@@ -19,7 +19,8 @@ namespace TechShop.Services
 
         public async Task<List<Vw_CategoryProducts>> GetCategoryProducts(string categoryUrl)
         {
-            IQueryable<Vw_CategoryProducts> req = techDbContext.Vw_CategoryProducts;
+            IQueryable<Vw_CategoryProducts> req = from categoryProduct in techDbContext.Vw_CategoryProducts
+                                                  select categoryProduct;
 
             if (categoryUrl != null)
             {
