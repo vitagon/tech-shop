@@ -9,8 +9,8 @@ using TechShop.Data;
 namespace TechShop.Migrations
 {
     [DbContext(typeof(TechDbContext))]
-    [Migration("20191006040135_AddCategories")]
-    partial class AddCategories
+    [Migration("20191006034734_CreateCategoryTable")]
+    partial class CreateCategoryTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

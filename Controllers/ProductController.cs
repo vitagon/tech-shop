@@ -46,19 +46,21 @@ namespace TechShop.Controllers
                                 select p;
             }
 
-            if (productFilters.MaxPrice > 0)
-            {
-                fetchProducts = from p in fetchProducts
-                                where p.Price <= productFilters.MaxPrice
-                                select p;
-            }
+            //if (productFilters.MaxPrice > 0)
+            //{
+            //    var today = DateTime.Today.Date;
+            //    fetchProducts = from p in fetchProducts
+            //                    join ph in _techDbContext.PriceHistory
+            //                    where p.Price <= productFilters.MaxPrice
+            //                    select p;
+            //}
 
-            if (productFilters.MinPrice > 0)
-            {
-                fetchProducts = from p in fetchProducts
-                                where p.Price >= productFilters.MinPrice
-                                select p;
-            }
+            //if (productFilters.MinPrice > 0)
+            //{
+            //    fetchProducts = from p in fetchProducts
+            //                    where p.Price >= productFilters.MinPrice
+            //                    select p;
+            //}
 
             PagedList<Product> products = PagedList<Product>.ToPagedList(
                 fetchProducts,

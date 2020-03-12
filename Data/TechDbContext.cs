@@ -25,11 +25,16 @@ namespace TechShop.Data
                 entity.HasNoKey();
                 entity.ToView("vw_CategoryProducts");
             });
+
+            modelBuilder.SeedData();
         }
 
         public DbSet<Breadcrumb> Breadcrumb { get; set; }
+        public DbSet<Brand> Brand { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }
+        public DbSet<PriceHistory> PriceHistory { get; set; }
+        public DbSet<Discount> Discount { get; set; }
         public DbSet<CategoryProduct> CategoryProduct { get; set; }
 
         public DbSet<Vw_CategoryProducts> Vw_CategoryProducts { get; set; }

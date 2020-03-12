@@ -3,34 +3,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TechShop.Migrations
 {
-    public partial class CreateProductsTable : Migration
+    public partial class CreateBrandTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "Brand",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false),
-                    Img = table.Column<string>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    OldPrice = table.Column<decimal>(nullable: false),
-                    Sale = table.Column<int>(nullable: false),
-                    Rating = table.Column<decimal>(nullable: false)
+                    Name = table.Column<string>(nullable: false, maxLength: 450)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.PrimaryKey("PK_Brand", x => x.Id);
+                    table.UniqueConstraint("UQ_Brand_Name", x => x.Name);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Brand");
         }
     }
 }

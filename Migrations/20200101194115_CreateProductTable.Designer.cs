@@ -8,8 +8,8 @@ using TechShop.Data;
 namespace TechShop.Migrations
 {
     [DbContext(typeof(TechDbContext))]
-    [Migration("20200101194115_CreateProductsTable")]
-    partial class CreateProductsTable
+    [Migration("20200101194115_CreateProductTable")]
+    partial class CreateProductTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

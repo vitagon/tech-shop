@@ -22,14 +22,8 @@ namespace TechShop.Models
         [Required]
         public string Img { get; set; }
 
-        [Required]
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal Price { get; set; }
-
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal OldPrice { get; set; }
-        
-        public int Sale { get; set; }
+        public Brand Brand { get; set; }
+        public int BrandId { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal Rating { get; set; }

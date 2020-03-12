@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TechShop.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class CreateCategoryTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,9 +22,9 @@ namespace TechShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_categories", x => x.Id);
-                    table.UniqueConstraint("UQ_categories_name", x => x.Name);
-                    table.UniqueConstraint("UQ_categories_url", x => x.Url);
+                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.UniqueConstraint("UQ_Category_Name", x => x.Name);
+                    table.UniqueConstraint("UQ_Category_Url", x => x.Url);
                 });
         }
 
