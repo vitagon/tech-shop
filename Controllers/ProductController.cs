@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TechShop.Data;
 using TechShop.Models;
 using TechShop.Services;
+using TechShop.Views;
 
 namespace TechShop.Controllers
 {
@@ -25,7 +26,7 @@ namespace TechShop.Controllers
         [HttpGet]
         public IActionResult GetProducts([FromQuery] ProductFilters productFilters)
         {
-            var fetchProducts = from p in _techDbContext.Product
+            var fetchProducts = from p in _techDbContext.Vw_Product
                                 select p;
 
             if (productFilters.CategoryUrl != null)
@@ -46,23 +47,21 @@ namespace TechShop.Controllers
                                 select p;
             }
 
-            //if (productFilters.MaxPrice > 0)
-            //{
-            //    var today = DateTime.Today.Date;
-            //    fetchProducts = from p in fetchProducts
-            //                    join ph in _techDbContext.PriceHistory
-            //                    where p.Price <= productFilters.MaxPrice
-            //                    select p;
-            //}
+            if (productFilters.MaxPrice > 0)
+            {
+                fetchProducts = from p in fetchProducts
+                                where p.Price <= productFilters.MaxPrice
+                                select p;
+            }
 
-            //if (productFilters.MinPrice > 0)
-            //{
-            //    fetchProducts = from p in fetchProducts
-            //                    where p.Price >= productFilters.MinPrice
-            //                    select p;
-            //}
+            if (productFilters.MinPrice > 0)
+            {
+                fetchProducts = from p in fetchProducts
+                                where p.Price >= productFilters.MinPrice
+                                select p;
+            }
 
-            PagedList<Product> products = PagedList<Product>.ToPagedList(
+            PagedList<Vw_Product> products = PagedList<Vw_Product>.ToPagedList(
                 fetchProducts,
                 productFilters.PageNumber,
                 productFilters.PageSize);

@@ -8,6 +8,6 @@ namespace TechShop.Services
 {
     public interface IProductFilterService
     {
-        Task<List<Vw_CategoryProducts>> GetCategoryProducts(string categoryUrl);
+        Task<List<Vw_CategoryProduct>> GetCategoryProducts(string categoryUrl);
     }
 }

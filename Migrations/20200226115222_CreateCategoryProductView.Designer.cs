@@ -9,8 +9,8 @@ using TechShop.Data;
 namespace TechShop.Migrations
 {
     [DbContext(typeof(TechDbContext))]
-    [Migration("20200226115222_CreateCategoryProductsView")]
-    partial class CreateCategoryProductsView
+    [Migration("20200226115222_CreateCategoryProductView")]
+    partial class CreateCategoryProductView
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

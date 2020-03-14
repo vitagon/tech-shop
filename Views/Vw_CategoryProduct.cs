@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TechShop.Views
 {
-    public class Vw_CategoryProducts
+    public class Vw_CategoryProduct
     {
         public int Id { get; set; }
 

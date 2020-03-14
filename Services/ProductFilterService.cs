@@ -17,9 +17,9 @@ namespace TechShop.Services
             this.techDbContext = techDbContext;
         }
 
-        public async Task<List<Vw_CategoryProducts>> GetCategoryProducts(string categoryUrl)
+        public async Task<List<Vw_CategoryProduct>> GetCategoryProducts(string categoryUrl)
         {
-            IQueryable<Vw_CategoryProducts> req = from categoryProduct in techDbContext.Vw_CategoryProducts
+            IQueryable<Vw_CategoryProduct> req = from categoryProduct in techDbContext.Vw_CategoryProducts
                                                   select categoryProduct;
 
             if (categoryUrl != null)

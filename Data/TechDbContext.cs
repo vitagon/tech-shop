@@ -20,10 +20,16 @@ namespace TechShop.Data
             modelBuilder.Entity<CategoryProduct>()
                 .HasKey(table => new { table.CategoryId, table.ProductId });
 
-            modelBuilder.Entity<Vw_CategoryProducts>(entity =>
+            modelBuilder.Entity<Vw_CategoryProduct>(entity =>
             {
                 entity.HasNoKey();
-                entity.ToView("vw_CategoryProducts");
+                entity.ToView("vw_CategoryProduct");
+            });
+
+            modelBuilder.Entity<Vw_Product>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("vw_Product");
             });
 
             modelBuilder.SeedData();
@@ -37,6 +43,7 @@ namespace TechShop.Data
         public DbSet<Discount> Discount { get; set; }
         public DbSet<CategoryProduct> CategoryProduct { get; set; }
 
-        public DbSet<Vw_CategoryProducts> Vw_CategoryProducts { get; set; }
+        public DbSet<Vw_CategoryProduct> Vw_CategoryProducts { get; set; }
+        public DbSet<Vw_Product> Vw_Product { get; set; }
     }
 }

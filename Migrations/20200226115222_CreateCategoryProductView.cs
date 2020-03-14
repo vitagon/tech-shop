@@ -2,12 +2,12 @@
 
 namespace TechShop.Migrations
 {
-    public partial class CreateCategoryProductsView : Migration
+    public partial class CreateCategoryProductView : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             //migrationBuilder.Sql(@"
-            //    CREATE VIEW vw_CategoryProducts
+            //    CREATE VIEW vw_CategoryProduct
             //    AS
             //    SELECT
 	           //     p.Id, p.[Name], p.[Description], p.Img, p.Rating, b.Name as Brand, d.Rate as Discount,
@@ -26,7 +26,7 @@ namespace TechShop.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"DROP VIEW IF EXISTS vw_CategoryProducts");
+            migrationBuilder.Sql(@"DROP VIEW IF EXISTS vw_CategoryProduct");
         }
     }
 }
