@@ -32,7 +32,7 @@ namespace TechShop.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Rate { get; set; }
 
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
         public int ProductId { get; set; }
     }
 }

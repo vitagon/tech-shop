@@ -20,11 +20,15 @@ namespace TechShop.Data
             modelBuilder.Entity<CategoryProduct>()
                 .HasKey(table => new { table.CategoryId, table.ProductId });
 
+            modelBuilder.Entity<ProductPAVPair>()
+                .HasKey(table => new { table.ProductId, table.AVPairId });
+
             modelBuilder.Entity<Vw_CategoryProduct>(entity =>
             {
                 entity.HasNoKey();
                 entity.ToView("vw_CategoryProduct");
             });
+
 
             modelBuilder.Entity<Vw_Product>(entity =>
             {
@@ -42,6 +46,10 @@ namespace TechShop.Data
         public DbSet<PriceHistory> PriceHistory { get; set; }
         public DbSet<Discount> Discount { get; set; }
         public DbSet<CategoryProduct> CategoryProduct { get; set; }
+        public DbSet<PAttribute> PAttribute { get; set; }
+        public DbSet<PValue> PValue { get; set; }
+        public DbSet<PAVPair> PAVPair { get; set; }
+        public DbSet<ProductPAVPair> ProductPAVPair { get; set; }
 
         public DbSet<Vw_CategoryProduct> Vw_CategoryProducts { get; set; }
         public DbSet<Vw_Product> Vw_Product { get; set; }

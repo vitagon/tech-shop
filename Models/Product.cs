@@ -28,6 +28,6 @@ namespace TechShop.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Rating { get; set; }
 
-        public List<CategoryProduct> CategoryProducts { get; set; }
+        public virtual List<CategoryProduct> CategoryProducts { get; set; }
     }
 }

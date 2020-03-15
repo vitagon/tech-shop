@@ -33,6 +33,11 @@ namespace TechShop.Migrations
                         name: "PK_ProductPAVPair",
                         columns: x => new { x.ProductId, x.AVPairId });
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductPAVPair_AVPairId",
+                table: "ProductPAVPair",
+                column: "AVPairId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

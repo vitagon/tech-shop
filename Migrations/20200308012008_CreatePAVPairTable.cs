@@ -34,6 +34,16 @@ namespace TechShop.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PAVPair_PAttributeId",
+                table: "PAVPair",
+                column: "PAttributeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PAVPair_PValueId",
+                table: "PAVPair",
+                column: "PValueId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

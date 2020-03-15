@@ -32,6 +32,6 @@ namespace TechShop.Models
         [Required]
         public string Url { get; set; }
 
-        public List<CategoryProduct> CategoryProducts { get; set; }
+        public virtual List<CategoryProduct> CategoryProducts { get; set; }
     }
 }
