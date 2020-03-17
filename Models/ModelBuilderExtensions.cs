@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -209,7 +210,7 @@ namespace TechShop.Models
                     {
                         Id = 1,
                         Name = "Laptop ASUS Air G3425",
-                        Description = "[Intel Celeron J4005, 2x2000 MGz, 4 GB DDR3, SSD 120 GB, without OS]",
+                        Description = "[Intel Celeron J4005, 2x2000 MGz, 4 GB DDR3, SSD 128 GB, Windows 10 Home]",
                         Img = "/img/product01.png",
                         BrandId = 1,
                         Rating = 5
@@ -218,7 +219,7 @@ namespace TechShop.Models
                     {
                         Id = 2,
                         Name = "Laptop Lenovo C1124",
-                        Description = "[Intel Celeron J4005, 2x2000 MGz, 4 GB DDR3, SSD 120 GB, Windows 10]",
+                        Description = "[Intel Celeron J4005, 2x2000 MGz, 4 GB DDR3, SSD 128 GB, Windows 10 Home]",
                         Img = "/img/product01.png",
                         BrandId = 6,
                         Rating = 0
@@ -254,7 +255,7 @@ namespace TechShop.Models
                     {
                         Id = 6,
                         Name = "Laptop Acer H2451",
-                        Description = "[Intel Celeron J4005, 2x2000 MGz, 4 GB DDR3, SSD 120 GB, without OS]",
+                        Description = "[Intel Celeron J4005, 2x2000 MGz, 4 GB DDR3, SSD 128 GB, Windows 10 Professional]",
                         Img = "/img/product06.png",
                         BrandId = 2,
                         Rating = 4
@@ -263,7 +264,7 @@ namespace TechShop.Models
                     {
                         Id = 7,
                         Name = "Laptop ASUS Air G3425",
-                        Description = "[Intel Celeron J4005, 2x2000 MGz, 6 GB DDR3, SSD 120 GB, without OS]",
+                        Description = "[Intel Celeron J4005, 2x2000 MGz, 6 GB DDR3, SSD 128 GB, Windows 10 Professional]",
                         Img = "/img/product07.png",
                         BrandId = 1,
                         Rating = 1
@@ -272,7 +273,7 @@ namespace TechShop.Models
                     {
                         Id = 8,
                         Name = "Laptop ASUS Air G5161",
-                        Description = "[Intel Celeron J4005, 2x4000 MGz, 8 GB DDR3, SSD 120 GB, Windows 10]",
+                        Description = "[Intel Celeron J4005, 2x4000 MGz, 8 GB DDR3, SSD 128 GB, Windows 10 Professional]",
                         Img = "/img/product08.png",
                         BrandId = 1,
                         Rating = 2
@@ -281,59 +282,173 @@ namespace TechShop.Models
                     {
                         Id = 9,
                         Name = "Laptop ASUS Air G9515",
-                        Description = "[Intel Celeron J4005, 2x2000 MGz, 16 GB DDR3, SSD 1 TB, Windows 10]",
+                        Description = "[Intel Celeron J4005, 2x2000 MGz, 16 GB DDR3, SSD 512 GB, Windows 10 Professional]",
                         Img = "/img/product09.png",
                         BrandId = 1,
                         Rating = 3
                     }
                 );
 
+            DateTimeFormatInfo dateTimeFormat = CultureInfo.GetCultureInfo("en-US").DateTimeFormat;
+            modelBuilder.Entity<PriceHistory>().HasData(
+                new PriceHistory
+                {
+                    Id = 1,
+                    Description = "Initial",
+                    ProductId = 1,
+                    Price = 150m,
+                    StartDate = DateTime.Parse("03/01/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 2,
+                    Description = "Initial",
+                    ProductId = 2,
+                    Price = 150m,
+                    StartDate = DateTime.Parse("03/01/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 3,
+                    Description = "Initial",
+                    ProductId = 3,
+                    Price = 150m,
+                    StartDate = DateTime.Parse("03/01/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 4,
+                    Description = "Initial",
+                    ProductId = 4,
+                    Price = 150m,
+                    StartDate = DateTime.Parse("03/01/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 5,
+                    Description = "Initial",
+                    ProductId = 5,
+                    Price = 150m,
+                    StartDate = DateTime.Parse("03/01/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 6,
+                    Description = "Initial",
+                    ProductId = 6,
+                    Price = 150m,
+                    StartDate = DateTime.Parse("03/01/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 7,
+                    Description = "Initial",
+                    ProductId = 7,
+                    Price = 150m,
+                    StartDate = DateTime.Parse("03/01/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 8,
+                    Description = "Initial",
+                    ProductId = 8,
+                    Price = 150m,
+                    StartDate = DateTime.Parse("03/01/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 9,
+                    Description = "Initial",
+                    ProductId = 9,
+                    Price = 150m,
+                    StartDate = DateTime.Parse("03/01/2020", dateTimeFormat)
+                },
+
+                // Purchase price increased, and we had to increase our prices
+                new PriceHistory
+                {
+                    Id = 10,
+                    Description = "Purchase price increased",
+                    ProductId = 1,
+                    Price = 167m,
+                    StartDate = DateTime.Parse("03/11/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 11,
+                    Description = "Purchase price increased",
+                    ProductId = 2,
+                    Price = 165m,
+                    StartDate = DateTime.Parse("03/11/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 12,
+                    Description = "Purchase price increased",
+                    ProductId = 3,
+                    Price = 193m,
+                    StartDate = DateTime.Parse("03/11/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 13,
+                    Description = "Purchase price increased",
+                    ProductId = 4,
+                    Price = 169m,
+                    StartDate = DateTime.Parse("03/11/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 14,
+                    Description = "Purchase price increased",
+                    ProductId = 5,
+                    Price = 156m,
+                    StartDate = DateTime.Parse("03/11/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 15,
+                    Description = "Purchase price increased",
+                    ProductId = 6,
+                    Price = 176m,
+                    StartDate = DateTime.Parse("03/11/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 16,
+                    Description = "Purchase price increased",
+                    ProductId = 7,
+                    Price = 181m,
+                    StartDate = DateTime.Parse("03/11/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 17,
+                    Description = "Purchase price increased",
+                    ProductId = 8,
+                    Price = 173m,
+                    StartDate = DateTime.Parse("03/11/2020", dateTimeFormat)
+                },
+                new PriceHistory
+                {
+                    Id = 18,
+                    Description = "Purchase price increased",
+                    ProductId = 9,
+                    Price = 165m,
+                    StartDate = DateTime.Parse("03/11/2020", dateTimeFormat)
+                }
+                ); ;
+
             modelBuilder.Entity<CategoryProduct>().HasData(
-                new CategoryProduct
-                {
-                    CategoryId = 4,
-                    ProductId = 1
-                },
-                new CategoryProduct
-                {
-                    CategoryId = 4,
-                    ProductId = 3
-                },
-                new CategoryProduct
-                {
-                    CategoryId = 4,
-                    ProductId = 6
-                },
-                new CategoryProduct
-                {
-                    CategoryId = 4,
-                    ProductId = 7
-                },
-                new CategoryProduct
-                {
-                    CategoryId = 4,
-                    ProductId = 8
-                },
-                new CategoryProduct
-                {
-                    CategoryId = 4,
-                    ProductId = 9
-                },
-                new CategoryProduct
-                {
-                    CategoryId = 4,
-                    ProductId = 2
-                },
-                new CategoryProduct
-                {
-                    CategoryId = 18,
-                    ProductId = 4
-                },
-                new CategoryProduct
-                {
-                    CategoryId = 4,
-                    ProductId = 5
-                });
+                new CategoryProduct { CategoryId = 4, ProductId = 1 },
+                new CategoryProduct { CategoryId = 4, ProductId = 3 },
+                new CategoryProduct { CategoryId = 4, ProductId = 6 },
+                new CategoryProduct { CategoryId = 4, ProductId = 7 },
+                new CategoryProduct { CategoryId = 4, ProductId = 8 },
+                new CategoryProduct { CategoryId = 4, ProductId = 9 },
+                new CategoryProduct { CategoryId = 4, ProductId = 2 },
+                new CategoryProduct { CategoryId = 18, ProductId = 4 },
+                new CategoryProduct { CategoryId = 4, ProductId = 5 });
 
             modelBuilder.Entity<PAttribute>().HasData(
                 new PAttribute { Id = 1, Name = "RAM" },
@@ -549,6 +664,108 @@ namespace TechShop.Models
                 new PAVPair { Id = 75, AttributeId = 11, ValueId = 75 },
                 new PAVPair { Id = 76, AttributeId = 11, ValueId = 76 },
                 new PAVPair { Id = 77, AttributeId = 11, ValueId = 77 }
+                );
+
+            modelBuilder.Entity<ProductPAVPair>().HasData(
+                // Set RAM size
+                new ProductPAVPair { ProductId = 1, AVPairId = 2 },
+                new ProductPAVPair { ProductId = 2, AVPairId = 2 },
+                new ProductPAVPair { ProductId = 3, AVPairId = 4 },
+                new ProductPAVPair { ProductId = 6, AVPairId = 2 },
+                new ProductPAVPair { ProductId = 7, AVPairId = 3 },
+                new ProductPAVPair { ProductId = 8, AVPairId = 4 },
+                new ProductPAVPair { ProductId = 9, AVPairId = 6 },
+
+                // Set SSD size
+                new ProductPAVPair { ProductId = 1, AVPairId = 16 },
+                new ProductPAVPair { ProductId = 2, AVPairId = 16 },
+                new ProductPAVPair { ProductId = 3, AVPairId = 16 },
+                new ProductPAVPair { ProductId = 6, AVPairId = 16 },
+                new ProductPAVPair { ProductId = 7, AVPairId = 16 },
+                new ProductPAVPair { ProductId = 8, AVPairId = 16 },
+                new ProductPAVPair { ProductId = 9, AVPairId = 19 },
+
+                // Set Operating System
+                new ProductPAVPair { ProductId = 1, AVPairId = 61 },
+                new ProductPAVPair { ProductId = 2, AVPairId = 61 },
+                new ProductPAVPair { ProductId = 3, AVPairId = 65 },
+                new ProductPAVPair { ProductId = 6, AVPairId = 62 },
+                new ProductPAVPair { ProductId = 7, AVPairId = 62 },
+                new ProductPAVPair { ProductId = 8, AVPairId = 62 },
+                new ProductPAVPair { ProductId = 9, AVPairId = 62 }
+                );
+
+            modelBuilder.Entity<PFilterName>().HasData(
+                new PFilterName { Id = 1, FilterName = "RAM Size" },
+                new PFilterName { Id = 2, FilterName = "SSD size" },
+                new PFilterName { Id = 3, FilterName = "Operating System" }
+                );
+
+            modelBuilder.Entity<PFilterValue>().HasData(
+                // RAM Filter Values
+                new PFilterValue { Id = 1, FilterValue = "2 GB" },
+                new PFilterValue { Id = 2, FilterValue = "4 GB" },
+                new PFilterValue { Id = 3, FilterValue = "6 GB" },
+                new PFilterValue { Id = 4, FilterValue = "8 GB" },
+                new PFilterValue { Id = 5, FilterValue = "12 GB" },
+                new PFilterValue { Id = 6, FilterValue = "16 GB" },
+
+                // SSD Size Filter Values
+                new PFilterValue { Id = 7, FilterValue = "128 to 256 GB" },
+                new PFilterValue { Id = 8, FilterValue = "257 to 512 GB" },
+                new PFilterValue { Id = 9, FilterValue = "513 to 1024 GB" },
+
+                // Operating System Filter Values
+                new PFilterValue { Id = 10, FilterValue = "Windows" },
+                new PFilterValue { Id = 11, FilterValue = "MacOS" },
+                new PFilterValue { Id = 12, FilterValue = "Unix" }
+                );
+
+            modelBuilder.Entity<PFilter>().HasData(
+                // RAM Filter
+                new PFilter { Id = 1, PFilterNameId = 1, PFilterValueId = 1 },
+                new PFilter { Id = 2, PFilterNameId = 1, PFilterValueId = 2 },
+                new PFilter { Id = 3, PFilterNameId = 1, PFilterValueId = 3 },
+                new PFilter { Id = 4, PFilterNameId = 1, PFilterValueId = 4 },
+                new PFilter { Id = 5, PFilterNameId = 1, PFilterValueId = 5 },
+                new PFilter { Id = 6, PFilterNameId = 1, PFilterValueId = 6 },
+
+                // SSD Size Filter
+                new PFilter { Id = 7, PFilterNameId = 2, PFilterValueId = 7 },
+                new PFilter { Id = 8, PFilterNameId = 2, PFilterValueId = 8 },
+                new PFilter { Id = 9, PFilterNameId = 2, PFilterValueId = 9 },
+
+                // Operating System Filter
+                new PFilter { Id = 10, PFilterNameId = 3, PFilterValueId = 10 },
+                new PFilter { Id = 11, PFilterNameId = 3, PFilterValueId = 11 },
+                new PFilter { Id = 12, PFilterNameId = 3, PFilterValueId = 12 }
+                );
+
+            modelBuilder.Entity<PFilterPAVPair>().HasData(
+                // RAM
+                new PFilterPAVPair { FilterId = 1, AVPairId = 1 },
+                new PFilterPAVPair { FilterId = 2, AVPairId = 2 },
+                new PFilterPAVPair { FilterId = 3, AVPairId = 3 },
+                new PFilterPAVPair { FilterId = 4, AVPairId = 4 },
+                new PFilterPAVPair { FilterId = 5, AVPairId = 5 },
+                new PFilterPAVPair { FilterId = 6, AVPairId = 6 },
+
+                // SSD 128 to 256 GB
+                new PFilterPAVPair { FilterId = 7, AVPairId = 16 },
+                new PFilterPAVPair { FilterId = 7, AVPairId = 17 },
+                new PFilterPAVPair { FilterId = 7, AVPairId = 18 },
+
+                // SSD (257 to 512 GB) (513 to 1024 GB)
+                new PFilterPAVPair { FilterId = 8, AVPairId = 19 },
+                new PFilterPAVPair { FilterId = 9, AVPairId = 20 },
+
+                // Operating System (Windows -> Windows Home, Windows Professional)
+                new PFilterPAVPair { FilterId = 10, AVPairId = 61 },
+                new PFilterPAVPair { FilterId = 10, AVPairId = 62 },
+
+                // Operating System (MacOS and UNIX)
+                new PFilterPAVPair { FilterId = 11, AVPairId = 65 },
+                new PFilterPAVPair { FilterId = 12, AVPairId = 63 }
                 );
         }
     }

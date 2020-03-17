@@ -23,6 +23,10 @@ namespace TechShop.Data
             modelBuilder.Entity<ProductPAVPair>()
                 .HasKey(table => new { table.ProductId, table.AVPairId });
 
+            modelBuilder.Entity<PFilterPAVPair>()
+                .HasKey(table => new { table.FilterId, table.AVPairId });
+            
+
             modelBuilder.Entity<Vw_CategoryProduct>(entity =>
             {
                 entity.HasNoKey();
@@ -50,6 +54,10 @@ namespace TechShop.Data
         public DbSet<PValue> PValue { get; set; }
         public DbSet<PAVPair> PAVPair { get; set; }
         public DbSet<ProductPAVPair> ProductPAVPair { get; set; }
+        public DbSet<PFilterName> PFilterName { get; set; }
+        public DbSet<PFilterValue> PFilterValue { get; set; }
+        public DbSet<PFilter> PFilter { get; set; }
+        public DbSet<PFilterPAVPair> PFilterPAVPair { get; set; }
 
         public DbSet<Vw_CategoryProduct> Vw_CategoryProducts { get; set; }
         public DbSet<Vw_Product> Vw_Product { get; set; }

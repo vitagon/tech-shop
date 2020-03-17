@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TechShop.Data;
 
 namespace TechShop.Migrations
 {
     [DbContext(typeof(TechDbContext))]
-    partial class TechDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200316134952_AddPFiltersData")]
+    partial class AddPFiltersData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1110,98 +1112,6 @@ namespace TechShop.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TechShop.Models.PFilterPAVPair", b =>
-                {
-                    b.Property<int>("FilterId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AVPairId")
-                        .HasColumnType("int");
-
-                    b.HasKey("FilterId", "AVPairId");
-
-                    b.HasIndex("AVPairId");
-
-                    b.ToTable("PFilterPAVPair");
-
-                    b.HasData(
-                        new
-                        {
-                            FilterId = 1,
-                            AVPairId = 1
-                        },
-                        new
-                        {
-                            FilterId = 2,
-                            AVPairId = 2
-                        },
-                        new
-                        {
-                            FilterId = 3,
-                            AVPairId = 3
-                        },
-                        new
-                        {
-                            FilterId = 4,
-                            AVPairId = 4
-                        },
-                        new
-                        {
-                            FilterId = 5,
-                            AVPairId = 5
-                        },
-                        new
-                        {
-                            FilterId = 6,
-                            AVPairId = 6
-                        },
-                        new
-                        {
-                            FilterId = 7,
-                            AVPairId = 16
-                        },
-                        new
-                        {
-                            FilterId = 7,
-                            AVPairId = 17
-                        },
-                        new
-                        {
-                            FilterId = 7,
-                            AVPairId = 18
-                        },
-                        new
-                        {
-                            FilterId = 8,
-                            AVPairId = 19
-                        },
-                        new
-                        {
-                            FilterId = 9,
-                            AVPairId = 20
-                        },
-                        new
-                        {
-                            FilterId = 10,
-                            AVPairId = 61
-                        },
-                        new
-                        {
-                            FilterId = 10,
-                            AVPairId = 62
-                        },
-                        new
-                        {
-                            FilterId = 11,
-                            AVPairId = 65
-                        },
-                        new
-                        {
-                            FilterId = 12,
-                            AVPairId = 63
-                        });
-                });
-
             modelBuilder.Entity("TechShop.Models.PFilterValue", b =>
                 {
                     b.Property<int>("Id")
@@ -1708,152 +1618,6 @@ namespace TechShop.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("PriceHistory");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Initial",
-                            Price = 150m,
-                            ProductId = 1,
-                            StartDate = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Initial",
-                            Price = 150m,
-                            ProductId = 2,
-                            StartDate = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Initial",
-                            Price = 150m,
-                            ProductId = 3,
-                            StartDate = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Initial",
-                            Price = 150m,
-                            ProductId = 4,
-                            StartDate = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Initial",
-                            Price = 150m,
-                            ProductId = 5,
-                            StartDate = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Description = "Initial",
-                            Price = 150m,
-                            ProductId = 6,
-                            StartDate = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Description = "Initial",
-                            Price = 150m,
-                            ProductId = 7,
-                            StartDate = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Description = "Initial",
-                            Price = 150m,
-                            ProductId = 8,
-                            StartDate = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Description = "Initial",
-                            Price = 150m,
-                            ProductId = 9,
-                            StartDate = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Description = "Purchase price increased",
-                            Price = 167m,
-                            ProductId = 1,
-                            StartDate = new DateTime(2020, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Description = "Purchase price increased",
-                            Price = 165m,
-                            ProductId = 2,
-                            StartDate = new DateTime(2020, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Description = "Purchase price increased",
-                            Price = 193m,
-                            ProductId = 3,
-                            StartDate = new DateTime(2020, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Description = "Purchase price increased",
-                            Price = 169m,
-                            ProductId = 4,
-                            StartDate = new DateTime(2020, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Description = "Purchase price increased",
-                            Price = 156m,
-                            ProductId = 5,
-                            StartDate = new DateTime(2020, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Description = "Purchase price increased",
-                            Price = 176m,
-                            ProductId = 6,
-                            StartDate = new DateTime(2020, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Description = "Purchase price increased",
-                            Price = 181m,
-                            ProductId = 7,
-                            StartDate = new DateTime(2020, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Description = "Purchase price increased",
-                            Price = 173m,
-                            ProductId = 8,
-                            StartDate = new DateTime(2020, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Description = "Purchase price increased",
-                            Price = 165m,
-                            ProductId = 9,
-                            StartDate = new DateTime(2020, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("TechShop.Models.Product", b =>
@@ -2139,21 +1903,6 @@ namespace TechShop.Migrations
                     b.HasOne("TechShop.Models.PFilterValue", "PFilterValue")
                         .WithMany()
                         .HasForeignKey("PFilterValueId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TechShop.Models.PFilterPAVPair", b =>
-                {
-                    b.HasOne("TechShop.Models.PAVPair", "PAVPair")
-                        .WithMany()
-                        .HasForeignKey("AVPairId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TechShop.Models.PFilter", "PFilter")
-                        .WithMany()
-                        .HasForeignKey("FilterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

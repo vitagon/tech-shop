@@ -36,14 +36,14 @@ namespace TechShop.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PAVPair_PAttributeId",
+                name: "IX_PAVPair_AttributeId",
                 table: "PAVPair",
-                column: "PAttributeId");
+                column: "AttributeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PAVPair_PValueId",
+                name: "IX_PAVPair_ValueId",
                 table: "PAVPair",
-                column: "PValueId");
+                column: "ValueId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

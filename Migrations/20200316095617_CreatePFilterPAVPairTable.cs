@@ -2,42 +2,40 @@
 
 namespace TechShop.Migrations
 {
-    public partial class CreateProductPAVPairTable : Migration
+    public partial class CreatePFilterPAVPairTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ProductPAVPair",
+                name: "PFilterPAVPair",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(nullable: false),
+                    FilterId = table.Column<int>(nullable: false),
                     AVPairId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_PFilterPAVPair", x => new { x.FilterId, x.AVPairId });
+
                     table.ForeignKey(
-                        name: "FK_ProductPAVPair_Product_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Product",
+                        name: "FK_PFilterPAVPair_PFilter_FilterId",
+                        column: x => x.FilterId,
+                        principalTable: "PFilter",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
 
                     table.ForeignKey(
-                        name: "FK_ProductPAVPair_PAVPair_PAVPairId",
+                        name: "FK_PFilterPAVPair_PAVPair_AVPairId",
                         column: x => x.AVPairId,
                         principalTable: "PAVPair",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
-
-                    table.PrimaryKey(
-                        name: "PK_ProductPAVPair",
-                        columns: x => new { x.ProductId, x.AVPairId });
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(name: "ProductPAVPair");
+            migrationBuilder.DropTable(name: "PFilterPAVPair");
         }
     }
 }
