@@ -1,11 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TechShop.Models;
 using TechShop.Views;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection;
 
 namespace TechShop.Data
 {
@@ -17,15 +13,9 @@ namespace TechShop.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CategoryProduct>()
-                .HasKey(table => new { table.CategoryId, table.ProductId });
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.Ignore<Breadcrumb>();
 
-            modelBuilder.Entity<ProductPAVPair>()
-                .HasKey(table => new { table.ProductId, table.AVPairId });
-
-            modelBuilder.Entity<PFilterPAVPair>()
-                .HasKey(table => new { table.FilterId, table.AVPairId });
-            
 
             modelBuilder.Entity<Vw_CategoryProduct>(entity =>
             {
@@ -33,14 +23,13 @@ namespace TechShop.Data
                 entity.ToView("vw_CategoryProduct");
             });
 
-
             modelBuilder.Entity<Vw_Product>(entity =>
             {
                 entity.HasNoKey();
                 entity.ToView("vw_Product");
             });
 
-            modelBuilder.SeedData();
+            //modelBuilder.SeedData();
         }
 
         public DbSet<Breadcrumb> Breadcrumb { get; set; }
@@ -50,6 +39,7 @@ namespace TechShop.Data
         public DbSet<PriceHistory> PriceHistory { get; set; }
         public DbSet<Discount> Discount { get; set; }
         public DbSet<CategoryProduct> CategoryProduct { get; set; }
+        public DbSet<ProductDiscount> ProductDiscount { get; set; }
         public DbSet<PAttribute> PAttribute { get; set; }
         public DbSet<PValue> PValue { get; set; }
         public DbSet<PAVPair> PAVPair { get; set; }

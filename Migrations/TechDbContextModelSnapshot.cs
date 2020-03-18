@@ -27,10 +27,14 @@ namespace TechShop.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Brand");
 
@@ -82,33 +86,6 @@ namespace TechShop.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TechShop.Models.Breadcrumb", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Level")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Breadcrumb");
-                });
-
             modelBuilder.Entity("TechShop.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -119,24 +96,28 @@ namespace TechShop.Migrations
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
-                    b.Property<int>("Lft")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
-                    b.Property<int>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rgt")
+                    b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Url")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("Url")
+                        .IsUnique();
 
                     b.ToTable("Category");
 
@@ -145,180 +126,144 @@ namespace TechShop.Migrations
                         {
                             Id = 1,
                             Level = 0,
-                            Lft = 1,
                             Name = "Categories",
                             ParentId = 0,
-                            Rgt = 38,
                             Url = ""
                         },
                         new
                         {
                             Id = 2,
                             Level = 1,
-                            Lft = 2,
                             Name = "Computers and laptops",
                             ParentId = 1,
-                            Rgt = 7,
                             Url = "computers-and-laptops"
                         },
                         new
                         {
                             Id = 3,
                             Level = 2,
-                            Lft = 3,
                             Name = "Laptops",
                             ParentId = 2,
-                            Rgt = 6,
                             Url = "laptops"
                         },
                         new
                         {
                             Id = 4,
                             Level = 3,
-                            Lft = 4,
                             Name = "All Laptops",
                             ParentId = 3,
-                            Rgt = 5,
                             Url = "all-laptops"
                         },
                         new
                         {
                             Id = 5,
                             Level = 1,
-                            Lft = 8,
                             Name = "Photo and video",
                             ParentId = 1,
-                            Rgt = 17,
                             Url = "photo-and-video"
                         },
                         new
                         {
                             Id = 6,
                             Level = 2,
-                            Lft = 9,
                             Name = "Cameras",
                             ParentId = 5,
-                            Rgt = 10,
                             Url = "cameras"
                         },
                         new
                         {
                             Id = 7,
                             Level = 2,
-                            Lft = 11,
                             Name = "Lenses, optics, flashes",
                             ParentId = 5,
-                            Rgt = 16,
                             Url = "lenses-optics-flashes"
                         },
                         new
                         {
                             Id = 8,
                             Level = 3,
-                            Lft = 12,
                             Name = "Lenses",
                             ParentId = 7,
-                            Rgt = 15,
                             Url = "lenses"
                         },
                         new
                         {
                             Id = 9,
                             Level = 1,
-                            Lft = 18,
                             Name = "TVs, audio, video",
                             ParentId = 1,
-                            Rgt = 27,
                             Url = "tvs-audio-video"
                         },
                         new
                         {
                             Id = 10,
                             Level = 2,
-                            Lft = 19,
                             Name = "TVs",
                             ParentId = 9,
-                            Rgt = 26,
                             Url = "tvs"
                         },
                         new
                         {
                             Id = 11,
                             Level = 3,
-                            Lft = 20,
                             Name = "All TVs",
                             ParentId = 10,
-                            Rgt = 21,
                             Url = "all-tvs"
                         },
                         new
                         {
                             Id = 12,
                             Level = 3,
-                            Lft = 22,
                             Name = "Smart-TVs",
                             ParentId = 10,
-                            Rgt = 23,
                             Url = "smart-tvs"
                         },
                         new
                         {
                             Id = 13,
                             Level = 3,
-                            Lft = 24,
                             Name = "OLED TVs",
                             ParentId = 10,
-                            Rgt = 25,
                             Url = "oled-tvs"
                         },
                         new
                         {
                             Id = 14,
                             Level = 1,
-                            Lft = 28,
                             Name = "Smartphones and gadgets",
                             ParentId = 1,
-                            Rgt = 37,
                             Url = "smartphones-and-gadgets"
                         },
                         new
                         {
                             Id = 15,
                             Level = 2,
-                            Lft = 29,
                             Name = "Smartphones",
                             ParentId = 14,
-                            Rgt = 32,
                             Url = "smartphones"
                         },
                         new
                         {
                             Id = 16,
                             Level = 3,
-                            Lft = 30,
                             Name = "All Smartphones",
                             ParentId = 15,
-                            Rgt = 31,
                             Url = "all-smartphones"
                         },
                         new
                         {
                             Id = 17,
                             Level = 2,
-                            Lft = 33,
                             Name = "Tablets",
                             ParentId = 14,
-                            Rgt = 36,
                             Url = "tablets"
                         },
                         new
                         {
                             Id = 18,
                             Level = 3,
-                            Lft = 34,
                             Name = "All Tablets",
                             ParentId = 17,
-                            Rgt = 35,
                             Url = "all-tablets"
                         });
                 });
@@ -393,26 +338,48 @@ namespace TechShop.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("date");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(2,2)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("date");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("Discount");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "New Year Sale",
+                            EndDate = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rate = 15m,
+                            StartDate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "First Year of Shop Opening",
+                            EndDate = new DateTime(2020, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rate = 5m,
+                            StartDate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Special Laptops Sale",
+                            EndDate = new DateTime(2020, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rate = 5m,
+                            StartDate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("TechShop.Models.PAVPair", b =>
@@ -422,23 +389,18 @@ namespace TechShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AttributeId")
+                    b.Property<int>("PAttributeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PAttributeId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PValueId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ValueId")
+                    b.Property<int>("PValueId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PAttributeId");
-
                     b.HasIndex("PValueId");
+
+                    b.HasIndex("PAttributeId", "PValueId")
+                        .IsUnique();
 
                     b.ToTable("PAVPair");
 
@@ -446,464 +408,464 @@ namespace TechShop.Migrations
                         new
                         {
                             Id = 1,
-                            AttributeId = 1,
-                            ValueId = 1
+                            PAttributeId = 1,
+                            PValueId = 1
                         },
                         new
                         {
                             Id = 2,
-                            AttributeId = 1,
-                            ValueId = 2
+                            PAttributeId = 1,
+                            PValueId = 2
                         },
                         new
                         {
                             Id = 3,
-                            AttributeId = 1,
-                            ValueId = 3
+                            PAttributeId = 1,
+                            PValueId = 3
                         },
                         new
                         {
                             Id = 4,
-                            AttributeId = 1,
-                            ValueId = 4
+                            PAttributeId = 1,
+                            PValueId = 4
                         },
                         new
                         {
                             Id = 5,
-                            AttributeId = 1,
-                            ValueId = 5
+                            PAttributeId = 1,
+                            PValueId = 5
                         },
                         new
                         {
                             Id = 6,
-                            AttributeId = 1,
-                            ValueId = 6
+                            PAttributeId = 1,
+                            PValueId = 6
                         },
                         new
                         {
                             Id = 7,
-                            AttributeId = 1,
-                            ValueId = 7
+                            PAttributeId = 1,
+                            PValueId = 7
                         },
                         new
                         {
                             Id = 8,
-                            AttributeId = 1,
-                            ValueId = 8
+                            PAttributeId = 1,
+                            PValueId = 8
                         },
                         new
                         {
                             Id = 9,
-                            AttributeId = 1,
-                            ValueId = 9
+                            PAttributeId = 1,
+                            PValueId = 9
                         },
                         new
                         {
                             Id = 10,
-                            AttributeId = 2,
-                            ValueId = 10
+                            PAttributeId = 2,
+                            PValueId = 10
                         },
                         new
                         {
                             Id = 11,
-                            AttributeId = 2,
-                            ValueId = 11
+                            PAttributeId = 2,
+                            PValueId = 11
                         },
                         new
                         {
                             Id = 12,
-                            AttributeId = 2,
-                            ValueId = 12
+                            PAttributeId = 2,
+                            PValueId = 12
                         },
                         new
                         {
                             Id = 13,
-                            AttributeId = 2,
-                            ValueId = 13
+                            PAttributeId = 2,
+                            PValueId = 13
                         },
                         new
                         {
                             Id = 14,
-                            AttributeId = 2,
-                            ValueId = 14
+                            PAttributeId = 2,
+                            PValueId = 14
                         },
                         new
                         {
                             Id = 15,
-                            AttributeId = 2,
-                            ValueId = 15
+                            PAttributeId = 2,
+                            PValueId = 15
                         },
                         new
                         {
                             Id = 16,
-                            AttributeId = 3,
-                            ValueId = 16
+                            PAttributeId = 3,
+                            PValueId = 16
                         },
                         new
                         {
                             Id = 17,
-                            AttributeId = 3,
-                            ValueId = 17
+                            PAttributeId = 3,
+                            PValueId = 17
                         },
                         new
                         {
                             Id = 18,
-                            AttributeId = 3,
-                            ValueId = 18
+                            PAttributeId = 3,
+                            PValueId = 18
                         },
                         new
                         {
                             Id = 19,
-                            AttributeId = 3,
-                            ValueId = 19
+                            PAttributeId = 3,
+                            PValueId = 19
                         },
                         new
                         {
                             Id = 20,
-                            AttributeId = 3,
-                            ValueId = 20
+                            PAttributeId = 3,
+                            PValueId = 20
                         },
                         new
                         {
                             Id = 21,
-                            AttributeId = 4,
-                            ValueId = 21
+                            PAttributeId = 4,
+                            PValueId = 21
                         },
                         new
                         {
                             Id = 22,
-                            AttributeId = 4,
-                            ValueId = 22
+                            PAttributeId = 4,
+                            PValueId = 22
                         },
                         new
                         {
                             Id = 23,
-                            AttributeId = 4,
-                            ValueId = 23
+                            PAttributeId = 4,
+                            PValueId = 23
                         },
                         new
                         {
                             Id = 24,
-                            AttributeId = 4,
-                            ValueId = 24
+                            PAttributeId = 4,
+                            PValueId = 24
                         },
                         new
                         {
                             Id = 25,
-                            AttributeId = 4,
-                            ValueId = 25
+                            PAttributeId = 4,
+                            PValueId = 25
                         },
                         new
                         {
                             Id = 26,
-                            AttributeId = 4,
-                            ValueId = 26
+                            PAttributeId = 4,
+                            PValueId = 26
                         },
                         new
                         {
                             Id = 27,
-                            AttributeId = 4,
-                            ValueId = 27
+                            PAttributeId = 4,
+                            PValueId = 27
                         },
                         new
                         {
                             Id = 28,
-                            AttributeId = 4,
-                            ValueId = 28
+                            PAttributeId = 4,
+                            PValueId = 28
                         },
                         new
                         {
                             Id = 29,
-                            AttributeId = 5,
-                            ValueId = 29
+                            PAttributeId = 5,
+                            PValueId = 29
                         },
                         new
                         {
                             Id = 30,
-                            AttributeId = 5,
-                            ValueId = 30
+                            PAttributeId = 5,
+                            PValueId = 30
                         },
                         new
                         {
                             Id = 31,
-                            AttributeId = 5,
-                            ValueId = 31
+                            PAttributeId = 5,
+                            PValueId = 31
                         },
                         new
                         {
                             Id = 32,
-                            AttributeId = 5,
-                            ValueId = 32
+                            PAttributeId = 5,
+                            PValueId = 32
                         },
                         new
                         {
                             Id = 33,
-                            AttributeId = 5,
-                            ValueId = 33
+                            PAttributeId = 5,
+                            PValueId = 33
                         },
                         new
                         {
                             Id = 34,
-                            AttributeId = 5,
-                            ValueId = 34
+                            PAttributeId = 5,
+                            PValueId = 34
                         },
                         new
                         {
                             Id = 35,
-                            AttributeId = 5,
-                            ValueId = 35
+                            PAttributeId = 5,
+                            PValueId = 35
                         },
                         new
                         {
                             Id = 36,
-                            AttributeId = 5,
-                            ValueId = 36
+                            PAttributeId = 5,
+                            PValueId = 36
                         },
                         new
                         {
                             Id = 37,
-                            AttributeId = 5,
-                            ValueId = 37
+                            PAttributeId = 5,
+                            PValueId = 37
                         },
                         new
                         {
                             Id = 38,
-                            AttributeId = 5,
-                            ValueId = 38
+                            PAttributeId = 5,
+                            PValueId = 38
                         },
                         new
                         {
                             Id = 39,
-                            AttributeId = 5,
-                            ValueId = 39
+                            PAttributeId = 5,
+                            PValueId = 39
                         },
                         new
                         {
                             Id = 40,
-                            AttributeId = 5,
-                            ValueId = 40
+                            PAttributeId = 5,
+                            PValueId = 40
                         },
                         new
                         {
                             Id = 41,
-                            AttributeId = 5,
-                            ValueId = 41
+                            PAttributeId = 5,
+                            PValueId = 41
                         },
                         new
                         {
                             Id = 42,
-                            AttributeId = 6,
-                            ValueId = 42
+                            PAttributeId = 6,
+                            PValueId = 42
                         },
                         new
                         {
                             Id = 43,
-                            AttributeId = 6,
-                            ValueId = 43
+                            PAttributeId = 6,
+                            PValueId = 43
                         },
                         new
                         {
                             Id = 44,
-                            AttributeId = 6,
-                            ValueId = 44
+                            PAttributeId = 6,
+                            PValueId = 44
                         },
                         new
                         {
                             Id = 45,
-                            AttributeId = 6,
-                            ValueId = 45
+                            PAttributeId = 6,
+                            PValueId = 45
                         },
                         new
                         {
                             Id = 46,
-                            AttributeId = 6,
-                            ValueId = 46
+                            PAttributeId = 6,
+                            PValueId = 46
                         },
                         new
                         {
                             Id = 47,
-                            AttributeId = 6,
-                            ValueId = 47
+                            PAttributeId = 6,
+                            PValueId = 47
                         },
                         new
                         {
                             Id = 48,
-                            AttributeId = 6,
-                            ValueId = 48
+                            PAttributeId = 6,
+                            PValueId = 48
                         },
                         new
                         {
                             Id = 49,
-                            AttributeId = 6,
-                            ValueId = 49
+                            PAttributeId = 6,
+                            PValueId = 49
                         },
                         new
                         {
                             Id = 50,
-                            AttributeId = 6,
-                            ValueId = 50
+                            PAttributeId = 6,
+                            PValueId = 50
                         },
                         new
                         {
                             Id = 51,
-                            AttributeId = 6,
-                            ValueId = 51
+                            PAttributeId = 6,
+                            PValueId = 51
                         },
                         new
                         {
                             Id = 52,
-                            AttributeId = 6,
-                            ValueId = 52
+                            PAttributeId = 6,
+                            PValueId = 52
                         },
                         new
                         {
                             Id = 53,
-                            AttributeId = 6,
-                            ValueId = 53
+                            PAttributeId = 6,
+                            PValueId = 53
                         },
                         new
                         {
                             Id = 54,
-                            AttributeId = 6,
-                            ValueId = 54
+                            PAttributeId = 6,
+                            PValueId = 54
                         },
                         new
                         {
                             Id = 55,
-                            AttributeId = 6,
-                            ValueId = 55
+                            PAttributeId = 6,
+                            PValueId = 55
                         },
                         new
                         {
                             Id = 56,
-                            AttributeId = 6,
-                            ValueId = 56
+                            PAttributeId = 6,
+                            PValueId = 56
                         },
                         new
                         {
                             Id = 57,
-                            AttributeId = 7,
-                            ValueId = 57
+                            PAttributeId = 7,
+                            PValueId = 57
                         },
                         new
                         {
                             Id = 58,
-                            AttributeId = 7,
-                            ValueId = 58
+                            PAttributeId = 7,
+                            PValueId = 58
                         },
                         new
                         {
                             Id = 59,
-                            AttributeId = 7,
-                            ValueId = 59
+                            PAttributeId = 7,
+                            PValueId = 59
                         },
                         new
                         {
                             Id = 60,
-                            AttributeId = 7,
-                            ValueId = 60
+                            PAttributeId = 7,
+                            PValueId = 60
                         },
                         new
                         {
                             Id = 61,
-                            AttributeId = 8,
-                            ValueId = 61
+                            PAttributeId = 8,
+                            PValueId = 61
                         },
                         new
                         {
                             Id = 62,
-                            AttributeId = 8,
-                            ValueId = 62
+                            PAttributeId = 8,
+                            PValueId = 62
                         },
                         new
                         {
                             Id = 63,
-                            AttributeId = 8,
-                            ValueId = 63
+                            PAttributeId = 8,
+                            PValueId = 63
                         },
                         new
                         {
                             Id = 64,
-                            AttributeId = 8,
-                            ValueId = 64
+                            PAttributeId = 8,
+                            PValueId = 64
                         },
                         new
                         {
                             Id = 65,
-                            AttributeId = 8,
-                            ValueId = 65
+                            PAttributeId = 8,
+                            PValueId = 65
                         },
                         new
                         {
                             Id = 66,
-                            AttributeId = 9,
-                            ValueId = 66
+                            PAttributeId = 9,
+                            PValueId = 66
                         },
                         new
                         {
                             Id = 67,
-                            AttributeId = 9,
-                            ValueId = 67
+                            PAttributeId = 9,
+                            PValueId = 67
                         },
                         new
                         {
                             Id = 68,
-                            AttributeId = 10,
-                            ValueId = 68
+                            PAttributeId = 10,
+                            PValueId = 68
                         },
                         new
                         {
                             Id = 69,
-                            AttributeId = 10,
-                            ValueId = 69
+                            PAttributeId = 10,
+                            PValueId = 69
                         },
                         new
                         {
                             Id = 70,
-                            AttributeId = 10,
-                            ValueId = 70
+                            PAttributeId = 10,
+                            PValueId = 70
                         },
                         new
                         {
                             Id = 71,
-                            AttributeId = 10,
-                            ValueId = 71
+                            PAttributeId = 10,
+                            PValueId = 71
                         },
                         new
                         {
                             Id = 72,
-                            AttributeId = 10,
-                            ValueId = 72
+                            PAttributeId = 10,
+                            PValueId = 72
                         },
                         new
                         {
                             Id = 73,
-                            AttributeId = 10,
-                            ValueId = 73
+                            PAttributeId = 10,
+                            PValueId = 73
                         },
                         new
                         {
                             Id = 74,
-                            AttributeId = 10,
-                            ValueId = 74
+                            PAttributeId = 10,
+                            PValueId = 74
                         },
                         new
                         {
                             Id = 75,
-                            AttributeId = 11,
-                            ValueId = 75
+                            PAttributeId = 11,
+                            PValueId = 75
                         },
                         new
                         {
                             Id = 76,
-                            AttributeId = 11,
-                            ValueId = 76
+                            PAttributeId = 11,
+                            PValueId = 76
                         },
                         new
                         {
                             Id = 77,
-                            AttributeId = 11,
-                            ValueId = 77
+                            PAttributeId = 11,
+                            PValueId = 77
                         });
                 });
 
@@ -920,6 +882,9 @@ namespace TechShop.Migrations
                         .HasMaxLength(450);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("PAttribute");
 
@@ -996,9 +961,10 @@ namespace TechShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PFilterNameId");
-
                     b.HasIndex("PFilterValueId");
+
+                    b.HasIndex("PFilterNameId", "PFilterValueId")
+                        .IsUnique();
 
                     b.ToTable("PFilter");
 
@@ -1085,10 +1051,14 @@ namespace TechShop.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FilterName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FilterName")
+                        .IsUnique();
 
                     b.ToTable("PFilterName");
 
@@ -1112,93 +1082,93 @@ namespace TechShop.Migrations
 
             modelBuilder.Entity("TechShop.Models.PFilterPAVPair", b =>
                 {
-                    b.Property<int>("FilterId")
+                    b.Property<int>("PFilterId")
                         .HasColumnType("int");
 
-                    b.Property<int>("AVPairId")
+                    b.Property<int>("PAVPairId")
                         .HasColumnType("int");
 
-                    b.HasKey("FilterId", "AVPairId");
+                    b.HasKey("PFilterId", "PAVPairId");
 
-                    b.HasIndex("AVPairId");
+                    b.HasIndex("PAVPairId");
 
                     b.ToTable("PFilterPAVPair");
 
                     b.HasData(
                         new
                         {
-                            FilterId = 1,
-                            AVPairId = 1
+                            PFilterId = 1,
+                            PAVPairId = 1
                         },
                         new
                         {
-                            FilterId = 2,
-                            AVPairId = 2
+                            PFilterId = 2,
+                            PAVPairId = 2
                         },
                         new
                         {
-                            FilterId = 3,
-                            AVPairId = 3
+                            PFilterId = 3,
+                            PAVPairId = 3
                         },
                         new
                         {
-                            FilterId = 4,
-                            AVPairId = 4
+                            PFilterId = 4,
+                            PAVPairId = 4
                         },
                         new
                         {
-                            FilterId = 5,
-                            AVPairId = 5
+                            PFilterId = 5,
+                            PAVPairId = 5
                         },
                         new
                         {
-                            FilterId = 6,
-                            AVPairId = 6
+                            PFilterId = 6,
+                            PAVPairId = 6
                         },
                         new
                         {
-                            FilterId = 7,
-                            AVPairId = 16
+                            PFilterId = 7,
+                            PAVPairId = 16
                         },
                         new
                         {
-                            FilterId = 7,
-                            AVPairId = 17
+                            PFilterId = 7,
+                            PAVPairId = 17
                         },
                         new
                         {
-                            FilterId = 7,
-                            AVPairId = 18
+                            PFilterId = 7,
+                            PAVPairId = 18
                         },
                         new
                         {
-                            FilterId = 8,
-                            AVPairId = 19
+                            PFilterId = 8,
+                            PAVPairId = 19
                         },
                         new
                         {
-                            FilterId = 9,
-                            AVPairId = 20
+                            PFilterId = 9,
+                            PAVPairId = 20
                         },
                         new
                         {
-                            FilterId = 10,
-                            AVPairId = 61
+                            PFilterId = 10,
+                            PAVPairId = 61
                         },
                         new
                         {
-                            FilterId = 10,
-                            AVPairId = 62
+                            PFilterId = 10,
+                            PAVPairId = 62
                         },
                         new
                         {
-                            FilterId = 11,
-                            AVPairId = 65
+                            PFilterId = 11,
+                            PAVPairId = 65
                         },
                         new
                         {
-                            FilterId = 12,
-                            AVPairId = 63
+                            PFilterId = 12,
+                            PAVPairId = 63
                         });
                 });
 
@@ -1210,10 +1180,14 @@ namespace TechShop.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FilterValue")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FilterValue")
+                        .IsUnique();
 
                     b.ToTable("PFilterValue");
 
@@ -1288,10 +1262,14 @@ namespace TechShop.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Value")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Value")
+                        .IsUnique();
 
                     b.ToTable("PValue");
 
@@ -1691,6 +1669,7 @@ namespace TechShop.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
 
@@ -1701,7 +1680,7 @@ namespace TechShop.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
@@ -1868,7 +1847,8 @@ namespace TechShop.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<string>("Img")
                         .IsRequired()
@@ -1876,14 +1856,18 @@ namespace TechShop.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
-                    b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal?>("Rating")
+                        .HasColumnType("decimal(1,2)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Product");
 
@@ -1971,17 +1955,159 @@ namespace TechShop.Migrations
                         });
                 });
 
+            modelBuilder.Entity("TechShop.Models.ProductDiscount", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiscountId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "DiscountId");
+
+                    b.HasIndex("DiscountId");
+
+                    b.ToTable("ProductDiscount");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            DiscountId = 1
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            DiscountId = 1
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            DiscountId = 1
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            DiscountId = 1
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            DiscountId = 1
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            DiscountId = 1
+                        },
+                        new
+                        {
+                            ProductId = 7,
+                            DiscountId = 1
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            DiscountId = 1
+                        },
+                        new
+                        {
+                            ProductId = 9,
+                            DiscountId = 1
+                        },
+                        new
+                        {
+                            ProductId = 1,
+                            DiscountId = 2
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            DiscountId = 2
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            DiscountId = 2
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            DiscountId = 2
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            DiscountId = 2
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            DiscountId = 2
+                        },
+                        new
+                        {
+                            ProductId = 7,
+                            DiscountId = 2
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            DiscountId = 2
+                        },
+                        new
+                        {
+                            ProductId = 9,
+                            DiscountId = 2
+                        },
+                        new
+                        {
+                            ProductId = 1,
+                            DiscountId = 3
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            DiscountId = 3
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            DiscountId = 3
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            DiscountId = 3
+                        },
+                        new
+                        {
+                            ProductId = 7,
+                            DiscountId = 3
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            DiscountId = 3
+                        },
+                        new
+                        {
+                            ProductId = 9,
+                            DiscountId = 3
+                        });
+                });
+
             modelBuilder.Entity("TechShop.Models.ProductPAVPair", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("AVPairId")
+                    b.Property<int>("PAVPairId")
                         .HasColumnType("int");
 
-                    b.HasKey("ProductId", "AVPairId");
+                    b.HasKey("ProductId", "PAVPairId");
 
-                    b.HasIndex("AVPairId");
+                    b.HasIndex("PAVPairId");
 
                     b.ToTable("ProductPAVPair");
 
@@ -1989,108 +2115,115 @@ namespace TechShop.Migrations
                         new
                         {
                             ProductId = 1,
-                            AVPairId = 2
+                            PAVPairId = 2
                         },
                         new
                         {
                             ProductId = 2,
-                            AVPairId = 2
+                            PAVPairId = 2
                         },
                         new
                         {
                             ProductId = 3,
-                            AVPairId = 4
+                            PAVPairId = 4
                         },
                         new
                         {
                             ProductId = 6,
-                            AVPairId = 2
+                            PAVPairId = 2
                         },
                         new
                         {
                             ProductId = 7,
-                            AVPairId = 3
+                            PAVPairId = 3
                         },
                         new
                         {
                             ProductId = 8,
-                            AVPairId = 4
+                            PAVPairId = 4
                         },
                         new
                         {
                             ProductId = 9,
-                            AVPairId = 6
+                            PAVPairId = 6
                         },
                         new
                         {
                             ProductId = 1,
-                            AVPairId = 16
+                            PAVPairId = 16
                         },
                         new
                         {
                             ProductId = 2,
-                            AVPairId = 16
+                            PAVPairId = 16
                         },
                         new
                         {
                             ProductId = 3,
-                            AVPairId = 16
+                            PAVPairId = 16
                         },
                         new
                         {
                             ProductId = 6,
-                            AVPairId = 16
+                            PAVPairId = 16
                         },
                         new
                         {
                             ProductId = 7,
-                            AVPairId = 16
+                            PAVPairId = 16
                         },
                         new
                         {
                             ProductId = 8,
-                            AVPairId = 16
+                            PAVPairId = 16
                         },
                         new
                         {
                             ProductId = 9,
-                            AVPairId = 19
+                            PAVPairId = 19
                         },
                         new
                         {
                             ProductId = 1,
-                            AVPairId = 61
+                            PAVPairId = 61
                         },
                         new
                         {
                             ProductId = 2,
-                            AVPairId = 61
+                            PAVPairId = 61
                         },
                         new
                         {
                             ProductId = 3,
-                            AVPairId = 65
+                            PAVPairId = 65
                         },
                         new
                         {
                             ProductId = 6,
-                            AVPairId = 62
+                            PAVPairId = 62
                         },
                         new
                         {
                             ProductId = 7,
-                            AVPairId = 62
+                            PAVPairId = 62
                         },
                         new
                         {
                             ProductId = 8,
-                            AVPairId = 62
+                            PAVPairId = 62
                         },
                         new
                         {
                             ProductId = 9,
-                            AVPairId = 62
+                            PAVPairId = 62
                         });
+                });
+
+            modelBuilder.Entity("TechShop.Models.Category", b =>
+                {
+                    b.HasOne("TechShop.Models.Category", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
                 });
 
             modelBuilder.Entity("TechShop.Models.CategoryProduct", b =>
@@ -2108,24 +2241,19 @@ namespace TechShop.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TechShop.Models.Discount", b =>
-                {
-                    b.HasOne("TechShop.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TechShop.Models.PAVPair", b =>
                 {
                     b.HasOne("TechShop.Models.PAttribute", "PAttribute")
                         .WithMany()
-                        .HasForeignKey("PAttributeId");
+                        .HasForeignKey("PAttributeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TechShop.Models.PValue", "PValue")
                         .WithMany()
-                        .HasForeignKey("PValueId");
+                        .HasForeignKey("PValueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TechShop.Models.PFilter", b =>
@@ -2147,13 +2275,13 @@ namespace TechShop.Migrations
                 {
                     b.HasOne("TechShop.Models.PAVPair", "PAVPair")
                         .WithMany()
-                        .HasForeignKey("AVPairId")
+                        .HasForeignKey("PAVPairId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TechShop.Models.PFilter", "PFilter")
                         .WithMany()
-                        .HasForeignKey("FilterId")
+                        .HasForeignKey("PFilterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -2176,11 +2304,26 @@ namespace TechShop.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TechShop.Models.ProductDiscount", b =>
+                {
+                    b.HasOne("TechShop.Models.Discount", "Discount")
+                        .WithMany("ProductDiscount")
+                        .HasForeignKey("DiscountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TechShop.Models.Product", "Product")
+                        .WithMany("ProductDiscount")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("TechShop.Models.ProductPAVPair", b =>
                 {
                     b.HasOne("TechShop.Models.PAVPair", "PAVPair")
                         .WithMany()
-                        .HasForeignKey("AVPairId")
+                        .HasForeignKey("PAVPairId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

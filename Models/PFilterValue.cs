@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace TechShop.Models
 {
-    [Table("PFilterValue")]
     public class PFilterValue
     {
         [Key]
         public int Id { get; set; }
 
+        [Required]
         [MaxLength(450)]
         public string FilterValue { get; set; }
     }

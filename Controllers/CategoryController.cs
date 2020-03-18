@@ -14,12 +14,10 @@ namespace TechShop.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
-        private INestedSetService nestedSetService;
 
-        public CategoryController(ICategoryService categoryService, INestedSetService nestedSetService)
+        public CategoryController(ICategoryService categoryService)
         {
             this._categoryService = categoryService;
-            this.nestedSetService = nestedSetService;
         }
 
         [HttpGet]
@@ -32,7 +30,8 @@ namespace TechShop.Controllers
         public async Task<IActionResult> GetCategoriesPrint()
         {
             List<Category> cats = await _categoryService.GetTreeFromRoot();
-            return Ok(nestedSetService.PrintTreeToString<Category>(cats));
+            //return Ok(nestedSetService.PrintTreeToString<Category>(cats));
+            return Ok();
         }
 
         [HttpGet("tree")]

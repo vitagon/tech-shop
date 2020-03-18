@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace TechShop.Models
 {
-    [Table("PValue")]
     public class PValue
     {
         [Key]
         public int Id { get; set; }
 
+        [Required]
         [MaxLength(450)]
         public string Value { get; set; }
     }

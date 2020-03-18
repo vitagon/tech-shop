@@ -19,8 +19,9 @@ namespace TechShop.Services
 
         public List<Breadcrumb> GetBreadcrumbTreeAsList(int categoryId)
         {
-            List<Breadcrumb> breadcrumbs = techDbContext.Breadcrumb.FromSqlRaw("GetCategoryPath @p0", categoryId).ToList();
-            return breadcrumbs;
+            //List<Breadcrumb> breadcrumbs = techDbContext.Breadcrumb.FromSqlRaw("GetCategoryPath @p0", categoryId).ToList();
+            //return breadcrumbs;
+            return new List<Breadcrumb>();
         }
     }
 }

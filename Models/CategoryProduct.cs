@@ -10,12 +10,14 @@ namespace TechShop.Models
     [Table("CategoryProduct")]
     public class CategoryProduct
     {
-        [Key, Column(Order = 0), ForeignKey("Category")]
+        [Key]
         public int CategoryId { get; set; }
-        public virtual Category Category { get; set; }
-
-        [Key, Column(Order = 1), ForeignKey("Product")]
+        
+        [Key]
         public int ProductId { get; set; }
+
+
+        public virtual Category Category { get; set; }
         public virtual Product Product { get; set; }
     }
 }

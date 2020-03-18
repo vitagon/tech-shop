@@ -23,61 +23,70 @@ namespace TechShop.Controllers
             _techDbContext = techDbContext;
         }
 
+        public IActionResult GetProductsByFilter(int[] f)
+        {
+            //var fetchProducts = from p in _techDbContext.Vw_Product
+            //                    select p;
+            //return Ok(fetchProducts.AsNoTracking().ToListAsync());
+            return Ok();
+        }
+
         [HttpGet]
         public IActionResult GetProducts([FromQuery] ProductFilters productFilters)
         {
-            var fetchProducts = from p in _techDbContext.Vw_Product
-                                select p;
+            //var fetchProducts = from p in _techDbContext.Vw_Product
+            //                    select p;
 
-            if (productFilters.CategoryUrl != null)
-            {
-                fetchProducts = from p in fetchProducts
-                                join cp in _techDbContext.CategoryProduct on p.Id equals cp.ProductId
-                                join c in _techDbContext.Category on cp.CategoryId equals c.Id
-                                where c.Url == productFilters.CategoryUrl
-                                select p;
-            }
+            //if (productFilters.CategoryUrl != null)
+            //{
+            //    fetchProducts = from p in fetchProducts
+            //                    join cp in _techDbContext.CategoryProduct on p.Id equals cp.ProductId
+            //                    join c in _techDbContext.Category on cp.CategoryId equals c.Id
+            //                    where c.Url == productFilters.CategoryUrl
+            //                    select p;
+            //}
 
-            if (productFilters.CategoryName != null)
-            {
-                fetchProducts = from p in fetchProducts
-                                join cp in _techDbContext.CategoryProduct on p.Id equals cp.ProductId
-                                join c in _techDbContext.Category on cp.CategoryId equals c.Id
-                                where c.Name == productFilters.CategoryName
-                                select p;
-            }
+            //if (productFilters.CategoryName != null)
+            //{
+            //    fetchProducts = from p in fetchProducts
+            //                    join cp in _techDbContext.CategoryProduct on p.Id equals cp.ProductId
+            //                    join c in _techDbContext.Category on cp.CategoryId equals c.Id
+            //                    where c.Name == productFilters.CategoryName
+            //                    select p;
+            //}
 
-            if (productFilters.MaxPrice > 0)
-            {
-                fetchProducts = from p in fetchProducts
-                                where p.Price <= productFilters.MaxPrice
-                                select p;
-            }
+            //if (productFilters.MaxPrice > 0)
+            //{
+            //    fetchProducts = from p in fetchProducts
+            //                    where p.Price <= productFilters.MaxPrice
+            //                    select p;
+            //}
 
-            if (productFilters.MinPrice > 0)
-            {
-                fetchProducts = from p in fetchProducts
-                                where p.Price >= productFilters.MinPrice
-                                select p;
-            }
+            //if (productFilters.MinPrice > 0)
+            //{
+            //    fetchProducts = from p in fetchProducts
+            //                    where p.Price >= productFilters.MinPrice
+            //                    select p;
+            //}
 
-            PagedList<Vw_Product> products = PagedList<Vw_Product>.ToPagedList(
-                fetchProducts,
-                productFilters.PageNumber,
-                productFilters.PageSize);
+            //PagedList<Vw_Product> products = PagedList<Vw_Product>.ToPagedList(
+            //    fetchProducts,
+            //    productFilters.PageNumber,
+            //    productFilters.PageSize);
 
-            var metadata = new
-            {
-                products.TotalCount,
-                products.PageSize,
-                products.CurrentPage,
-                products.TotalPages,
-                products.HasNext,
-                products.HasPrevious
-            };
+            //var metadata = new
+            //{
+            //    products.TotalCount,
+            //    products.PageSize,
+            //    products.CurrentPage,
+            //    products.TotalPages,
+            //    products.HasNext,
+            //    products.HasPrevious
+            //};
 
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
-            return Ok(products);
+            //Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            //return Ok(products);
+            return Ok();
         }
     }
 }

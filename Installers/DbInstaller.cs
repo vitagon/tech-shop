@@ -18,7 +18,6 @@ namespace TechShop.Installers
             //services.AddDbContext<TechDbContext>(options => options.UseSqlite("Filename=TechShop.db"));
 
             services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<INestedSetService, NestedSetService>();
             services.AddScoped<IBreadcrumbService, BreadcrumbService>();
             services.AddScoped<IProductFilterService, ProductFilterService>();
         }

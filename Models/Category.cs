@@ -8,30 +8,27 @@ using TechShop.Utilities.Attributes;
 
 namespace TechShop.Models
 {
-    [Table("Category")]
-    public class Category : NestedSet<Category>
+    public class Category
     {
         [Key]
-        public override int Id { get; set; }
+        public  int Id { get; set; }
 
         [Required]
-        public override int Lft { get; set; }
+        [MaxLength(450)]
+        public string Name { get; set; }
+
+        public int? ParentId { get; set; }
 
         [Required]
-        public override int Rgt { get; set; }
+        public int Level { get; set; }
 
         [Required]
-        public override string Name { get; set; }
-
-        [Required]
-        public override int ParentId { get; set; }
-
-        [Required]
-        public override int Level { get; set; }
-
-        [Required]
+        [MaxLength(450)]
         public string Url { get; set; }
 
-        public virtual List<CategoryProduct> CategoryProducts { get; set; }
+
+        [ForeignKey("ParentId")]
+        public virtual Category Parent { get; set; }
+        public virtual ICollection<CategoryProduct> CategoryProducts { get; set; }
     }
 }

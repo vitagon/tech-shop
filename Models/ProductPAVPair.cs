@@ -7,19 +7,15 @@ using System.Threading.Tasks;
 
 namespace TechShop.Models
 {
-    [Table("ProductPAVPair")]
     public class ProductPAVPair
     {
-        
-        public virtual Product Product { get; set; }
-
-        [Key, Column(Order = 0), ForeignKey("Product")]
+        [Key]
         public int ProductId { get; set; }
+        [Key]
+        public int PAVPairId { get; set; }
 
-        
+
+        public virtual Product Product { get; set; }
         public virtual PAVPair PAVPair { get; set; }
-
-        [Key, Column(Order = 1), ForeignKey("PAVPair")]
-        public int AVPairId { get; set; }
     }
 }

@@ -7,18 +7,15 @@ using System.Threading.Tasks;
 
 namespace TechShop.Models
 {
-    [Table("PFilterPAVPair")]
     public class PFilterPAVPair
     {
+        [Key]
+        public int PFilterId { get; set; }
+        [Key]
+        public int PAVPairId { get; set; }
 
-        public PFilter PFilter { get; set; }
 
-        [Key, Column(Order = 0), ForeignKey("PFilter")]
-        public int FilterId { get; set; }
-
-        public PAVPair PAVPair { get; set; }
-
-        [Key, Column(Order = 1), ForeignKey("PAVPair")]
-        public int AVPairId { get; set; }
+        public virtual PFilter PFilter { get; set; }
+        public virtual PAVPair PAVPair { get; set; }
     }
 }

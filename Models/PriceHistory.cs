@@ -7,17 +7,20 @@ using System.Threading.Tasks;
 
 namespace TechShop.Models
 {
-    [Table("PriceHistory")]
     public class PriceHistory
     {
         [Key]
         public int Id { get; set; }
 
+        [Required]
         [MaxLength(450)]
         public string Description { get; set; }
 
-        [Display(Name = "StartDate")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [Required]
+        public int ProductId { get; set; }
+
+        [Column(TypeName = "date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
@@ -25,7 +28,8 @@ namespace TechShop.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
-        public Product Product { get; set; }
-        public int ProductId { get; set; }
+
+        public virtual Product Product { get; set; }
+        
     }
 }

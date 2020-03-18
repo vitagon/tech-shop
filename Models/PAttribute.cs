@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace TechShop.Models
 {
-    [Table("PAttribute")]
     public class PAttribute
     {
         [Key]

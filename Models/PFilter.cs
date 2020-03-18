@@ -7,16 +7,18 @@ using System.Threading.Tasks;
 
 namespace TechShop.Models
 {
-    [Table("PFilter")]
     public class PFilter
     {
         [Key]
         public int Id { get; set; }
 
-        public PFilterName PFilterName { get; set; }
+        [Required]
         public int PFilterNameId { get; set; }
-
-        public PFilterValue PFilterValue { get; set; }
+        [Required]
         public int PFilterValueId { get; set; }
+
+
+        public virtual PFilterName PFilterName { get; set; }
+        public virtual PFilterValue PFilterValue { get; set; }
     }
 }

@@ -11,12 +11,10 @@ namespace TechShop.Services
     public class CategoryService : ICategoryService
     {
         private readonly TechDbContext _techDbContext;
-        private INestedSetService nestedSetService;
 
-        public CategoryService(TechDbContext techDbContext, INestedSetService nestedSetService)
+        public CategoryService(TechDbContext techDbContext)
         {
             this._techDbContext = techDbContext;
-            this.nestedSetService = nestedSetService;
         }
 
         public async Task<List<Category>> GetCategoriesAsync()
@@ -79,23 +77,25 @@ namespace TechShop.Services
         {
             List<Category> categories = await _techDbContext.Category.ToListAsync();
             List<Category> catsListCopy = new List<Category>(categories);
-            return nestedSetService.BuildTreeAsList(ref catsListCopy);
+            //return nestedSetService.BuildTreeAsList(ref catsListCopy);
+            return new List<Category>();
         }
 
         public async Task<List<Category>> GetTreeFromNode(int parentId)
         {
-            var getParentNode = from c in _techDbContext.Category
-                                where c.Id == parentId
-                                select c;
-            Category parentNode = await getParentNode.FirstOrDefaultAsync();
+            //var getParentNode = from c in _techDbContext.Category
+            //                    where c.Id == parentId
+            //                    select c;
+            //Category parentNode = await getParentNode.FirstOrDefaultAsync();
 
-            var query = from c in _techDbContext.Category
-                        where c.Lft >= parentNode.Lft && c.Rgt <= parentNode.Rgt
-                        select c;
-            List<Category> categories = await query.ToListAsync();
+            //var query = from c in _techDbContext.Category
+            //            where c.Lft >= parentNode.Lft && c.Rgt <= parentNode.Rgt
+            //            select c;
+            //List<Category> categories = await query.ToListAsync();
 
-            List<Category> categoriesCopy = new List<Category>(categories);
-            return nestedSetService.BuildTreeAsList(ref categoriesCopy, parentNode.ParentId);
+            //List<Category> categoriesCopy = new List<Category>(categories);
+            //return nestedSetService.BuildTreeAsList(ref categoriesCopy, parentNode.ParentId);
+            return new List<Category>();
         }
 
         public async Task<Category> GetCategoryByUrlAsync(string url)

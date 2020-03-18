@@ -7,27 +7,31 @@ using System.Threading.Tasks;
 
 namespace TechShop.Models
 {
-    [Table("Product")]
     public class Product
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(450)]
         public string Name { get; set; }
 
         [Required]
+        [MaxLength(450)]
         public string Description { get; set; }
 
         [Required]
         public string Img { get; set; }
 
-        public Brand Brand { get; set; }
+        [Required]
         public int BrandId { get; set; }
 
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal Rating { get; set; }
+        [Column(TypeName = "decimal(1,2)")]
+        public decimal? Rating { get; set; }
 
-        public virtual List<CategoryProduct> CategoryProducts { get; set; }
+
+        public virtual Brand Brand { get; set; }
+        public virtual ICollection<CategoryProduct> CategoryProducts { get; set; }
+        public virtual ICollection<ProductDiscount> ProductDiscount { get; set; }
     }
 }

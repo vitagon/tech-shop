@@ -26,13 +26,13 @@ namespace TechShop.Views
         public decimal Price { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
-        public decimal OldPrice { get; set; }
+        public decimal? OldPrice { get; set; }
 
-        public int DiscountId { get; set; }
-        public DateTime DiscountStartDate { get; set; }
-        public DateTime DiscountEndDate { get; set; }
+        public int? DiscountId { get; set; }
+        public DateTime? DiscountStartDate { get; set; }
+        public DateTime? DiscountEndDate { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
-        public decimal DiscountRate { get; set; }
+        public decimal? DiscountRate { get; set; }
     }
 }
