@@ -10,8 +10,8 @@ using TechShop.Data;
 namespace TechShop.Migrations
 {
     [DbContext(typeof(TechDbContext))]
-    [Migration("20200318133623_SeedInitialData")]
-    partial class SeedInitialData
+    [Migration("20200319063514_CreateCategoryProductView")]
+    partial class CreateCategoryProductView
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -129,7 +129,6 @@ namespace TechShop.Migrations
                             Id = 1,
                             Level = 0,
                             Name = "Categories",
-                            ParentId = 0,
                             Url = ""
                         },
                         new
@@ -324,11 +323,6 @@ namespace TechShop.Migrations
                         {
                             CategoryId = 18,
                             ProductId = 4
-                        },
-                        new
-                        {
-                            CategoryId = 4,
-                            ProductId = 5
                         });
                 });
 
@@ -348,7 +342,7 @@ namespace TechShop.Migrations
                         .HasColumnType("date");
 
                     b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(2,2)");
+                        .HasColumnType("decimal(4,2)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("date");
@@ -1862,7 +1856,7 @@ namespace TechShop.Migrations
                         .HasMaxLength(450);
 
                     b.Property<decimal?>("Rating")
-                        .HasColumnType("decimal(1,2)");
+                        .HasColumnType("decimal(3,1)");
 
                     b.HasKey("Id");
 
@@ -1880,7 +1874,7 @@ namespace TechShop.Migrations
                             BrandId = 1,
                             Description = "[Intel Celeron J4005, 2x2000 MGz, 4 GB DDR3, SSD 128 GB, Windows 10 Home]",
                             Img = "/img/product01.png",
-                            Name = "Laptop ASUS Air G3425",
+                            Name = "Laptop ASUS Air G3425 Black",
                             Rating = 5m
                         },
                         new
@@ -1934,7 +1928,7 @@ namespace TechShop.Migrations
                             BrandId = 1,
                             Description = "[Intel Celeron J4005, 2x2000 MGz, 6 GB DDR3, SSD 128 GB, Windows 10 Professional]",
                             Img = "/img/product07.png",
-                            Name = "Laptop ASUS Air G3425",
+                            Name = "Laptop ASUS Air G3425 Grey",
                             Rating = 1m
                         },
                         new

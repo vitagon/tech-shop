@@ -7,6 +7,23 @@ namespace TechShop.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterColumn<decimal>(
+                name: "Rating",
+                table: "Product",
+                type: "decimal(3,1)",
+                nullable: true,
+                oldClrType: typeof(decimal),
+                oldType: "decimal(1,2)",
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<decimal>(
+                name: "Rate",
+                table: "Discount",
+                type: "decimal(4,2)",
+                nullable: false,
+                oldClrType: typeof(decimal),
+                oldType: "decimal(2,2)");
+
             migrationBuilder.InsertData(
                 table: "Brand",
                 columns: new[] { "Id", "Name" },
@@ -26,7 +43,7 @@ namespace TechShop.Migrations
             migrationBuilder.InsertData(
                 table: "Category",
                 columns: new[] { "Id", "Level", "Name", "ParentId", "Url" },
-                values: new object[] { 1, 0, "Categories", 0, "" });
+                values: new object[] { 1, 0, "Categories", null, "" });
 
             migrationBuilder.InsertData(
                 table: "Discount",
@@ -295,8 +312,8 @@ namespace TechShop.Migrations
                     { 6, 2, "[Intel Celeron J4005, 2x2000 MGz, 4 GB DDR3, SSD 128 GB, Windows 10 Professional]", "/img/product06.png", "Laptop Acer H2451", 4m },
                     { 9, 1, "[Intel Celeron J4005, 2x2000 MGz, 16 GB DDR3, SSD 512 GB, Windows 10 Professional]", "/img/product09.png", "Laptop ASUS Air G9515", 3m },
                     { 8, 1, "[Intel Celeron J4005, 2x4000 MGz, 8 GB DDR3, SSD 128 GB, Windows 10 Professional]", "/img/product08.png", "Laptop ASUS Air G5161", 2m },
-                    { 7, 1, "[Intel Celeron J4005, 2x2000 MGz, 6 GB DDR3, SSD 128 GB, Windows 10 Professional]", "/img/product07.png", "Laptop ASUS Air G3425", 1m },
-                    { 1, 1, "[Intel Celeron J4005, 2x2000 MGz, 4 GB DDR3, SSD 128 GB, Windows 10 Home]", "/img/product01.png", "Laptop ASUS Air G3425", 5m }
+                    { 7, 1, "[Intel Celeron J4005, 2x2000 MGz, 6 GB DDR3, SSD 128 GB, Windows 10 Professional]", "/img/product07.png", "Laptop ASUS Air G3425 Grey", 1m },
+                    { 1, 1, "[Intel Celeron J4005, 2x2000 MGz, 4 GB DDR3, SSD 128 GB, Windows 10 Home]", "/img/product01.png", "Laptop ASUS Air G3425 Black", 5m }
                 });
 
             migrationBuilder.InsertData(
@@ -445,7 +462,6 @@ namespace TechShop.Migrations
                     { 4, 8 },
                     { 4, 9 },
                     { 4, 2 },
-                    { 4, 5 },
                     { 18, 4 }
                 });
         }
@@ -511,11 +527,6 @@ namespace TechShop.Migrations
                 table: "CategoryProduct",
                 keyColumns: new[] { "CategoryId", "ProductId" },
                 keyValues: new object[] { 4, 3 });
-
-            migrationBuilder.DeleteData(
-                table: "CategoryProduct",
-                keyColumns: new[] { "CategoryId", "ProductId" },
-                keyValues: new object[] { 4, 5 });
 
             migrationBuilder.DeleteData(
                 table: "CategoryProduct",
@@ -2046,6 +2057,23 @@ namespace TechShop.Migrations
                 table: "Category",
                 keyColumn: "Id",
                 keyValue: 1);
+
+            migrationBuilder.AlterColumn<decimal>(
+                name: "Rating",
+                table: "Product",
+                type: "decimal(1,2)",
+                nullable: true,
+                oldClrType: typeof(decimal),
+                oldType: "decimal(3,1)",
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<decimal>(
+                name: "Rate",
+                table: "Discount",
+                type: "decimal(2,2)",
+                nullable: false,
+                oldClrType: typeof(decimal),
+                oldType: "decimal(4,2)");
         }
     }
 }

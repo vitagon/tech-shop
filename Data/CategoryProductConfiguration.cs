@@ -22,8 +22,7 @@ namespace TechShop.Data
                 new CategoryProduct { CategoryId = 4, ProductId = 8 },
                 new CategoryProduct { CategoryId = 4, ProductId = 9 },
                 new CategoryProduct { CategoryId = 4, ProductId = 2 },
-                new CategoryProduct { CategoryId = 18, ProductId = 4 },
-                new CategoryProduct { CategoryId = 4, ProductId = 5 }
+                new CategoryProduct { CategoryId = 18, ProductId = 4 }
                 );
         }
     }

@@ -21,7 +21,7 @@ namespace TechShop.Data
                     {
                         Id = 1,
                         Name = "Categories",
-                        ParentId = 0,
+                        ParentId = null,
                         Level = 0,
                         Url = ""
                     },

@@ -26,7 +26,7 @@ namespace TechShop.Models
         [Required]
         public int BrandId { get; set; }
 
-        [Column(TypeName = "decimal(1,2)")]
+        [Column(TypeName = "decimal(3,1)")]
         public decimal? Rating { get; set; }
 
 

@@ -16,7 +16,7 @@ namespace TechShop.Migrations
                     Description = table.Column<string>(maxLength: 450, nullable: false),
                     StartDate = table.Column<DateTime>(type: "date", nullable: false),
                     EndDate = table.Column<DateTime>(type: "date", nullable: false),
-                    Rate = table.Column<decimal>(type: "decimal(2,2)", nullable: false)
+                    Rate = table.Column<decimal>(type: "decimal(4,2)", nullable: false)
                 },
                 constraints: table =>
                 {

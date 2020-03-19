@@ -18,7 +18,7 @@ namespace TechShop.Data
                     new Product
                     {
                         Id = 1,
-                        Name = "Laptop ASUS Air G3425",
+                        Name = "Laptop ASUS Air G3425 Black",
                         Description = "[Intel Celeron J4005, 2x2000 MGz, 4 GB DDR3, SSD 128 GB, Windows 10 Home]",
                         Img = "/img/product01.png",
                         BrandId = 1,
@@ -72,7 +72,7 @@ namespace TechShop.Data
                     new Product
                     {
                         Id = 7,
-                        Name = "Laptop ASUS Air G3425",
+                        Name = "Laptop ASUS Air G3425 Grey",
                         Description = "[Intel Celeron J4005, 2x2000 MGz, 6 GB DDR3, SSD 128 GB, Windows 10 Professional]",
                         Img = "/img/product07.png",
                         BrandId = 1,

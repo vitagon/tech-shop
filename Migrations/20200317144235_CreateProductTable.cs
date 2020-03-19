@@ -16,7 +16,7 @@ namespace TechShop.Migrations
                     Description = table.Column<string>(maxLength: 450, nullable: false),
                     Img = table.Column<string>(nullable: false),
                     BrandId = table.Column<int>(nullable: false),
-                    Rating = table.Column<decimal>(type: "decimal(1,2)", nullable: true)
+                    Rating = table.Column<decimal>(type: "decimal(3,1)", nullable: true)
                 },
                 constraints: table =>
                 {

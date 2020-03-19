@@ -29,7 +29,11 @@ namespace TechShop.Data
                 entity.ToView("vw_Product");
             });
 
-            //modelBuilder.SeedData();
+            modelBuilder.Entity<Vw_PFilterPAVPair>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("vw_PFilterPAVPair");
+            });
         }
 
         public DbSet<Breadcrumb> Breadcrumb { get; set; }
@@ -49,7 +53,8 @@ namespace TechShop.Data
         public DbSet<PFilter> PFilter { get; set; }
         public DbSet<PFilterPAVPair> PFilterPAVPair { get; set; }
 
-        public DbSet<Vw_CategoryProduct> Vw_CategoryProducts { get; set; }
+        public DbSet<Vw_CategoryProduct> Vw_CategoryProduct { get; set; }
         public DbSet<Vw_Product> Vw_Product { get; set; }
+        public DbSet<Vw_PFilterPAVPair> Vw_PFilterPAVPair { get; set; }
     }
 }

@@ -29,7 +29,7 @@ namespace TechShop.Models
         public DateTime EndDate { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(2,2)")]
+        [Column(TypeName = "decimal(4,2)")]
         public decimal Rate { get; set; }
 
         public virtual ICollection<ProductDiscount> ProductDiscount { get; set; }

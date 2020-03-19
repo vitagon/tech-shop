@@ -10,11 +10,11 @@ namespace TechShop.Services
 {
     public class ProductFilterService : IProductFilterService
     {
-        private readonly TechDbContext techDbContext;
+        private readonly TechDbContext _techDbContext;
 
         public ProductFilterService(TechDbContext techDbContext)
         {
-            this.techDbContext = techDbContext;
+            this._techDbContext = techDbContext;
         }
 
         public async Task<List<Vw_CategoryProduct>> GetCategoryProducts(string categoryUrl)
